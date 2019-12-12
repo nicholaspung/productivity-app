@@ -78,7 +78,6 @@ const LoginManagementBase = ({ firebase, authUser }) => {
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
-          console.log(isEnabled);
 
           return (
             <li key={signInMethod.id}>
