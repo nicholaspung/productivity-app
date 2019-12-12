@@ -15,6 +15,7 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
 
+    this.emailAuthProvider = app.auth.EmailAuthProvider;
     this.auth = app.auth();
     this.db = app.database();
 
@@ -39,13 +40,19 @@ class Firebase {
   onAuthUserListener = (next, fallback) =>
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
+        console.log(authUser);
         this.user(authUser.uid)
           .once("value")
           .then(snapshot => {
             const dbUser = snapshot.val();
 
+            console.log(dbUser);
+
             // default empty roles
-            if (!dbUser.roles) {
+            // if (!dbUser.roles) {
+            //   dbUser.roles = {};
+            // }
+            if (dbUser) {
               dbUser.roles = {};
             }
 

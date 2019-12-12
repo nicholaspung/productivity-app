@@ -7,19 +7,19 @@ import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
 const withAuthorization = condition => Component => {
-  const WithAuthorization = ({ firebase, history }) => {
+  const WithAuthorization = props => {
+    const { firebase, history } = props;
     useEffect(() => {
-      firebase.onAuthUserListener(authUser => {
-        if (!condition(authUser)) {
-          history.push(ROUTES.SIGN_IN);
-        } else {
+      firebase.onAuthUserListener(
+        authUser => {},
+        () => {
           history.push(ROUTES.SIGN_IN);
         }
-      });
+      );
     }, [firebase, history]);
     return (
       <AuthUserContext.Consumer>
-        {authUser => condition(authUser) && <Component {...this.props} />}
+        {authUser => condition(authUser) && <Component {...props} />}
       </AuthUserContext.Consumer>
     );
   };

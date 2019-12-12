@@ -2,7 +2,8 @@ import React from "react";
 
 const Landing = () => (
   <>
-    <div>Hi</div>
+    <div>Landing</div>
+    <p>The Landing Page is accessible by everyone.</p>
   </>
 );
 
