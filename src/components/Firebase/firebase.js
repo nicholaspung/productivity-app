@@ -35,6 +35,10 @@ class Firebase {
   doSignInWithTwitter = () => this.auth.signInWithPopup(this.twitterProvider);
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
+  doSendEmailVerification = () =>
+    this.auth.currentUser.sendEmailVerification({
+      url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT
+    });
 
   // *** Merge Auth and DB User API ***
   onAuthUserListener = (next, fallback) =>
@@ -44,7 +48,7 @@ class Firebase {
           .once("value")
           .then(snapshot => {
             const dbUser = snapshot.val();
-            
+
             // default empty roles
             if (!dbUser.roles) {
               dbUser.roles = {};
@@ -54,6 +58,8 @@ class Firebase {
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
+              emailVerified: authUser.emailVerified,
+              providerData: authUser.providerData,
               ...dbUser
             };
 

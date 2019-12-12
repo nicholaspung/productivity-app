@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { compose } from "recompose";
 
-import { withAuthorization, AuthUserContext } from "../Session";
+import {
+  withAuthorization,
+  AuthUserContext,
+  withEmailVerification
+} from "../Session";
 import { withFirebase } from "../Firebase";
 import PasswordChangeForm from "../PasswordChange";
 
@@ -187,4 +192,7 @@ const LoginManagement = withFirebase(LoginManagementBase);
 
 const condition = authUser => !!authUser;
 
-export default withAuthorization(condition)(AccountPage);
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition)
+)(AccountPage);
