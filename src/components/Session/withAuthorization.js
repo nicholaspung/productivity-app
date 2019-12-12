@@ -9,12 +9,14 @@ import * as ROUTES from "../../constants/routes";
 const withAuthorization = condition => Component => {
   const WithAuthorization = ({ firebase, history }) => {
     useEffect(() => {
-      firebase.auth.onAuthStateChanged(authUser => {
+      firebase.auth.onAuthUserListener(authUser => {
         if (!condition(authUser)) {
+          history.push(ROUTES.SIGN_IN);
+        } else {
           history.push(ROUTES.SIGN_IN);
         }
       });
-    }, [firebase.auth, history]);
+    }, [firebase, history]);
     return (
       <AuthUserContext.Consumer>
         {authUser => condition(authUser) && <Component {...this.props} />}
