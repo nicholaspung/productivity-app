@@ -13,6 +13,14 @@ const SignUpPage = () => (
   </div>
 );
 
+const ERROR_CODE_ACCOUNT_EXISTS = "auth/email-already-in-use";
+const ERROR_MSG_ACCOUNT_EXISTS = `
+  An account with this E-Mail address already exists. Try to login
+  with this account instead. If you think the account is already used
+  from one of the social logins, try to sign-in with one of them.
+  Afterward, associate your accounts on your personal account page.
+`;
+
 const SignUpFormBase = ({ firebase, history }) => {
   const INITIAL_STATE = {
     username: "",
@@ -31,6 +39,8 @@ const SignUpFormBase = ({ firebase, history }) => {
 
     if (isAdmin) {
       roles[ROLES.ADMIN] = ROLES.ADMIN;
+    } else {
+      roles[ROLES.ADMIN] = "false"
     }
 
     firebase
@@ -44,6 +54,10 @@ const SignUpFormBase = ({ firebase, history }) => {
         history.push(ROUTES.HOME);
       })
       .catch(error => {
+        if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
+          error.message = ERROR_MSG_ACCOUNT_EXISTS;
+        }
+
         setUserInfo({ ...userInfo, error });
       });
     event.preventDefault();
@@ -112,7 +126,7 @@ const SignUpFormBase = ({ firebase, history }) => {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={ROUTES > ROUTES.SIGN_UP}>Sign Up</Link>
+    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
   </p>
 );
 
