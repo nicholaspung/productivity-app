@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { withAuthorization, AuthUserContext } from "../Session";
 import { withFirebase } from "../Firebase";
-import { PasswordForgetForm } from "../PasswordForget";
 import PasswordChangeForm from "../PasswordChange";
 
 const SIGN_IN_METHODS = [
@@ -17,8 +16,6 @@ const AccountPage = () => (
     {authUser => (
       <div>
         <h1>Account: {authUser.email}</h1>
-        <PasswordForgetForm />
-        <PasswordChangeForm />
         <LoginManagement authUser={authUser} />
       </div>
     )}
@@ -30,8 +27,8 @@ const LoginManagementBase = ({ firebase, authUser }) => {
   const [error, setError] = useState(null);
 
   const fetchSignInMethods = () => {
-    firebase
-      .fetchSignInMethodsForEmail(authUser)
+    firebase.auth
+      .fetchSignInMethodsForEmail(authUser.email)
       .then(activeSignInMethodsObject =>
         setActiveSignInMethods(activeSignInMethodsObject)
       )
@@ -70,15 +67,17 @@ const LoginManagementBase = ({ firebase, authUser }) => {
 
   return (
     <div>
+      {activeSignInMethods.includes("password") && <PasswordChangeForm />}
       Sign In Methods:
       <ul>
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
+          console.log(isEnabled);
 
           return (
             <li key={signInMethod.id}>
-              {signInMethod.id == "password" ? (
+              {signInMethod.id === "password" ? (
                 <DefaultLoginToggle
                   onlyOneLeft={onlyOneLeft}
                   isEnabled={isEnabled}
@@ -111,7 +110,6 @@ const SocialLoginToggle = ({
   onLink,
   onUnlink
 }) => {
-  console.log('bye')
   return isEnabled ? (
     <button
       type="button"
@@ -134,9 +132,11 @@ const DefaultLoginToggle = ({
   onLink,
   onUnlink
 }) => {
-  console.log("hi");
-  const [password, setPassword] = { passwordOne: "", passwordTwo: "" };
-  
+  const [password, setPassword] = useState({
+    passwordOne: "",
+    passwordTwo: ""
+  });
+
   const onSubmit = event => {
     event.preventDefault();
 

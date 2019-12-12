@@ -42,15 +42,15 @@ const UserList = ({ users }) => (
   <ul>
     {users.map(user => (
       <li key={user.uid}>
-        <span>
+        <p>
           <strong>ID:</strong> {user.uid}
-        </span>
-        <span>
+        </p>
+        <p>
           <strong>E-Mail:</strong> {user.email}
-        </span>
-        <span>
+        </p>
+        <p>
           <strong>Username:</strong> {user.username}
-        </span>
+        </p>
       </li>
     ))}
   </ul>
