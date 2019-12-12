@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
+import { withAuthorization } from "../Session";
+import * as ROLES from "../../constants/roles";
 
 const AdminPage = ({ firebase }) => {
   const [users, setUsers] = useState([]);
@@ -26,6 +29,7 @@ const AdminPage = ({ firebase }) => {
   return (
     <div>
       <h1>Admin</h1>
+      <p>The Admin Page is accessible by every signed in admin user.</p>
 
       {loading && <div>Loading ...</div>}
 
@@ -52,4 +56,6 @@ const UserList = ({ users }) => (
   </ul>
 );
 
-export default withFirebase(AdminPage);
+const condition = authUser => authUser && !!authUser.roles[ROLES.ADMIN];
+
+export default compose(withAuthorization(condition), withFirebase)(AdminPage);
