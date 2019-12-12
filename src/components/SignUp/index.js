@@ -4,6 +4,7 @@ import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
 
 const SignUpPage = () => (
   <div>
@@ -12,21 +13,33 @@ const SignUpPage = () => (
   </div>
 );
 
-const SignUpFormBase = ({ history }) => {
+const SignUpFormBase = ({ firebase, history }) => {
   const INITIAL_STATE = {
     username: "",
     email: "",
     passwordOne: "",
     passwordTwo: "",
+    isAdmin: false,
     error: null
   };
   const [userInfo, setUserInfo] = useState(INITIAL_STATE);
 
   const onSubmit = event => {
-    const { email, passwordOne } = userInfo;
-    this.props.firebase
+    const { email, passwordOne, username, isAdmin } = userInfo;
+
+    const roles = {};
+
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
+
+    firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        // Create a user in your Firebase realtime database
+        return firebase.user(authUser.user.uid).set({ username, email, roles });
+      })
+      .then(() => {
         setUserInfo({ ...INITIAL_STATE });
         history.push(ROUTES.HOME);
       })
@@ -38,6 +51,10 @@ const SignUpFormBase = ({ history }) => {
 
   const onChange = event => {
     setUserInfo({ ...userInfo, [event.target.name]: event.target.value });
+  };
+
+  const onChangeCheckbox = event => {
+    setUserInfo({ ...userInfo, [event.target.name]: event.target.checked });
   };
 
   const isInvalid =
@@ -76,6 +93,15 @@ const SignUpFormBase = ({ history }) => {
         type="password"
         placeholder="Confirm Password"
       />
+      <label>
+        Admin:
+        <input
+          name="isAdmin"
+          type="checkbox"
+          checked={userInfo.isAdmin}
+          onChange={onChangeCheckbox}
+        />
+      </label>
       <button disabled={isInvalid} type="submit">
         Sign Up
       </button>
