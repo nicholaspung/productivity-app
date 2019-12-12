@@ -39,8 +39,6 @@ const SignUpFormBase = ({ firebase, history }) => {
 
     if (isAdmin) {
       roles[ROLES.ADMIN] = ROLES.ADMIN;
-    } else {
-      roles[ROLES.ADMIN] = "false"
     }
 
     firebase

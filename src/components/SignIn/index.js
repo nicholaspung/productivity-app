@@ -80,7 +80,7 @@ const SignInFormBase = ({ firebase, history }) => {
   );
 };
 
-const SignInGoogleBase = ({ firebase }) => {
+const SignInGoogleBase = ({ firebase, history }) => {
   const [error, setError] = useState(null);
 
   const onSubmit = event => {
@@ -98,7 +98,7 @@ const SignInGoogleBase = ({ firebase }) => {
       })
       .then(() => {
         setError(null);
-        this.props.history.push(ROUTES.HOME);
+        history.push(ROUTES.HOME);
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -118,7 +118,7 @@ const SignInGoogleBase = ({ firebase }) => {
   );
 };
 
-const SignInFacebookBase = ({ firebase }) => {
+const SignInFacebookBase = ({ firebase, history }) => {
   const [error, setError] = useState(null);
 
   const onSubmit = event => {
@@ -136,7 +136,7 @@ const SignInFacebookBase = ({ firebase }) => {
       })
       .then(() => {
         setError(null);
-        this.props.history.push(ROUTES.HOME);
+        history.push(ROUTES.HOME);
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
@@ -156,7 +156,7 @@ const SignInFacebookBase = ({ firebase }) => {
   );
 };
 
-const SignInTwitterBase = ({ firebase }) => {
+const SignInTwitterBase = ({ firebase, history }) => {
   const [error, setError] = useState(null);
 
   const onSubmit = event => {
@@ -174,7 +174,7 @@ const SignInTwitterBase = ({ firebase }) => {
       })
       .then(() => {
         setError(null);
-        this.props.history.push(ROUTES.HOME);
+        history.push(ROUTES.HOME);
       })
       .catch(error => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
