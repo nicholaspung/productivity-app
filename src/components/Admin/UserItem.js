@@ -14,12 +14,14 @@ const UserItemBase = ({ firebase, match, location }) => {
 
     setLoading(true);
 
-    const unsubscribe = firebase.user(match.params.id).onSnapshot(snapshot => {
-      setUser(snapshot.data());
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+    firebase.db
+      .collection("users")
+      .doc(match.params.id)
+      .get()
+      .then(doc => {
+        setUser(doc.data());
+        setLoading(false);
+      });
   }, [firebase, localState, match.params.id]);
 
   const onSendPasswordResetEmail = () => {
