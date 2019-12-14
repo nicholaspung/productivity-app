@@ -11,16 +11,17 @@ const UserListBase = ({ firebase }) => {
   useEffect(() => {
     setLoading(true);
 
-    const unsubscribe = firebase.users().onSnapshot(snapshot => {
-      let usersList = [];
+    firebase.db
+      .collection("users")
+      .get()
+      .then(doc => {
+        let usersList = [];
 
-      snapshot.forEach(doc => users.push({ ...doc.data(), uid: doc.id }));
+        doc.forEach(doc => users.push({ ...doc.data(), uid: doc.id }));
 
-      setUsers(usersList);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
+        setUsers(usersList);
+        setLoading(false);
+      });
   }, [firebase]);
 
   return (
