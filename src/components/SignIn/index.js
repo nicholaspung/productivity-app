@@ -1,24 +1,22 @@
 import React from "react";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
 import SignInForm from "./SignInForm";
-import SignInFacebook from "./SignInFacebook";
-import SignInGoogle from "./SignInGoogle";
-import SignInTwitter from "./SignInTwitter";
+import { withFirebase } from "../Firebase";
 
-const SignInPage = () => (
+const SignInPage = ({ firebase }) => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
-    <SignInGoogle />
-    <SignInFacebook />
-    <SignInTwitter />
+    <StyledFirebaseAuth
+      uiConfig={firebase.uiConfig}
+      firebaseAuth={firebase.auth}
+    />
     <PasswordForgetLink />
     <SignUpLink />
   </div>
 );
 
-export default SignInPage;
-
-export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };
+export default withFirebase(SignInPage);
