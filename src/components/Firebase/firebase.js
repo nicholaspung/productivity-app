@@ -22,7 +22,8 @@ class Firebase {
       signInOptions: [
         app.auth.GoogleAuthProvider.PROVIDER_ID,
         app.auth.FacebookAuthProvider.PROVIDER_ID,
-        app.auth.TwitterAuthProvider.PROVIDER_ID
+        app.auth.TwitterAuthProvider.PROVIDER_ID,
+        app.auth.GithubAuthProvider.PROVIDER_ID
       ]
     };
 
