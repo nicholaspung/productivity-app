@@ -5,7 +5,7 @@ import NavigationAuth from "./NavigationAuth";
 import NavigationNonAuth from "./NavigationNonAuth";
 
 const Navigation = () => (
-  <div>
+  <nav>
     <AuthUserContext.Consumer>
       {authUser =>
         authUser ? (
@@ -15,7 +15,7 @@ const Navigation = () => (
         )
       }
     </AuthUserContext.Consumer>
-  </div>
+  </nav>
 );
 
 export default Navigation;

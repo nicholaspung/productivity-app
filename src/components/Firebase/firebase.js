@@ -15,6 +15,17 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
 
+    // UI Config
+    this.uiConfig = {
+      signInFlow: "popup",
+      signInSuccessUrl: "/home",
+      signInOptions: [
+        app.auth.GoogleAuthProvider.PROVIDER_ID,
+        app.auth.FacebookAuthProvider.PROVIDER_ID,
+        app.auth.TwitterAuthProvider.PROVIDER_ID
+      ]
+    };
+
     // Helper
     this.fieldValue = app.firestore.FieldValue;
     this.emailAuthProvider = app.auth.EmailAuthProvider;
