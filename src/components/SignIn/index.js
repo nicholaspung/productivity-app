@@ -10,10 +10,12 @@ const SignInPage = ({ firebase }) => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
-    <StyledFirebaseAuth
-      uiConfig={firebase.uiConfig}
-      firebaseAuth={firebase.auth}
-    />
+    <div style={{ height: "205px", padding: "1rem 0px" }}>
+      <StyledFirebaseAuth
+        uiConfig={firebase.uiConfig}
+        firebaseAuth={firebase.auth}
+      />
+    </div>
     <PasswordForgetLink />
     <SignUpLink />
   </div>
