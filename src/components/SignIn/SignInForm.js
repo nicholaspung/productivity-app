@@ -42,6 +42,7 @@ const SignInFormBase = ({ firebase, history }) => {
         onChange={onChange}
         type="text"
         placeholder="Email Address"
+        autoComplete="email"
       />
       <input
         name="password"
@@ -49,6 +50,7 @@ const SignInFormBase = ({ firebase, history }) => {
         onChange={onChange}
         type="password"
         placeholder="Password"
+        autoComplete="current-password"
       />
       <button disabled={isInvalid} type="submit">
         Sign In

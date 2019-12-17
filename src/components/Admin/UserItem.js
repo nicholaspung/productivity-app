@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
 
 const UserItemBase = ({ firebase, match, location }) => {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
-  const [localState, setLocalState] = useState(location.state);
+  const localState = location.state;
 
   useEffect(() => {
     if (localState.user) {
+      setUser(localState.user);
       return;
     }
 
@@ -55,4 +58,4 @@ const UserItemBase = ({ firebase, match, location }) => {
   );
 };
 
-export default withFirebase(UserItemBase);
+export default compose(withRouter, withFirebase)(UserItemBase);

@@ -27,7 +27,7 @@ const LoginManagementBase = ({ firebase, authUser }) => {
 
   useEffect(() => {
     fetchSignInMethods();
-  }, [authUser.email, firebase]);
+  }, []);
 
   const onSocialLoginLink = provider => {
     firebase.auth.currentUser
