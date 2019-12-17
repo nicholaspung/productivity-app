@@ -39,6 +39,7 @@ class Firebase {
     this.googleProvider = new app.auth.GoogleAuthProvider();
     this.facebookProvider = new app.auth.FacebookAuthProvider();
     this.twitterProvider = new app.auth.TwitterAuthProvider();
+    this.githubProvider = new app.auth.GithubAuthProvider();
   }
 
   // *** Auth API ***
@@ -50,6 +51,7 @@ class Firebase {
   doSignInWithGoogle = () => this.auth.signInWithPopup(this.googleProvider);
   doSignInWithFacebook = () => this.auth.signInWithPopup(this.facebookProvider);
   doSignInWithTwitter = () => this.auth.signInWithPopup(this.twitterProvider);
+  doSignInWithGithub = () => this.auth.signInWithPopup(this.githubProvider);
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
   doSendEmailVerification = () =>

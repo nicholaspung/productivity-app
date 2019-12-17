@@ -30,6 +30,10 @@ const chooseProvider = (firebase, provider) => {
       signInMethod = firebase.doSignInWithTwitter;
       name = "Twitter";
       break;
+    case "github":
+      signInMethod = firebase.doSignInWithGithub;
+      name = "Github";
+      break;
     default:
       break;
   }
