@@ -4,6 +4,7 @@ import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
 
 const ERROR_CODE_ACCOUNT_EXISTS =
   "auth/account-exists-with-different-credential";
@@ -51,7 +52,7 @@ const SignInWithBase = ({ firebase, history, provider }) => {
         const authUserObject = {
           username: socialAuthUser.user.displayName,
           email: socialAuthUser.user.email,
-          roles: {}
+          roles: { [ROLES.USER]: true }
         };
 
         return firebase
