@@ -16,13 +16,12 @@ const UserListBase = ({ firebase }) => {
       .get()
       .then(doc => {
         let usersList = [];
-
-        doc.forEach(doc => users.push({ ...doc.data(), uid: doc.id }));
+        doc.forEach(doc => usersList.push({ ...doc.data(), uid: doc.id }));
 
         setUsers(usersList);
         setLoading(false);
       });
-  }, [firebase]);
+  }, []);
 
   return (
     <div>

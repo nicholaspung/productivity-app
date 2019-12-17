@@ -39,7 +39,6 @@ const SignUpFormBase = ({ firebase, history }) => {
     firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        // Create a user in your Firebase realtime database
         return firebase
           .user(authUser.user.uid)
           .set({ username, email, roles }, { merge: true });
@@ -83,6 +82,7 @@ const SignUpFormBase = ({ firebase, history }) => {
         onChange={onChange}
         type="text"
         placeholder="Full Name"
+        autoComplete="username"
       />
       <input
         name="email"
@@ -90,6 +90,7 @@ const SignUpFormBase = ({ firebase, history }) => {
         onChange={onChange}
         type="text"
         placeholder="Email Address"
+        autoComplete="email"
       />
       <input
         name="passwordOne"
@@ -97,6 +98,7 @@ const SignUpFormBase = ({ firebase, history }) => {
         onChange={onChange}
         type="password"
         placeholder="Password"
+        autoComplete="new-password"
       />
       <input
         name="passwordTwo"
@@ -104,6 +106,7 @@ const SignUpFormBase = ({ firebase, history }) => {
         onChange={onChange}
         type="password"
         placeholder="Confirm Password"
+        autoComplete="new-password"
       />
       <label>
         Admin:

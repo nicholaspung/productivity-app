@@ -43,6 +43,7 @@ const DefaultLoginToggle = ({
         onChange={onChange}
         type="password"
         placeholder="New Password"
+        autoComplete="new-password"
       />
       <input
         name="passwordTwo"
@@ -50,6 +51,7 @@ const DefaultLoginToggle = ({
         onChange={onChange}
         type="password"
         placeholder="Confirm New Password"
+        autoComplete="new-password"
       />
       <button disabled={isInvalid} type="submit">
         Link {signInMethod.id}
