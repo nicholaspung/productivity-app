@@ -13,7 +13,7 @@ const withAuthorization = condition => Component => {
       firebase.onAuthUserListener(
         authUser => {},
         () => {
-          history.push(ROUTES.SIGN_IN);
+          history.push(ROUTES.LANDING);
         }
       );
     }, [firebase, history]);
