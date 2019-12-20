@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AuthUserContext } from "../Session/";
+import { AuthUserContext } from "../../contexts/Session";
 import NavigationAuth from "./NavigationAuth";
 import NavigationNonAuth from "./NavigationNonAuth";
 

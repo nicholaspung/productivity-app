@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { withFirebase } from "../Firebase";
+import { withFirebase } from "../../contexts/Firebase";
 import PasswordChangeForm from "../PasswordChange";
 import DefaultLoginToggle from "./DefaultLoginToggle";
 import SocialLoginToggle from "./SocialLoginToggle";

@@ -5,7 +5,7 @@ import {
   withAuthorization,
   AuthUserContext,
   withEmailVerification
-} from "../Session";
+} from "../../contexts/Session";
 import LoginManagement from "./LoginManagement";
 
 const AccountPage = () => (
