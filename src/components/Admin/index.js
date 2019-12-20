@@ -2,8 +2,8 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { compose } from "recompose";
 
-import { withFirebase } from "../Firebase";
-import { withAuthorization, withEmailVerification } from "../Session";
+import { withFirebase } from "../../contexts/Firebase";
+import { withAuthorization, withEmailVerification } from "../../contexts/Session";
 import * as ROLES from "../../constants/roles";
 import * as ROUTES from "../../constants/routes";
 import UserItem from "./UserItem";

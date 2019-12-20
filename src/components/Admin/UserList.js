@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
-import { withFirebase } from "../Firebase";
+import { withFirebase } from "../../contexts/Firebase";
 
 const UserListBase = ({ firebase }) => {
   const [loading, setLoading] = useState(false);

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
-import { withFirebase } from "../Firebase";
+import { withFirebase } from "../../contexts/Firebase";
 
 const UserItemBase = ({ firebase, match, location }) => {
   const [loading, setLoading] = useState(false);
