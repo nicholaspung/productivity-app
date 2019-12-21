@@ -91,7 +91,17 @@ class Firebase {
 
   // *** User API ***
   user = uid => this.db.doc(`users/${uid}`);
-  users = () => this.db.doc("users");
+  users = () => this.db.collection("users");
+
+  // *** Habit API ***
+  todo = id => this.db.doc(`todos/${id}`);
+  addTodo = object => this.todos().add(object);
+  todos = () => this.db.collection("todos");
+  habit = id => this.db.doc(`habits/${id}`);
+  addHabit = object => this.habits().add(object);
+  habits = () => this.db.collection("habits");
+  date = id => this.db.doc(`dates/${id}`);
+  dates = () => this.db.collection("dates");
 }
 
 export default Firebase;
