@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
-import { withFirebase } from "../../contexts/Firebase";
-import * as ROUTES from "../../constants/routes";
+import { withFirebase } from "../../../contexts/Firebase";
+import * as ROUTES from "../../../constants/routes";
 
 const INITIAL_STATE = {
   email: "",

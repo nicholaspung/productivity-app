@@ -4,7 +4,7 @@ import { SignUpLink } from "../SignUp";
 import { PasswordForgetLink } from "../PasswordForget";
 import SignInForm from "./SignInForm";
 import SignInWith from "./SignInWith";
-import { withFirebase } from "../../contexts/Firebase";
+import { withFirebase } from "../../../contexts/Firebase";
 
 const signInMethods = ["google", "facebook", "twitter", "github"];
 

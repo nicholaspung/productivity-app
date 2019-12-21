@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
-import { withFirebase } from "../../contexts/Firebase";
-import * as ROUTES from "../../constants/routes";
-import * as ROLES from "../../constants/roles";
+import { withFirebase } from "../../../contexts/Firebase";
+import * as ROUTES from "../../../constants/routes";
+import * as ROLES from "../../../constants/roles";
 
 const INITIAL_STATE = {
   username: "",
