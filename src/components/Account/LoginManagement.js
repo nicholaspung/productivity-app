@@ -27,6 +27,8 @@ const LoginManagementBase = ({ firebase, authUser }) => {
 
   useEffect(() => {
     fetchSignInMethods();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSocialLoginLink = provider => {

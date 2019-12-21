@@ -11,16 +11,18 @@ const UserListBase = ({ firebase }) => {
   useEffect(() => {
     setLoading(true);
 
-    firebase.db
-      .collection("users")
+    firebase
+      .users()
       .get()
-      .then(doc => {
+      .then(docs => {
         let usersList = [];
-        doc.forEach(doc => usersList.push({ ...doc.data(), uid: doc.id }));
+        docs.forEach(doc => usersList.push({ ...doc.data(), uid: doc.id }));
 
         setUsers(usersList);
         setLoading(false);
       });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

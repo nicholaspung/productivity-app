@@ -17,9 +17,8 @@ const UserItemBase = ({ firebase, match, location }) => {
 
     setLoading(true);
 
-    firebase.db
-      .collection("users")
-      .doc(match.params.id)
+    firebase
+      .user(match.params.id)
       .get()
       .then(doc => {
         setUser(doc.data());
