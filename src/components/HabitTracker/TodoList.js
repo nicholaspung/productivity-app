@@ -1,34 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
+import { collectIdsAndDocsFirebase } from "../../utilities";
 
 const TodoList = ({ firebase, id }) => {
-  const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
-
-    // subscribe to real-time updates next
-    firebase
+    const unsubscribeFromTodos = firebase
       .todos()
       .where("user", "==", id)
-      .get()
-      .then(docs => {
-        let todosList = [];
-        docs.forEach(doc => todosList.push({ ...doc.data() }));
+      .where("done", "==", false)
+      .onSnapshot(snapshot => {
+        const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
 
+        // Need to order eventually
         setTodos(todosList);
-        setLoading(false);
       });
+
+    return () => unsubscribeFromTodos();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return loading ? (
-    <div>Loading...</div>
+  return todos.length ? (
+    todos.map(todo => <Todo todo={todo} key={todo.name} />)
   ) : (
-    todos.map(todo => <Todo todo={todo} key={todo.name}/>)
+    <div>Loading...</div>
   );
 };
 
