@@ -17,6 +17,7 @@ import EditTodo from "./EditTodo";
 
 const Todo = ({ todo, firebase }) => {
   const [options, setOptions] = useState(false);
+  const [edit, setEdit] = useState(false);
 
   const handleToggle = () => {
     firebase.todo(todo.id).update({ done: !todo.done });
@@ -28,6 +29,10 @@ const Todo = ({ todo, firebase }) => {
 
   const handleOptions = () => {
     setOptions(!options);
+  };
+
+  const handleEdit = () => {
+    setEdit(!edit);
   };
 
   return (
@@ -45,7 +50,15 @@ const Todo = ({ todo, firebase }) => {
         </button>
       ) : (
         <>
-          <button type="button">Edit</button>
+          <button
+            type="button"
+            onClick={() => {
+              handleEdit();
+              handleOptions();
+            }}
+          >
+            Edit
+          </button>
           <button type="button" onClick={handleDelete}>
             Delete
           </button>
@@ -54,7 +67,7 @@ const Todo = ({ todo, firebase }) => {
           </button>
         </>
       )}
-      <EditTodo />
+      {edit && <EditTodo handleEdit={handleEdit} todo={todo} />}
     </div>
   );
 };
