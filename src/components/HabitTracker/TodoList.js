@@ -3,14 +3,14 @@ import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const TodoList = ({ firebase, id }) => {
+const TodoList = ({ firebase, id, done }) => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     const unsubscribeFromTodos = firebase
       .todos()
       .where("user", "==", id)
-      .where("done", "==", false)
+      .where("done", "==", done)
       .onSnapshot(snapshot => {
         const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
 

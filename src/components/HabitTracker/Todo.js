@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
+import EditTodo from "./EditTodo";
 
 /*
  * Todo Schema
@@ -15,15 +16,45 @@ import { withFirebase } from "../../contexts/Firebase";
  */
 
 const Todo = ({ todo, firebase }) => {
-  const handleClick = () => {
+  const [options, setOptions] = useState(false);
+
+  const handleToggle = () => {
     firebase.todo(todo.id).update({ done: !todo.done });
+  };
+
+  const handleDelete = () => {
+    firebase.todo(todo.id).delete();
+  };
+
+  const handleOptions = () => {
+    setOptions(!options);
   };
 
   return (
     <div>
-      <input type="checkbox" value={todo.done} onChange={handleClick} />
+      <input
+        type="checkbox"
+        value={todo.done}
+        onChange={handleToggle}
+        checked={todo.done}
+      />
       <span>{todo.name}</span>
-      <button type="button">Options</button>
+      {!options ? (
+        <button type="button" onClick={handleOptions}>
+          Options
+        </button>
+      ) : (
+        <>
+          <button type="button">Edit</button>
+          <button type="button" onClick={handleDelete}>
+            Delete
+          </button>
+          <button type="button" onClick={handleOptions}>
+            Cancel
+          </button>
+        </>
+      )}
+      <EditTodo />
     </div>
   );
 };
