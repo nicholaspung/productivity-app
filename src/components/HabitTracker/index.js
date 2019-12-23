@@ -10,7 +10,9 @@ const HabitTracker = ({ authUser }) => {
       <div>Habit Tracker</div>
       <AddDaily id={authUser.uid} />
       <AddTodo id={authUser.uid} />
-      <TodoList id={authUser.uid}/>
+      <TodoList id={authUser.uid} done={false} />
+      <p>Archive</p>
+      <TodoList id={authUser.uid} done={true} />
     </>
   );
 };
