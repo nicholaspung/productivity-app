@@ -67,7 +67,10 @@ const Todo = ({ todo, firebase }) => {
           </button>
         </>
       )}
-      {edit && <EditTodo handleEdit={handleEdit} todo={todo} />}
+      {edit && (
+        <EditTodo handleEdit={handleEdit} todo={todo} firebase={firebase} />
+      )}
+      {todo.description && <p>{todo.description}</p>}
     </div>
   );
 };
