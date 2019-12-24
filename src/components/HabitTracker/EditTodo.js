@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import useTextInput from "../../hooks/useTextInput";
 
-const EditTodo = ({ handleEdit, todo }) => {
-  const [name, setName, handleNameChange] = useTextInput(todo.name);
-  const [description, setDescription, handleDescriptionChange] = useTextInput(
+const EditTodo = ({ handleEdit, todo, firebase }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [name, _n, handleNameChange] = useTextInput(todo.name);
+  // eslint-disable-next-line no-unused-vars
+  const [description, _d, handleDescriptionChange] = useTextInput(
     todo.description
   );
 
   useEffect(() => {
     const handleModal = event => {
-      if (event.target.className == "todo-modal") {
+      if (event.target.className === "todo-modal") {
         handleEdit();
       }
     };
@@ -19,8 +21,17 @@ const EditTodo = ({ handleEdit, todo }) => {
     return () => window.removeEventListener("click", handleModal);
   });
 
+  const handleUpdate = () => {
+    firebase.todo(todo.id).update({ name: name, description: description });
+    handleEdit();
+  };
+
   return (
-    <div className="todo-modal" style={{ border: "1px solid blue" }}>
+    <form
+      className="todo-modal"
+      style={{ border: "1px solid blue" }}
+      onSubmit={handleUpdate}
+    >
       <input
         type="text"
         value={name}
@@ -33,8 +44,9 @@ const EditTodo = ({ handleEdit, todo }) => {
         placeholder="Write a description"
         onChange={handleDescriptionChange}
       />
+      <button onClick={handleUpdate}>Update</button>
       <button onClick={handleEdit}>x</button>
-    </div>
+    </form>
   );
 };
 
