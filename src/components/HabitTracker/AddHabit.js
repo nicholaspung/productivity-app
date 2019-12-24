@@ -3,11 +3,20 @@ import React from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import useTextInput from "../../hooks/useTextInput";
 
-const AddDaily = ({ firebase, id }) => {
+const AddHabit = ({ firebase, id }) => {
   const [input, setInput, handleChange] = useTextInput();
 
   const handleSubmit = event => {
     event.preventDefault();
+
+    firebase.addHabit({
+      name: input,
+      description: null, // String
+      createdAt: new Date(),
+      user: id
+    });
+
+    setInput("");
   };
 
   return (
@@ -16,11 +25,11 @@ const AddDaily = ({ firebase, id }) => {
         type="text"
         value={input}
         onChange={handleChange}
-        placeholder="Add a Daily"
+        placeholder="Add a Habit"
       />
       <button type="submit">Add</button>
     </form>
   );
 };
 
-export default withFirebase(AddDaily);
+export default withFirebase(AddHabit);

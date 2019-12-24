@@ -4,29 +4,40 @@ import Todo from "./Todo";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
 const TodoList = ({ firebase, id, done }) => {
+  const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribeFromTodos = firebase
       .todos()
       .where("user", "==", id)
       .where("done", "==", done)
       .onSnapshot(snapshot => {
-        const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
+        if (!snapshot.empty) {
+          const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
 
-        // Need to order eventually
-        setTodos(todosList);
+          // Need to order eventually
+          setTodos(todosList);
+        }
       });
+
+    setLoading(false);
 
     return () => unsubscribeFromTodos();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return todos.length ? (
-    todos.map(todo => <Todo todo={todo} key={todo.name} />)
-  ) : (
-    <div>Loading...</div>
+  return (
+    <>
+      {loading && <div>Loading...</div>}
+      {todos.length ? (
+        todos.map(todo => <Todo todo={todo} key={todo.name} />)
+      ) : (
+        <div>You have no {done && "archived"} todos.</div>
+      )}
+    </>
   );
 };
 
