@@ -20,19 +20,17 @@ const TodoList = ({ firebase, id, done }) => {
           // Need to order eventually
           setTodos(todosList);
         }
+        setLoading(false);
       });
 
-    setLoading(false);
-
     return () => unsubscribeFromTodos();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      {loading && <div>Loading...</div>}
-      {todos.length ? (
+      {loading ? <div>Loading...</div> : null}
+      {!loading || !todos.length ? (
         todos.map(todo => <Todo todo={todo} key={todo.name} />)
       ) : (
         <div>You have no {done && "archived"} todos.</div>

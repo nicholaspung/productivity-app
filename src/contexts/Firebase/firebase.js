@@ -1,6 +1,7 @@
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { getTodaysDate, collectIdsAndDocsFirebase } from "../../utilities";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -95,11 +96,26 @@ class Firebase {
 
   // *** Habit API ***
   todo = id => this.db.doc(`todos/${id}`);
-  addTodo = object => this.todos().add(object);
   todos = () => this.db.collection("todos");
+  addTodo = object => this.todos().add(object);
   habit = id => this.db.doc(`habits/${id}`);
-  addHabit = object => this.habits().add(object);
   habits = () => this.db.collection("habits");
+  addHabit = object => this.habits().add(object);
+  getHabitsAndUpdateDate = () =>
+    this.habits()
+      .get()
+      .then(snapshot => {
+        let today = getTodaysDate(new Date());
+        let updatedHabits = snapshot.docs.map(collectIdsAndDocsFirebase);
+
+        this.dates()
+          .where("date", "==", today)
+          .get()
+          .then(snapshot => {
+            let dateId = snapshot.docs[0].id;
+            this.date(dateId).update({ habits: updatedHabits });
+          });
+      });
   date = id => this.db.doc(`dates/${id}`);
   dates = () => this.db.collection("dates");
 }

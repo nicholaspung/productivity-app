@@ -16,6 +16,8 @@ const AddHabit = ({ firebase, id }) => {
       user: id
     });
 
+    firebase.getHabitsAndUpdateDate();
+
     setInput("");
   };
 
