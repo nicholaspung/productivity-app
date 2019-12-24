@@ -33,15 +33,6 @@ export default HabitTracker;
     order: Number
   }]
 
-  when you create a habit, you need to update the date object to see the added habit
-  - have new habit
-  - query date object, with habits
-  - read the last habit order
-  - add to new habit
-
-  - add new habit to date object and update
-  - add new habit to habits
-
   when you edit a habit, you need to update the date object with the updated habit
   - have updated habit
   - query the date object

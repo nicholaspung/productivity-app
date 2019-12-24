@@ -41,7 +41,7 @@ const HabitList = ({ firebase, id }) => {
   return (
     <>
       {loading && <div>Loading...</div>}
-      {habits.length ? (
+      {!loading || !habits.length ? (
         habits.map(habit => <Habit habit={habit} key={habit.name} />)
       ) : (
         <div>You have no habits.</div>
