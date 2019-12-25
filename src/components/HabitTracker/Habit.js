@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import { getTodaysDate } from "../../utilities";
+import EditHabit from "./EditHabit";
 
 /*
  * Habit Schema
@@ -50,12 +51,7 @@ const Habit = ({ habit, firebase }) => {
   };
   return (
     <div>
-      <input
-        type="checkbox"
-        value={habit.done}
-        checked={habit.done}
-        onChange={handleToggle}
-      />
+      <input type="checkbox" checked={habit.done} onChange={handleToggle} />
       <span>{habit.name}</span>
       {!options ? (
         <button type="button" onClick={handleOptions}>
@@ -80,10 +76,9 @@ const Habit = ({ habit, firebase }) => {
           </button>
         </>
       )}
-      {edit &&
-        {
-          /* <EditTodo handleEdit={handleEdit} habit={habit} firebase={firebase} /> */
-        }}
+      {edit && (
+        <EditHabit handleEdit={handleEdit} habit={habit} firebase={firebase} />
+      )}
       {habit.description && <p>{habit.description}</p>}
     </div>
   );

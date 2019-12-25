@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import useTextInput from "../../hooks/useTextInput";
 
-const EditTodo = ({ handleEdit, todo, firebase }) => {
+const EditHabit = ({ handleEdit, habit, firebase }) => {
   // eslint-disable-next-line no-unused-vars
-  const [name, _n, handleNameChange] = useTextInput(todo.name);
+  const [name, _n, handleNameChange] = useTextInput(habit.name);
   // eslint-disable-next-line no-unused-vars
   const [description, _d, handleDescriptionChange] = useTextInput(
-    todo.description
+    habit.description
   );
 
   useEffect(() => {
     const handleModal = event => {
-      if (event.target.className === "todo-modal") {
+      if (event.target.className === "habit-modal") {
         handleEdit();
       }
     };
@@ -24,14 +24,15 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
   const handleUpdate = async event => {
     event.preventDefault();
     await firebase
-      .todo(todo.id)
+      .habit(habit.id)
       .update({ name: name, description: description });
+    await firebase.getHabitsAndUpdateDate();
     handleEdit();
   };
 
   return (
     <form
-      className="todo-modal"
+      className="habit-modal"
       style={{ border: "1px solid blue" }}
       onSubmit={event => handleUpdate(event)}
     >
@@ -47,10 +48,14 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
         placeholder="Write a description"
         onChange={handleDescriptionChange}
       />
-      <button onClick={event => handleUpdate(event)}>Update</button>
-      <button onClick={handleEdit}>x</button>
+      <button onClick={event => handleUpdate(event)} type="submit">
+        Update
+      </button>
+      <button onClick={handleEdit} type="button">
+        x
+      </button>
     </form>
   );
 };
 
-export default EditTodo;
+export default EditHabit;

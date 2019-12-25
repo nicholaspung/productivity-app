@@ -5,6 +5,7 @@ import { collectIdsAndDocsFirebase } from "../../utilities";
 
 const TodoList = ({ firebase, id, done }) => {
   const [loading, setLoading] = useState(false);
+  const [doneLoading, setDoneLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -19,8 +20,11 @@ const TodoList = ({ firebase, id, done }) => {
 
           // Need to order eventually
           setTodos(todosList);
+        } else {
+          setTodos([]);
         }
         setLoading(false);
+        setDoneLoading(true);
       });
 
     return () => unsubscribeFromTodos();
@@ -30,9 +34,10 @@ const TodoList = ({ firebase, id, done }) => {
   return (
     <>
       {loading ? <div>Loading...</div> : null}
-      {!loading || !todos.length ? (
-        todos.map(todo => <Todo todo={todo} key={todo.name} />)
-      ) : (
+      {!loading || !todos.length
+        ? todos.map(todo => <Todo todo={todo} key={todo.name} />)
+        : null}
+      {doneLoading && !todos.length && (
         <div>You have no {done && "archived"} todos.</div>
       )}
     </>
