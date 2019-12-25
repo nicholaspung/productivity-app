@@ -23,9 +23,10 @@ const HabitList = ({ firebase, id }) => {
             .get()
             .then(snapshot => {
               let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
+              habits = habits.map(habit => ({ ...habit, done: false }));
 
               firebase.dates().add({
-                id: id,
+                user: id,
                 date: today,
                 habits: habits
               });
