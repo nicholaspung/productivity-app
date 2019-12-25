@@ -21,8 +21,11 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
     return () => window.removeEventListener("click", handleModal);
   });
 
-  const handleUpdate = () => {
-    firebase.todo(todo.id).update({ name: name, description: description });
+  const handleUpdate = async event => {
+    event.preventDefault();
+    await firebase
+      .todo(todo.id)
+      .update({ name: name, description: description });
     handleEdit();
   };
 
@@ -30,7 +33,7 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
     <form
       className="todo-modal"
       style={{ border: "1px solid blue" }}
-      onSubmit={handleUpdate}
+      onSubmit={event => handleUpdate(event)}
     >
       <input
         type="text"
@@ -44,7 +47,7 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
         placeholder="Write a description"
         onChange={handleDescriptionChange}
       />
-      <button onClick={handleUpdate}>Update</button>
+      <button onClick={event => handleUpdate(event)}>Update</button>
       <button onClick={handleEdit}>x</button>
     </form>
   );

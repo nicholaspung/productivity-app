@@ -5,6 +5,7 @@ import { collectIdsAndDocsFirebase, getTodaysDate } from "../../utilities";
 
 const HabitList = ({ firebase, id }) => {
   const [loading, setLoading] = useState(false);
+  const [doneLoading, setDoneLoading] = useState(false);
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const HabitList = ({ firebase, id }) => {
             .get()
             .then(snapshot => {
               let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
+
               habits = habits.map(habit => ({ ...habit, done: false }));
 
               firebase.dates().add({
@@ -33,6 +35,7 @@ const HabitList = ({ firebase, id }) => {
             });
         }
         setLoading(false);
+        setDoneLoading(true);
       });
 
     return () => unsubscribeFromHabits();
@@ -42,11 +45,10 @@ const HabitList = ({ firebase, id }) => {
   return (
     <>
       {loading && <div>Loading...</div>}
-      {!loading || !habits.length ? (
-        habits.map(habit => <Habit habit={habit} key={habit.name} />)
-      ) : (
-        <div>You have no habits.</div>
-      )}
+      {!loading || !habits.length
+        ? habits.map(habit => <Habit habit={habit} key={habit.name} />)
+        : null}
+      {doneLoading && <div>You have no habits.</div>}
     </>
   );
 };
