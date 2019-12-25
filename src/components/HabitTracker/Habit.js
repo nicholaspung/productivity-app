@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
+import { getTodaysDate } from "../../utilities";
 
 /*
  * Habit Schema
@@ -16,7 +17,24 @@ const Habit = ({ habit, firebase }) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  // work on handleToggle
+  const handleToggle = () => {
+    let today = getTodaysDate(new Date());
+    firebase
+      .dates()
+      .where("date", "==", today)
+      .get()
+      .then(snapshot => {
+        let date = snapshot.docs[0];
+        let updatedHabits = date.data().habits.map(h => {
+          if (h.id === habit.id) {
+            h.done = !h.done;
+          }
+          return h;
+        });
+
+        firebase.date(date.id).update({ habits: updatedHabits });
+      });
+  };
 
   const handleDelete = () => {
     firebase.habit(habit.id).delete();
@@ -32,7 +50,12 @@ const Habit = ({ habit, firebase }) => {
   };
   return (
     <div>
-      <input type="checkbox" value={habit.done} checked={habit.done} />
+      <input
+        type="checkbox"
+        value={habit.done}
+        checked={habit.done}
+        onChange={handleToggle}
+      />
       <span>{habit.name}</span>
       {!options ? (
         <button type="button" onClick={handleOptions}>

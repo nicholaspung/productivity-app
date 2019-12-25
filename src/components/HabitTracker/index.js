@@ -41,10 +41,4 @@ export default HabitTracker;
   - update date object with updated habit
   - update habit with updated habit
 
-  when you click on finishing a habit, you need to update the date object as done
-  - query date object
-  - find the habit clicked and marked complete/uncomplete
-  - update the date object
-
-
 */
