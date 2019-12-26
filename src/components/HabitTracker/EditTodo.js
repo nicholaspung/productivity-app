@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useTextInput from "../../hooks/useTextInput";
+import useModalContainer from "../../hooks/useModalContainer";
 
 const EditTodo = ({ handleEdit, todo, firebase }) => {
   // eslint-disable-next-line no-unused-vars
@@ -9,17 +10,7 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
     todo.description
   );
 
-  useEffect(() => {
-    const handleModal = event => {
-      if (event.target.className === "todo-modal") {
-        handleEdit();
-      }
-    };
-
-    window.addEventListener("click", handleModal);
-
-    return () => window.removeEventListener("click", handleModal);
-  });
+  useModalContainer("todo-modal", handleEdit);
 
   const handleUpdate = async event => {
     event.preventDefault();
