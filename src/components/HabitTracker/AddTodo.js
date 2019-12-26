@@ -5,10 +5,10 @@ import { withFirebase } from "../../contexts/Firebase";
 const AddTodo = ({ firebase, id }) => {
   const [input, setInput, handleChange] = useTextInput();
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    firebase.addTodo({
+    await firebase.addTodo({
       name: input,
       description: null, // String
       done: false,

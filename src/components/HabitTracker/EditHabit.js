@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useTextInput from "../../hooks/useTextInput";
+import useModalContainer from "../../hooks/useModalContainer";
 
 const EditHabit = ({ handleEdit, habit, firebase }) => {
   // eslint-disable-next-line no-unused-vars
@@ -9,17 +10,7 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
     habit.description
   );
 
-  useEffect(() => {
-    const handleModal = event => {
-      if (event.target.className === "habit-modal") {
-        handleEdit();
-      }
-    };
-
-    window.addEventListener("click", handleModal);
-
-    return () => window.removeEventListener("click", handleModal);
-  });
+  useModalContainer("habit-modal", handleEdit);
 
   const handleUpdate = async event => {
     event.preventDefault();

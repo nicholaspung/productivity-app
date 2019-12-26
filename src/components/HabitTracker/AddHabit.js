@@ -6,17 +6,17 @@ import useTextInput from "../../hooks/useTextInput";
 const AddHabit = ({ firebase, id }) => {
   const [input, setInput, handleChange] = useTextInput();
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    firebase.addHabit({
+    await firebase.addHabit({
       name: input,
       description: null, // String
       createdAt: new Date(),
       user: id
     });
 
-    firebase.getHabitsAndUpdateDate();
+    await firebase.getHabitsAndUpdateDate();
 
     setInput("");
   };

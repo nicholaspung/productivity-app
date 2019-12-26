@@ -37,9 +37,9 @@ const Habit = ({ habit, firebase }) => {
       });
   };
 
-  const handleDelete = () => {
-    firebase.habit(habit.id).delete();
-    firebase.getHabitsAndUpdateDate();
+  const handleDelete = async () => {
+    await firebase.habit(habit.id).delete();
+    await firebase.getHabitsAndUpdateDate();
   };
 
   const handleOptions = () => {
