@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import Habit from "./Habit";
-import { collectIdsAndDocsFirebase, getTodaysDate } from "../../utilities";
+import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const HabitList = ({ firebase, id }) => {
+const HabitList = ({ firebase, id, date }) => {
   const [loading, setLoading] = useState(false);
   const [doneLoading, setDoneLoading] = useState(false);
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    let today = getTodaysDate(new Date());
     const unsubscribeFromHabits = firebase
       .dates()
-      .where("date", "==", today)
+      .where("date", "==", date)
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
           let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
@@ -29,7 +28,7 @@ const HabitList = ({ firebase, id }) => {
 
               firebase.dates().add({
                 user: id,
-                date: today,
+                date: date,
                 habits: habits
               });
             });
@@ -46,7 +45,9 @@ const HabitList = ({ firebase, id }) => {
     <>
       {loading && <div>Loading...</div>}
       {!loading || !habits.length
-        ? habits.map(habit => <Habit habit={habit} key={habit.name} />)
+        ? habits.map(habit => (
+            <Habit habit={habit} key={habit.name} date={date} />
+          ))
         : null}
       {doneLoading && <div>You have no habits.</div>}
     </>

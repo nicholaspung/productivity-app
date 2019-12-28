@@ -1,11 +1,25 @@
 import React from "react";
+import { withFirebase } from "../../contexts/Firebase";
+import HabitList from "./HabitList";
+import { getYesterdaysDate, getTodaysDate } from "../../utilities";
 
-const PreviousDay = () => {
+const PreviousDay = ({ id, setShowPreviousDay }) => {
+  const handleClick = () => {
+    setShowPreviousDay(false);
+    localStorage.setItem(
+      "first-time-for-day",
+      JSON.stringify(getTodaysDate(new Date()))
+    );
+  };
+
   return (
     <>
-      <div>hi</div>
+      <HabitList id={id} date={getYesterdaysDate(new Date())} />
+      <button type="button" onClick={handleClick}>
+        Done!
+      </button>
     </>
   );
 };
 
-export default PreviousDay;
+export default withFirebase(PreviousDay);

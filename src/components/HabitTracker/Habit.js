@@ -14,27 +14,12 @@ import EditHabit from "./EditHabit";
  * }
  */
 
-const Habit = ({ habit, firebase }) => {
+const Habit = ({ habit, firebase, date }) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
 
   const handleToggle = () => {
-    let today = getTodaysDate(new Date());
-    firebase
-      .dates()
-      .where("date", "==", today)
-      .get()
-      .then(snapshot => {
-        let date = snapshot.docs[0];
-        let updatedHabits = date.data().habits.map(h => {
-          if (h.id === habit.id) {
-            h.done = !h.done;
-          }
-          return h;
-        });
-
-        firebase.date(date.id).update({ habits: updatedHabits });
-      });
+    firebase.toggleHabit(habit, date);
   };
 
   const handleDelete = async () => {

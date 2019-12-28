@@ -116,6 +116,22 @@ class Firebase {
             this.date(dateId).update({ habits: updatedHabits });
           });
       });
+  toggleHabit = (habit, date) => {
+    this.dates()
+      .where("date", "==", date)
+      .get()
+      .then(snapshot => {
+        let date = snapshot.docs[0];
+        let updatedHabits = date.data().habits.map(h => {
+          if (h.id === habit.id) {
+            h.done = !h.done;
+          }
+          return h;
+        });
+
+        this.date(date.id).update({ habits: updatedHabits });
+      });
+  };
   date = id => this.db.doc(`dates/${id}`);
   dates = () => this.db.collection("dates");
 }
