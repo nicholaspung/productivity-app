@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useModalContainer = (className, cb) => {
+const useExitModal = (className, cb) => {
   useEffect(() => {
     const handleModal = event => {
       if (event.target.className === className) {
@@ -14,4 +14,4 @@ const useModalContainer = (className, cb) => {
   });
 };
 
-export default useModalContainer;
+export default useExitModal;

@@ -5,34 +5,31 @@ import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
 import HabitList from "./HabitList";
 import PreviousDay from "./PreviousDay";
-import useModalContainer from "../../hooks/useModalContainer";
-import { getTodaysDate, getYesterdaysDate } from "../../utilities";
-import { withFirebase } from "../../contexts/Firebase";
+import { getTodaysDate } from "../../utilities";
 
-const HabitTracker = ({ authUser, firebase }) => {
+const HabitTracker = ({ authUser }) => {
   const [showPreviousDay, setShowPreviousDay] = useState(false);
 
   useEffect(() => {
     let today = getTodaysDate(new Date());
-    firebase
-      .dates()
-      .where("date", "==", today)
-      .get()
-      .then(snapshot => {
-        if (snapshot.empty) {
-          let yesterday = getYesterdaysDate(new Date())
-          console.log(yesterday)
-          // firebase.dates().where("date", "==", )
-        }
-      });
-  });
+    let isFirstTime = JSON.parse(localStorage.getItem("first-time-for-day"));
+    if (today !== isFirstTime) {
+      setShowPreviousDay(true);
+    }
+  }, []);
+
   return (
     <>
-      <PreviousDay />
+      {showPreviousDay && (
+        <PreviousDay
+          id={authUser.uid}
+          setShowPreviousDay={setShowPreviousDay}
+        />
+      )}
       <div>Habit Tracker</div>
       <AddHabit id={authUser.uid} />
       <p>Habit List</p>
-      <HabitList id={authUser.uid} />
+      <HabitList id={authUser.uid} date={getTodaysDate(new Date())} />
       <AddTodo id={authUser.uid} />
       <p>Todo List</p>
       <TodoList id={authUser.uid} done={false} />
@@ -42,24 +39,4 @@ const HabitTracker = ({ authUser, firebase }) => {
   );
 };
 
-export default withFirebase(HabitTracker);
-
-// Date
-/*
-  date: Date, (date.toString().slice(0,15))
-  habits: [{
-    name: String,
-    description: String,
-    done: Boolean,
-    order: Number
-  }]
-
-  when you edit a habit, you need to update the date object with the updated habit
-  - have updated habit
-  - query the date object
-  - find the habit and update in the date object
-  
-  - update date object with updated habit
-  - update habit with updated habit
-
-*/
+export default HabitTracker;
