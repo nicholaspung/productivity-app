@@ -135,6 +135,29 @@ class Firebase {
       });
   date = id => this.db.doc(`dates/${id}`);
   dates = () => this.db.collection("dates");
+  checkIfDateIsCreated = (date, uid) =>
+    this.dates()
+      .where("user", "==", uid)
+      .where("date", "==", date)
+      .get()
+      .then(snapshot => {
+        if (snapshot.empty) {
+          this.habits()
+            .where("user", "==", uid)
+            .get()
+            .then(snapshot => {
+              let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
+
+              habits = habits.map(habit => ({ ...habit, done: false }));
+
+              this.dates().add({
+                user: uid,
+                date: date,
+                habits: habits
+              });
+            });
+        }
+      });
 }
 
 export default Firebase;

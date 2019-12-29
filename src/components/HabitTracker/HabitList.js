@@ -10,30 +10,7 @@ const HabitList = ({ firebase, uid, date }) => {
 
   useEffect(() => {
     setLoading(true);
-    firebase
-      .dates()
-      .where("user", "==", uid)
-      .where("date", "==", date)
-      .get()
-      .then(snapshot => {
-        if (snapshot.empty) {
-          firebase
-            .habits()
-            .where("user", "==", uid)
-            .get()
-            .then(snapshot => {
-              let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
-
-              habits = habits.map(habit => ({ ...habit, done: false }));
-
-              firebase.dates().add({
-                user: uid,
-                date: date,
-                habits: habits
-              });
-            });
-        }
-      });
+    firebase.checkIfDateIsCreated(date, uid);
     const unsubscribe = firebase
       .dates()
       .where("user", "==", uid)
