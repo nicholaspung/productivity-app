@@ -37,7 +37,12 @@ const Todo = ({ todo, firebase }) => {
 
   return (
     <div>
-      <input type="checkbox" onChange={handleToggle} checked={todo.done} />
+      <input
+        type="checkbox"
+        onChange={handleToggle}
+        value={todo.done}
+        checked={todo.done}
+      />
       <span>{todo.name}</span>
       {!options ? (
         <button type="button" onClick={handleOptions}>

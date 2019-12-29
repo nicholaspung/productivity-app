@@ -22,19 +22,19 @@ const HabitTracker = ({ authUser }) => {
     <>
       {showPreviousDay && (
         <PreviousDay
-          id={authUser.uid}
+          uid={authUser.uid}
           setShowPreviousDay={setShowPreviousDay}
         />
       )}
       <div>Habit Tracker</div>
-      <AddHabit id={authUser.uid} />
+      <AddHabit />
       <p>Habit List</p>
-      <HabitList id={authUser.uid} date={getTodaysDate(new Date())} />
-      <AddTodo id={authUser.uid} />
+      <HabitList uid={authUser.uid} date={getTodaysDate(new Date())} />
+      <AddTodo />
       <p>Todo List</p>
-      <TodoList id={authUser.uid} done={false} />
+      <TodoList uid={authUser.uid} done={false} />
       <p>Archive</p>
-      <TodoList id={authUser.uid} done={true} />
+      <TodoList uid={authUser.uid} done={true} />
     </>
   );
 };

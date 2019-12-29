@@ -2,7 +2,7 @@ import React from "react";
 import useTextInput from "../../hooks/useTextInput";
 import { withFirebase } from "../../contexts/Firebase";
 
-const AddTodo = ({ firebase, id }) => {
+const AddTodo = ({ firebase }) => {
   const [input, setInput, handleChange] = useTextInput();
 
   const handleSubmit = async event => {
@@ -14,7 +14,7 @@ const AddTodo = ({ firebase, id }) => {
       done: false,
       createdAt: new Date(),
       doneAt: null, // Date
-      user: id
+      user: firebase.auth.currentUser.uid
     });
 
     setInput("");
