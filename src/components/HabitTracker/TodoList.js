@@ -3,17 +3,17 @@ import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const TodoList = ({ firebase, id, done }) => {
+const TodoList = ({ firebase, uid, done }) => {
   const [loading, setLoading] = useState(false);
   const [doneLoading, setDoneLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    const unsubscribeFromTodos = firebase
+    const unsubscribe = firebase
       .todos()
-      .where("user", "==", id)
       .where("done", "==", done)
+      .where("user", "==", uid)
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
           const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
@@ -27,7 +27,7 @@ const TodoList = ({ firebase, id, done }) => {
         setDoneLoading(true);
       });
 
-    return () => unsubscribeFromTodos();
+    return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

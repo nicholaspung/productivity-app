@@ -3,7 +3,7 @@ import React from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import useTextInput from "../../hooks/useTextInput";
 
-const AddHabit = ({ firebase, id }) => {
+const AddHabit = ({ firebase }) => {
   const [input, setInput, handleChange] = useTextInput();
 
   const handleSubmit = async event => {
@@ -13,7 +13,7 @@ const AddHabit = ({ firebase, id }) => {
       name: input,
       description: null, // String
       createdAt: new Date(),
-      user: id
+      user: firebase.auth.currentUser.uid
     });
 
     await firebase.getHabitsAndUpdateDate();

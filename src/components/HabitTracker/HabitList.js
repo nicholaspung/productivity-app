@@ -3,23 +3,23 @@ import { withFirebase } from "../../contexts/Firebase";
 import Habit from "./Habit";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const HabitList = ({ firebase, id, date }) => {
+const HabitList = ({ firebase, uid, date }) => {
   const [loading, setLoading] = useState(false);
   const [doneLoading, setDoneLoading] = useState(false);
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    const unsubscribeFromHabits = firebase
+    firebase
       .dates()
+      .where("user", "==", uid)
       .where("date", "==", date)
-      .onSnapshot(snapshot => {
-        if (!snapshot.empty) {
-          let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
-          setHabits(date.habits);
-        } else {
+      .get()
+      .then(snapshot => {
+        if (snapshot.empty) {
           firebase
             .habits()
+            .where("user", "==", uid)
             .get()
             .then(snapshot => {
               let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
@@ -27,17 +27,27 @@ const HabitList = ({ firebase, id, date }) => {
               habits = habits.map(habit => ({ ...habit, done: false }));
 
               firebase.dates().add({
-                user: id,
+                user: uid,
                 date: date,
                 habits: habits
               });
             });
         }
+      });
+    const unsubscribe = firebase
+      .dates()
+      .where("user", "==", uid)
+      .where("date", "==", date)
+      .onSnapshot(snapshot => {
+        if (!snapshot.empty) {
+          let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
+          setHabits(date.habits);
+        }
         setLoading(false);
         setDoneLoading(true);
       });
 
-    return () => unsubscribeFromHabits();
+    return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -49,7 +59,7 @@ const HabitList = ({ firebase, id, date }) => {
             <Habit habit={habit} key={habit.name} date={date} />
           ))
         : null}
-      {doneLoading && <div>You have no habits.</div>}
+      {doneLoading && !habits.length && <div>You have no habits.</div>}
     </>
   );
 };

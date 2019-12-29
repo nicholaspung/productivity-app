@@ -3,7 +3,7 @@ import { withFirebase } from "../../contexts/Firebase";
 import HabitList from "./HabitList";
 import { getYesterdaysDate, getTodaysDate } from "../../utilities";
 
-const PreviousDay = ({ id, setShowPreviousDay }) => {
+const PreviousDay = ({ uid, setShowPreviousDay }) => {
   const handleClick = () => {
     setShowPreviousDay(false);
     localStorage.setItem(
@@ -14,7 +14,7 @@ const PreviousDay = ({ id, setShowPreviousDay }) => {
 
   return (
     <>
-      <HabitList id={id} date={getYesterdaysDate(new Date())} />
+      <HabitList uid={uid} date={getYesterdaysDate(new Date())} />
       <button type="button" onClick={handleClick}>
         Done!
       </button>

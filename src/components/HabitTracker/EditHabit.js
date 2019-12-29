@@ -17,7 +17,7 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
     await firebase
       .habit(habit.id)
       .update({ name: name, description: description });
-    await firebase.getHabitsAndUpdateDate();
+    await firebase.getHabitsAndUpdateDate(habit.user);
     handleEdit();
   };
 
