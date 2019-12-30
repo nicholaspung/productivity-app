@@ -3,7 +3,13 @@ import { withFirebase } from "../../contexts/Firebase";
 import Habit from "./Habit";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const HabitList = ({ firebase, uid, date }) => {
+const HabitList = ({
+  firebase,
+  uid,
+  date,
+  previousDay,
+  handlePreviousClick
+}) => {
   const [loading, setLoading] = useState(false);
   const [doneLoading, setDoneLoading] = useState(false);
   const [habits, setHabits] = useState([]);
@@ -18,7 +24,19 @@ const HabitList = ({ firebase, uid, date }) => {
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
           let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
-          setHabits(date.habits);
+
+          if (previousDay) {
+            let habits = date.habits;
+            let notDoneHabits = habits.filter(habit => habit.done === false);
+
+            if (notDoneHabits.length) {
+              setHabits(notDoneHabits);
+            } else {
+              handlePreviousClick();
+            }
+          } else {
+            setHabits(date.habits);
+          }
         }
         setLoading(false);
         setDoneLoading(true);
