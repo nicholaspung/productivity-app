@@ -7,6 +7,7 @@ import {
   AuthUserContext
 } from "../../contexts/Session";
 import HabitTracker from "../HabitTracker";
+import Calendar from "../Calendar";
 
 const HomePage = () => {
   return (
@@ -16,6 +17,7 @@ const HomePage = () => {
       <AuthUserContext.Consumer>
         {authUser => <HabitTracker authUser={authUser} />}
       </AuthUserContext.Consumer>
+      <Calendar />
     </div>
   );
 };
