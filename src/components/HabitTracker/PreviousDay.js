@@ -17,11 +17,10 @@ const PreviousDay = ({ uid, setShowPreviousDay }) => {
       <HabitList
         uid={uid}
         date={getYesterdaysDate(new Date())}
-        previousDay={true}
         handlePreviousClick={handleClick}
       />
       <button type="button" onClick={handleClick}>
-        Done!
+        Start my new day!
       </button>
     </>
   );
