@@ -23,7 +23,9 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick }) => {
           if (habits.length) {
             setHabits(habits);
           } else {
-            handlePreviousClick();
+            if (typeof handlePreviousClick == "function") {
+              handlePreviousClick();
+            }
           }
         }
         setLoading(false);
