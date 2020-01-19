@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import "./habit.css";
 import "./add-habit.css";
 import "./habit-list.css";
 import AddHabit from "./AddHabit";

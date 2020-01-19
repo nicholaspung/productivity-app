@@ -1,0 +1,7 @@
+.habit-tracker > p,
+.todo-tracker > p {
+  width: 26rem;
+  background-color: lightgreen;
+  padding: 1rem 0;
+  margin: 0px;
+}
