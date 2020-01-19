@@ -13,6 +13,7 @@ import Calendar from "../Calendar";
 const HomePage = () => {
   return (
     <main>
+      <Calendar />
       <div className="home-info">
         <h1>Home Page</h1>
         <p>The Home Page is accessible by every signed in user.</p>
@@ -20,7 +21,6 @@ const HomePage = () => {
       <AuthUserContext.Consumer>
         {authUser => <HabitTracker authUser={authUser} />}
       </AuthUserContext.Consumer>
-      <Calendar />
     </main>
   );
 };

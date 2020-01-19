@@ -34,42 +34,52 @@ const Habit = ({ habit, firebase, date }) => {
     setEdit(!edit);
   };
   return (
-    <div>
+    <li className="habit-item">
       <input
         type="checkbox"
         checked={habit.done}
         value={habit.done}
         onChange={handleToggle}
       />
-      <span>{habit.name}</span>
-      {!options ? (
-        <button type="button" onClick={handleOptions}>
-          Options
-        </button>
-      ) : (
-        <>
+      <div className="habit-item-name-container">
+        <p className="habit-item-name">{habit.name}</p>
+        {habit.description && (
+          <p className="habit-item-description">{habit.description}</p>
+        )}
+      </div>
+      <div className="habit-button">
+        {!options ? (
           <button
             type="button"
-            onClick={() => {
-              handleEdit();
-              handleOptions();
-            }}
+            onClick={handleOptions}
+            className="habit-options-button"
           >
-            Edit
+            Options
           </button>
-          <button type="button" onClick={handleDelete}>
-            Delete
-          </button>
-          <button type="button" onClick={handleOptions}>
-            Cancel
-          </button>
-        </>
-      )}
+        ) : (
+          <div className="habit-options">
+            <button
+              type="button"
+              onClick={() => {
+                handleEdit();
+                handleOptions();
+              }}
+            >
+              Edit
+            </button>
+            <button type="button" onClick={handleDelete}>
+              Delete
+            </button>
+            <button type="button" onClick={handleOptions}>
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
       {edit && (
         <EditHabit handleEdit={handleEdit} habit={habit} firebase={firebase} />
       )}
-      {habit.description && <p>{habit.description}</p>}
-    </div>
+    </li>
   );
 };
 

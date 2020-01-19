@@ -1,34 +1,40 @@
-main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 0.5fr auto;
-  grid-template-areas:
-    "info info info info"
-    "tracker-info tracker-info calendar-info calendar-info"
-    "habit todo calendar calendar"
-    "habit todo calendar calendar";
-}
+@media only screen and (min-width: 968px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr auto 0.5fr auto;
+    grid-template-areas:
+      "info info info info"
+      "previous-day previous-day previous-day previous-day"
+      "tracker-info tracker-info calendar-info calendar-info"
+      "habit todo calendar calendar";
+  }
 
-.home-info {
-  grid-area: info;
-}
+  .home-info {
+    grid-area: info;
+  }
 
-.tracker-info {
-  grid-area: tracker-info;
-}
+  .previous-day-tracker {
+    grid-area: previous-day;
+  }
 
-.habit-tracker {
-  grid-area: habit;
-}
+  .tracker-info {
+    grid-area: tracker-info;
+  }
 
-.todo-tracker {
-  grid-area: todo;
-}
+  .habit-tracker {
+    grid-area: habit;
+  }
 
-.calendar-info {
-  grid-area: calendar-info;
-}
+  .todo-tracker {
+    grid-area: todo;
+  }
 
-.calendar {
-  grid-area: calendar;
+  .calendar-info {
+    grid-area: calendar-info;
+  }
+
+  .calendar {
+    grid-area: calendar;
+  }
 }
