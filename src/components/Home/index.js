@@ -1,5 +1,6 @@
 import React from "react";
 import { compose } from "recompose";
+import "./home.css";
 
 import {
   withAuthorization,
@@ -11,14 +12,16 @@ import Calendar from "../Calendar";
 
 const HomePage = () => {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>The Home Page is accessible by every signed in user.</p>
+    <main>
+      <div className="home-info">
+        <h1>Home Page</h1>
+        <p>The Home Page is accessible by every signed in user.</p>
+      </div>
       <AuthUserContext.Consumer>
         {authUser => <HabitTracker authUser={authUser} />}
       </AuthUserContext.Consumer>
       <Calendar />
-    </div>
+    </main>
   );
 };
 

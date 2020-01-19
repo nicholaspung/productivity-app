@@ -26,15 +26,21 @@ const HabitTracker = ({ authUser }) => {
           setShowPreviousDay={setShowPreviousDay}
         />
       )}
-      <div>Habit Tracker</div>
-      <AddHabit />
-      <p>Habit List</p>
-      <HabitList uid={authUser.uid} date={getTodaysDate(new Date())} />
-      <AddTodo />
-      <p>Todo List</p>
-      <TodoList uid={authUser.uid} done={false} />
-      <p>Archive</p>
-      <TodoList uid={authUser.uid} done={true} />
+      <div className="tracker-info">Track Your Life</div>
+      <div className="habit-tracker">
+        <p>Habit Tracker</p>
+        <AddHabit />
+        <p>Habit List</p>
+        <HabitList uid={authUser.uid} date={getTodaysDate(new Date())} />
+      </div>
+      <div className="todo-tracker">
+        <p>Your Todos</p>
+        <AddTodo />
+        <p>Todo List</p>
+        <TodoList uid={authUser.uid} done={false} />
+        <p>Archive</p>
+        <TodoList uid={authUser.uid} done={true} />
+      </div>
     </>
   );
 };

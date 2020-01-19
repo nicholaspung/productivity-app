@@ -98,41 +98,44 @@ const Calendar = () => {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th colSpan="7">
-            {monthNames[month]} {year}
-          </th>
-        </tr>
-        <tr>
-          <th>
-            <button onClick={() => changeMonth("left")}>{"<"}</button>
-          </th>
-          <th colSpan="5">
-            <button onClick={() => changeMonth("current")}>Today</button>
-          </th>
+    <>
+      <p className="calendar-info">Calendar Info</p>
+      <table className="calendar">
+        <thead>
+          <tr>
+            <th colSpan="7">
+              {monthNames[month]} {year}
+            </th>
+          </tr>
+          <tr>
+            <th>
+              <button onClick={() => changeMonth("left")}>{"<"}</button>
+            </th>
+            <th colSpan="5">
+              <button onClick={() => changeMonth("current")}>Today</button>
+            </th>
 
-          <th>
-            <button onClick={() => changeMonth("right")}>{">"}</button>
-          </th>
-        </tr>
-        <tr>
-          {dayNames.map(day => (
-            <td key={day}>{day}</td>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {monthArray.map((week, i) => (
-          <tr key={i}>
-            {week.map((day, i) => (
-              <Day day={day} key={i} />
+            <th>
+              <button onClick={() => changeMonth("right")}>{">"}</button>
+            </th>
+          </tr>
+          <tr>
+            {dayNames.map(day => (
+              <td key={day}>{day}</td>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {monthArray.map((week, i) => (
+            <tr key={i}>
+              {week.map((day, i) => (
+                <Day day={day} key={i} />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 
