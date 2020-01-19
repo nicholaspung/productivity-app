@@ -36,7 +36,7 @@ const Todo = ({ todo, firebase }) => {
   };
 
   return (
-    <li class="habit-item">
+    <li className="habit-item">
       <input
         type="checkbox"
         onChange={handleToggle}
