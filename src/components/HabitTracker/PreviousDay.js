@@ -13,7 +13,8 @@ const PreviousDay = ({ uid, setShowPreviousDay }) => {
   };
 
   return (
-    <>
+    <div className="previous-day-tracker">
+      <p>Previous Day</p>
       <HabitList
         uid={uid}
         date={getYesterdaysDate(new Date())}
@@ -22,7 +23,7 @@ const PreviousDay = ({ uid, setShowPreviousDay }) => {
       <button type="button" onClick={handleClick}>
         Start my new day!
       </button>
-    </>
+    </div>
   );
 };
 

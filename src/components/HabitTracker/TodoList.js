@@ -32,15 +32,19 @@ const TodoList = ({ firebase, uid, done }) => {
   }, []);
 
   return (
-    <>
-      {loading ? <div>Loading...</div> : null}
-      {!loading || !todos.length
-        ? todos.map(todo => <Todo todo={todo} key={todo.name} />)
-        : null}
+    <section className="habit-list">
+      {loading && <p>Loading...</p>}
+      {!loading || !todos.length ? (
+        <ul>
+          {todos.map(todo => (
+            <Todo todo={todo} key={todo.name} />
+          ))}
+        </ul>
+      ) : null}
       {doneLoading && !todos.length && (
-        <div>You have no {done && "archived"} todos.</div>
+        <p>You have no {done && "archived"} todos.</p>
       )}
-    </>
+    </section>
   );
 };
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import "./add-habit.css";
+import "./habit-list.css";
 import AddHabit from "./AddHabit";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
@@ -30,13 +32,11 @@ const HabitTracker = ({ authUser }) => {
       <div className="habit-tracker">
         <p>Habit Tracker</p>
         <AddHabit />
-        <p>Habit List</p>
         <HabitList uid={authUser.uid} date={getTodaysDate(new Date())} />
       </div>
       <div className="todo-tracker">
         <p>Your Todos</p>
         <AddTodo />
-        <p>Todo List</p>
         <TodoList uid={authUser.uid} done={false} />
         <p>Archive</p>
         <TodoList uid={authUser.uid} done={true} />
