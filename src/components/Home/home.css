@@ -1,0 +1,34 @@
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr auto;
+  grid-template-areas:
+    "info info info info"
+    "tracker-info tracker-info calendar-info calendar-info"
+    "habit todo calendar calendar"
+    "habit todo calendar calendar";
+}
+
+.home-info {
+  grid-area: info;
+}
+
+.tracker-info {
+  grid-area: tracker-info;
+}
+
+.habit-tracker {
+  grid-area: habit;
+}
+
+.todo-tracker {
+  grid-area: todo;
+}
+
+.calendar-info {
+  grid-area: calendar-info;
+}
+
+.calendar {
+  grid-area: calendar;
+}

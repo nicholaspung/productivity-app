@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
+
 import SignOutButton from "../Authentication/SignOut";
 
 const NavigationAuth = ({ authUser }) => (
