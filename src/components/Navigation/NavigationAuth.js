@@ -1,3 +1,6 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -6,20 +9,42 @@ import * as ROLES from "../../constants/roles";
 
 import SignOutButton from "../Authentication/SignOut";
 
+const linkStyles = css`
+  font-size: 1rem;
+  text-decoration: none;
+  padding: 1rem;
+  color: black;
+`;
+
 const NavigationAuth = ({ authUser }) => (
-  <ul>
+  <ul
+    css={css`
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+    `}
+  >
     <li>
-      <Link to={ROUTES.LANDING}>Landing</Link>
+      <Link to={ROUTES.LANDING} css={linkStyles}>
+        Landing
+      </Link>
     </li>
     <li>
-      <Link to={ROUTES.HOME}>Home</Link>
+      <Link to={ROUTES.HOME} css={linkStyles}>
+        Home
+      </Link>
     </li>
     <li>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
+      <Link to={ROUTES.ACCOUNT} css={linkStyles}>
+        Account
+      </Link>
     </li>
     {!!authUser.roles[ROLES.ADMIN] && (
       <li>
-        <Link to={ROUTES.ADMIN}>Admin</Link>
+        <Link to={ROUTES.ADMIN} css={linkStyles}>
+          Admin
+        </Link>
       </li>
     )}
     <li>

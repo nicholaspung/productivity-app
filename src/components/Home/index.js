@@ -1,6 +1,8 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
 import React from "react";
 import { compose } from "recompose";
-import "./home.css";
 
 import {
   withAuthorization,
@@ -12,16 +14,37 @@ import Calendar from "../Calendar";
 
 const HomePage = () => {
   return (
-    <main>
-      <Calendar />
-      <div className="home-info">
-        <h1>Home Page</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
-      </div>
-      <AuthUserContext.Consumer>
-        {authUser => <HabitTracker authUser={authUser} />}
-      </AuthUserContext.Consumer>
-    </main>
+    <AuthUserContext.Consumer>
+      {authUser => (
+        <main
+          css={css`
+            display: grid;
+            grid-template-rows: 1fr auto;
+            grid-template-columns: 1fr 1fr;
+          `}
+        >
+          <section
+            css={css`
+              grid-column: 1/3;
+              grid-row: 2/3;
+              margin: 0 0.75rem 1.5rem;
+            `}
+          >
+            <Calendar />
+          </section>
+          <section
+            css={css`
+              display: flex;
+              flex-flow: row wrap;
+              grid-column: 1/3;
+              grid-row: 3/4;
+            `}
+          >
+            <HabitTracker authUser={authUser} />
+          </section>
+        </main>
+      )}
+    </AuthUserContext.Consumer>
   );
 };
 

@@ -37,17 +37,11 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick }) => {
   }, []);
 
   return (
-    <section className="habit-list">
-      {loading && <p>Loading...</p>}
-      {!loading || !habits.length ? (
-        <ul>
-          {habits.map(habit => (
-            <Habit habit={habit} key={habit.name} date={date} />
-          ))}
-        </ul>
-      ) : null}
-      {doneLoading && !habits.length && <p>You have no habits.</p>}
-    </section>
+    <>
+      {habits.map(habit => (
+        <Habit habit={habit} key={habit.name} date={date} />
+      ))}
+    </>
   );
 };
 

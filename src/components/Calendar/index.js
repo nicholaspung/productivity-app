@@ -1,140 +1,134 @@
-import React, { useState, useEffect } from "react";
-import {
-  getMonth,
-  getYear,
-  subMonths,
-  addMonths,
-  getDaysInMonth,
-  startOfMonth,
-  getDay,
-  endOfMonth
-} from "date-fns";
-import Day from "./Day";
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
+import React, { useState } from "react";
+import { getDaysInMonth, getMonth, getYear } from "date-fns";
 
-const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+import CalendarControls from "./CalendarControls";
+import CalendarHeader from "./CalendarHeader";
+import CalendarHabitView from "./CalendarHabitView";
 
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
+const MONTHS = [
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
+  "MAY",
+  "JUN",
+  "JUL",
+  "AUG",
+  "SEP",
+  "OCT",
+  "NOV",
+  "DEC"
 ];
 
-const Calendar = () => {
-  const [day, setDay] = useState(new Date());
-  const [month, setMonth] = useState(getMonth(day));
-  const [year, setYear] = useState(getYear(day));
-  const [monthArray, setMonthArray] = useState([]);
+const cellMargin = "2px";
+const cellDayFlex = "0 0 2.75%";
+const cellHabitFlex = "0 0 201px";
+const minWidthCell = "25px";
+const minHeightCell = "25px";
 
-  useEffect(() => {
-    setMonthArray(calendarWeekArray(day));
-  }, [day]);
+const calendarDayCellStyles = css`
+  border: 1px solid grey;
+  margin: ${cellMargin};
+  flex: ${cellDayFlex};
+  text-align: center;
+  min-width: ${minWidthCell};
+  min-height: ${minHeightCell};
+`;
 
-  const changeMonth = direction => {
-    let toDay, toMonth, toYear;
-    switch (direction) {
-      case "left":
-        toDay = subMonths(day, 1);
-        month - 1 < 0 ? (toMonth = 11) : (toMonth = month - 1);
-        toYear = getYear(toDay);
-        break;
-      case "right":
-        toDay = addMonths(day, 1);
-        month + 1 > 11 ? (toMonth = 0) : (toMonth = month + 1);
-        toYear = getYear(toDay);
-        break;
-      case "current":
-        toDay = new Date();
-        toMonth = getMonth(toDay);
-        toYear = getYear(toDay);
-        break;
-      default:
-        break;
+const calendarHabitCellStyles = css`
+  border: 1px solid grey;
+  margin: ${cellMargin};
+  flex: ${cellHabitFlex};
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Calendar = ({
+  habits = [
+    {
+      name: "Hello there, this is a test to see what happens"
+    },
+    {
+      name: "Yellow"
+    },
+    {
+      name: "Fire"
     }
-    setDay(toDay);
-    setMonth(toMonth);
-    setYear(toYear);
+  ]
+}) => {
+  const [today] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(today);
+  const [currentMonthAndYear, setCurrentMonthAndYear] = useState(
+    `${MONTHS[getMonth(currentDate)]} ${getYear(currentDate)}`
+  );
+
+  const arrayOfDaysInMonth = () => {
+    let arr = [];
+    {
+      let i = 1;
+      while (i <= getDaysInMonth(currentDate)) {
+        arr.push(i);
+        i += 1;
+      }
+    }
+    return arr;
   };
 
-  const calendarWeekArray = date => {
-    const daysInMonth = getDaysInMonth(date);
-    const startOfMonthDate = startOfMonth(date);
-    const startOfMonthIndex = getDay(startOfMonthDate);
-    const endOfMonthDate = endOfMonth(date);
-    const endOfMonthIndex = getDay(endOfMonthDate);
+  const changeMonth = operator => {
+    let nextMonth = operator(currentDate, 1);
+    setCurrentDate(nextMonth);
+    setCurrentMonthAndYear(
+      `${MONTHS[getMonth(nextMonth)]} ${getYear(nextMonth)}`
+    );
+  };
 
-    // Creates initial array with days and placeholders
-    let days = [];
-    for (let i = 0; i < startOfMonthIndex; i += 1) {
-      days.push(" ");
-    }
-    for (let j = 1; j <= daysInMonth; j += 1) {
-      days.push(j);
-    }
-    for (let k = 0; k < 6 - endOfMonthIndex; k += 1) {
-      days.push(" ");
-    }
-
-    // Separates initial array into parts of 7 days
-    let month = [];
-    for (let a = 0; a < days.length / 7; a += 1) {
-      let week = [];
-      let start = a * 7;
-      for (let b = start; b < start + 7; b += 1) {
-        week.push(days[b]);
-      }
-      month.push(week);
-    }
-
-    return month;
+  const changeDate = () => {
+    setCurrentDate(today);
+    setCurrentMonthAndYear(`${MONTHS[getMonth(today)]} ${getYear(today)}`);
   };
 
   return (
     <>
-      <p className="calendar-info">Calendar Info</p>
-      <table className="calendar">
-        <thead>
-          <tr>
-            <th colSpan="7">
-              {monthNames[month]} {year}
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <button onClick={() => changeMonth("left")}>{"<"}</button>
-            </th>
-            <th colSpan="5">
-              <button onClick={() => changeMonth("current")}>Today</button>
-            </th>
-
-            <th>
-              <button onClick={() => changeMonth("right")}>{">"}</button>
-            </th>
-          </tr>
-          <tr>
-            {dayNames.map(day => (
-              <td key={day}>{day}</td>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {monthArray.map((week, i) => (
-            <tr key={i}>
-              {week.map((day, i) => (
-                <Day day={day} key={i} />
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h1
+        css={css`
+          text-align: center;
+          margin: 0;
+          text-decoration: underline;
+        `}
+      >
+        Calendar
+      </h1>
+      <CalendarControls
+        changeMonth={changeMonth}
+        changeDate={changeDate}
+        currentMonthAndYear={currentMonthAndYear}
+        calendarStyles={{
+          cellMargin,
+          cellDayFlex,
+          cellHabitFlex,
+          minWidthCell,
+          minHeightCell
+        }}
+      />
+      <CalendarHeader
+        arrayOfDaysInMonth={arrayOfDaysInMonth}
+        calendarStyles={{ calendarHabitCellStyles, calendarDayCellStyles }}
+      />
+      <CalendarHabitView
+        habits={habits}
+        arrayOfDaysInMonth={arrayOfDaysInMonth}
+        calendarStyles={{
+          calendarHabitCellStyles,
+          calendarDayCellStyles,
+          minWidthCell,
+          minHeightCell
+        }}
+      />
     </>
   );
 };

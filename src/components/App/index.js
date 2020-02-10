@@ -9,17 +9,17 @@ import PasswordForgetPage from "../Authentication/PasswordForget";
 import HomePage from "../Home";
 import AccountPage from "../Account";
 import AdminPage from "../Admin";
-import NotFoundPage from '../404'
+import NotFoundPage from "../404";
+import Footer from "../Footer";
 
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../../contexts/Session";
 
 const App = () => (
   <Router>
-    <div>
+    <>
       <Navigation />
 
-      <hr />
       <Switch>
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
         <Route exact path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -34,7 +34,9 @@ const App = () => (
         <Route path={ROUTES.ADMIN} component={AdminPage} />
         <Route component={NotFoundPage} />
       </Switch>
-    </div>
+
+      <Footer />
+    </>
   </Router>
 );
 
