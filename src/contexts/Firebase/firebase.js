@@ -136,27 +136,19 @@ class Firebase {
   date = id => this.db.doc(`dates/${id}`);
   dates = () => this.db.collection("dates");
   checkIfDateIsCreated = (date, uid) =>
-    this.dates()
+    this.habits()
       .where("user", "==", uid)
-      .where("date", "==", date)
       .get()
       .then(snapshot => {
-        if (snapshot.empty) {
-          this.habits()
-            .where("user", "==", uid)
-            .get()
-            .then(snapshot => {
-              let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
+        let habits = snapshot.docs.map(collectIdsAndDocsFirebase);
 
-              habits = habits.map(habit => ({ ...habit, done: false }));
+        habits = habits.map(habit => ({ ...habit, done: false }));
 
-              this.dates().add({
-                user: uid,
-                date: date,
-                habits: habits
-              });
-            });
-        }
+        this.dates().add({
+          user: uid,
+          date: date,
+          habits: habits
+        });
       });
 }
 

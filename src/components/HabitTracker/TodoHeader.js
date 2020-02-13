@@ -17,7 +17,14 @@ const statusStyles = css`
   padding: 0.25rem 0.5rem;
 `;
 
-const TodoHeader = () => (
+const conditionalStyles = (status, conditional) => {
+  if (status === conditional) {
+    return [statusStyles, activeStatusStyles];
+  }
+  return statusStyles;
+};
+
+const TodoHeader = ({ status, setStatus }) => (
   <div
     css={css`
       display: flex;
@@ -38,8 +45,18 @@ const TodoHeader = () => (
       </h2>
     </div>
     <div>
-      <button css={[statusStyles, activeStatusStyles]}>Active</button>
-      <button css={statusStyles}>Completed</button>
+      <button
+        css={conditionalStyles(status, "active")}
+        onClick={() => setStatus("active")}
+      >
+        Active
+      </button>
+      <button
+        css={conditionalStyles(status, "completed")}
+        onClick={() => setStatus("completed")}
+      >
+        Completed
+      </button>
     </div>
   </div>
 );

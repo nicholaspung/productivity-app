@@ -3,14 +3,12 @@ import { withFirebase } from "../../contexts/Firebase";
 import Habit from "./Habit";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const HabitList = ({ firebase, uid, date, handlePreviousClick }) => {
+const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
   const [loading, setLoading] = useState(false);
-  const [doneLoading, setDoneLoading] = useState(false);
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    firebase.checkIfDateIsCreated(date, uid);
     const unsubscribe = firebase
       .dates()
       .where("user", "==", uid)
@@ -27,20 +25,30 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick }) => {
               handlePreviousClick();
             }
           }
+        } else {
+          firebase.checkIfDateIsCreated(date, uid);
         }
         setLoading(false);
-        setDoneLoading(true);
       });
 
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [status]);
 
   return (
     <>
-      {habits.map(habit => (
-        <Habit habit={habit} key={habit.name} date={date} />
-      ))}
+      {habits
+        .filter(habit => {
+          let statusReturn = habit => ({
+            all: true,
+            due: !habit.done,
+            "not due": habit.done
+          });
+          return statusReturn(habit)[status];
+        })
+        .map(habit => (
+          <Habit habit={habit} key={habit.name} date={date} />
+        ))}
     </>
   );
 };

@@ -15,6 +15,8 @@ import { colors } from "../../constants/styleTheme";
 
 const HabitTracker = ({ authUser }) => {
   const [showPreviousDay, setShowPreviousDay] = useState(false);
+  const [habitStatus, setHabitStatus] = useState("all");
+  const [todoStatus, setTodoStatus] = useState("active");
 
   useEffect(() => {
     let today = getTodaysDate(new Date());
@@ -39,7 +41,7 @@ const HabitTracker = ({ authUser }) => {
           min-width: 350px;
         `}
       >
-        <HabitHeader />
+        <HabitHeader status={habitStatus} setStatus={setHabitStatus} />
         <div
           css={css`
             border: 0.5rem solid ${colors.primaryBackground};
@@ -47,7 +49,11 @@ const HabitTracker = ({ authUser }) => {
           `}
         >
           <AddHabit />
-          <HabitList uid={authUser.uid} date={getTodaysDate(new Date())} />
+          <HabitList
+            uid={authUser.uid}
+            date={getTodaysDate(new Date())}
+            status={habitStatus}
+          />
           <div
             css={css`
               text-align: center;
@@ -67,7 +73,7 @@ const HabitTracker = ({ authUser }) => {
           min-width: 350px;
         `}
       >
-        <TodoHeader />
+        <TodoHeader status={todoStatus} setStatus={setTodoStatus} />
         <div
           css={css`
             border: 0.5rem solid ${colors.primaryBackground};
@@ -75,7 +81,7 @@ const HabitTracker = ({ authUser }) => {
           `}
         >
           <AddTodo />
-          <TodoList uid={authUser.uid} done={false} />
+          <TodoList uid={authUser.uid} done={false} status={todoStatus} />
           <div
             css={css`
               text-align: center;
