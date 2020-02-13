@@ -3,7 +3,7 @@ import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const TodoList = ({ firebase, uid, done, status }) => {
+const TodoList = ({ firebase, uid, status }) => {
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
@@ -11,7 +11,6 @@ const TodoList = ({ firebase, uid, done, status }) => {
     setLoading(true);
     const unsubscribe = firebase
       .todos()
-      .where("done", "==", done)
       .where("user", "==", uid)
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
@@ -32,12 +31,12 @@ const TodoList = ({ firebase, uid, done, status }) => {
   return (
     <>
       {todos
-        .filter(habit => {
-          let statusReturn = habit => ({
-            active: !habit.done,
-            completed: habit.done
+        .filter(todo => {
+          let statusReturn = todo => ({
+            active: !todo.done,
+            completed: todo.done
           });
-          return statusReturn(habit)[status];
+          return statusReturn(todo)[status];
         })
         .map(todo => (
           <Todo todo={todo} key={todo.name} />
