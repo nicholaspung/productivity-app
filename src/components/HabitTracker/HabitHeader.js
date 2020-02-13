@@ -17,7 +17,14 @@ const statusStyles = css`
   padding: 0.25rem 0.5rem;
 `;
 
-const HabitHeader = () => (
+const conditionalStyles = (status, conditional) => {
+  if (status === conditional) {
+    return [statusStyles, activeStatusStyles];
+  }
+  return statusStyles;
+};
+
+const HabitHeader = ({ status, setStatus }) => (
   <div
     css={css`
       display: flex;
@@ -38,9 +45,24 @@ const HabitHeader = () => (
       </h2>
     </div>
     <div>
-      <button css={[statusStyles, activeStatusStyles]}>All</button>
-      <button css={statusStyles}>Due</button>
-      <button css={statusStyles}>Not Due</button>
+      <button
+        css={conditionalStyles(status, "all")}
+        onClick={() => setStatus("all")}
+      >
+        All
+      </button>
+      <button
+        css={conditionalStyles(status, "due")}
+        onClick={() => setStatus("due")}
+      >
+        Due
+      </button>
+      <button
+        css={conditionalStyles(status, "not due")}
+        onClick={() => setStatus("not due")}
+      >
+        Not Due
+      </button>
     </div>
   </div>
 );

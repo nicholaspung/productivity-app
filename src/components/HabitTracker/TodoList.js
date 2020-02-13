@@ -3,9 +3,8 @@ import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
 import { collectIdsAndDocsFirebase } from "../../utilities";
 
-const TodoList = ({ firebase, uid, done }) => {
+const TodoList = ({ firebase, uid, done, status }) => {
   const [loading, setLoading] = useState(false);
-  const [doneLoading, setDoneLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -24,7 +23,6 @@ const TodoList = ({ firebase, uid, done }) => {
           setTodos([]);
         }
         setLoading(false);
-        setDoneLoading(true);
       });
 
     return () => unsubscribe();
@@ -33,9 +31,17 @@ const TodoList = ({ firebase, uid, done }) => {
 
   return (
     <>
-      {todos.map(todo => (
-        <Todo todo={todo} key={todo.name} />
-      ))}
+      {todos
+        .filter(habit => {
+          let statusReturn = habit => ({
+            active: !habit.done,
+            completed: habit.done
+          });
+          return statusReturn(habit)[status];
+        })
+        .map(todo => (
+          <Todo todo={todo} key={todo.name} />
+        ))}
     </>
   );
 };
