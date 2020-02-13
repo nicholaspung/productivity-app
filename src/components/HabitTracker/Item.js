@@ -12,6 +12,7 @@ const Item = ({ data, handleToggle, itemType }) => (
       margin: 0 0 0.3rem 0;
       background-color: lightgrey;
       border: 2px solid transparent;
+      min-height: 79px;
       &:hover {
         border: 2px solid ${colors.transition};
 
@@ -118,7 +119,6 @@ const Item = ({ data, handleToggle, itemType }) => (
         cursor: pointer;
       `}
     >
-      {" "}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 4 16"
