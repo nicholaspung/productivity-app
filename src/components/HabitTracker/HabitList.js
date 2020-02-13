@@ -33,7 +33,7 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
 
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
+  }, []);
 
   return (
     <>
