@@ -30,13 +30,22 @@ const Habit = ({ habit, firebase, date }) => {
 
   const handleOptions = () => {
     setOptions(!options);
+    console.log("hi");
   };
 
   const handleEdit = () => {
     setEdit(!edit);
   };
 
-  return <Item data={habit} itemType="habit" handleToggle={handleToggle} />;
+  return (
+    <Item
+      data={habit}
+      itemType="habit"
+      handleToggle={handleToggle}
+      options={options}
+      handleOptions={handleOptions}
+    />
+  );
 };
 
 export default withFirebase(Habit);
