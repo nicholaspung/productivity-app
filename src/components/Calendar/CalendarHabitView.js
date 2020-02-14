@@ -44,7 +44,7 @@ const CalendarHabitView = ({
                   background-color: ${habit.dates.find(
                     date => Number(getSpecificDate(date)) === day
                   )
-                    ? "lightblue"
+                    ? "lightgreen"
                     : "white"};
                   min-width: ${cs.minWidthCell};
                   min-height: ${cs.minHeightCell};

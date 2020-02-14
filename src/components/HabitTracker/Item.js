@@ -89,7 +89,6 @@ const Item = ({ data, handleToggle, itemType }) => (
         padding: 0.5rem;
         background-color: white;
         font-weight: normal;
-        cursor: pointer;
       `}
     >
       {data.name}
@@ -116,7 +115,6 @@ const Item = ({ data, handleToggle, itemType }) => (
         padding: 0.5rem;
         background-color: white;
         flex: 0 0 7.5%;
-        cursor: pointer;
       `}
     >
       <svg
