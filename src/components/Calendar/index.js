@@ -1,12 +1,18 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getDaysInMonth, getMonth, getYear } from "date-fns";
 
 import CalendarControls from "./CalendarControls";
 import CalendarHeader from "./CalendarHeader";
 import CalendarHabitView from "./CalendarHabitView";
+import { withFirebase } from "../../contexts/Firebase";
+import {
+  collectIdsAndDocsFirebase,
+  getSelectedMonth,
+  changeDatesToHabitsArray
+} from "../../utilities";
 
 const MONTHS = [
   "JAN",
@@ -48,24 +54,13 @@ const calendarHabitCellStyles = css`
   align-items: center;
 `;
 
-const Calendar = ({
-  habits = [
-    {
-      name: "Hello there, this is a test to see what happens"
-    },
-    {
-      name: "Yellow"
-    },
-    {
-      name: "Fire"
-    }
-  ]
-}) => {
+const Calendar = ({ firebase, authUser }) => {
   const [today] = useState(new Date());
   const [currentDate, setCurrentDate] = useState(today);
   const [currentMonthAndYear, setCurrentMonthAndYear] = useState(
     `${MONTHS[getMonth(currentDate)]} ${getYear(currentDate)}`
   );
+  const [habits, setHabits] = useState([]);
 
   const arrayOfDaysInMonth = () => {
     let arr = [];
@@ -91,6 +86,27 @@ const Calendar = ({
     setCurrentDate(today);
     setCurrentMonthAndYear(`${MONTHS[getMonth(today)]} ${getYear(today)}`);
   };
+
+  useEffect(() => {
+    const unsubscribe = firebase
+      .dates()
+      .where("user", "==", authUser.uid)
+      .onSnapshot(snapshot => {
+        if (!snapshot.empty) {
+          let days = snapshot.docs.map(collectIdsAndDocsFirebase);
+          let filteredDays = days.filter(day =>
+            day.date.includes(getSelectedMonth(today))
+          );
+
+          setHabits(changeDatesToHabitsArray(filteredDays));
+        }
+      });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line
+  }, []);
+
+  console.log(habits);
 
   return (
     <>
@@ -133,4 +149,4 @@ const Calendar = ({
   );
 };
 
-export default Calendar;
+export default withFirebase(Calendar);

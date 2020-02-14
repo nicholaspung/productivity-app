@@ -1,6 +1,3 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-// eslint-disable-next-line
 import React, { useState } from "react";
 
 import { withFirebase } from "../../contexts/Firebase";
