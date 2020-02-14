@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+import { getSpecificDate } from "../../utilities";
 
 const CalendarHabitView = ({
   habits,
@@ -40,11 +41,16 @@ const CalendarHabitView = ({
             <div css={cs.calendarDayCellStyles} key={day}>
               <div
                 css={css`
-                  background-color: lightblue;
+                  background-color: ${habit.dates.find(
+                    date => Number(getSpecificDate(date)) === day
+                  )
+                    ? "lightblue"
+                    : "white"};
                   min-width: ${cs.minWidthCell};
                   min-height: ${cs.minHeightCell};
                 `}
               />
+              {/* if dates.includes(day) background-color: lightblue, else background-color: white */}
             </div>
           ))}
         </div>

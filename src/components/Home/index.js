@@ -30,7 +30,7 @@ const HomePage = () => {
               margin: 0 0.75rem 1.5rem;
             `}
           >
-            <Calendar />
+            <Calendar authUser={authUser} />
           </section>
           <section
             css={css`

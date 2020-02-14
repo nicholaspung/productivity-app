@@ -1,6 +1,3 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
-// eslint-disable-next-line
 import React, { useState } from "react";
 
 import Item from "./Item";
@@ -23,9 +20,7 @@ const Habit = ({ habit, firebase, date }) => {
   const [edit, setEdit] = useState(false);
 
   const handleToggle = () => {
-    console.log("hi");
     firebase.toggleHabit(habit, date);
-    console.log("firing");
   };
 
   const handleDelete = async () => {
