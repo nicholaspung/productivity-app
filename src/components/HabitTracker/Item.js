@@ -5,7 +5,7 @@ import React from "react";
 
 import { colors } from "../../constants/styleTheme";
 
-const Item = ({ data, handleToggle, itemType }) => (
+const Item = ({ data, handleToggle, itemType, options, handleOptions }) => (
   <div
     css={css`
       display: flex;
@@ -128,12 +128,41 @@ const Item = ({ data, handleToggle, itemType }) => (
           cursor: pointer;
         `}
         className="item-option"
+        onClick={handleOptions}
       >
         <path
           fillRule="evenodd"
           d="M2 4a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
         />
       </svg>
+      {options && (
+        <div
+          css={css`
+            position: relative;
+            display: inline-block;
+          `}
+        >
+          <div
+            css={css`
+              position: absolute;
+              z-index: 1;
+              display: flex;
+              flex-flow: column wrap;
+              background-color: white;
+              border: 1px solid grey;
+              padding: 0.5rem;
+              right: 0.3rem;
+              top: -0.5rem;
+              width: 150px;
+            `}
+          >
+            <div>Edit</div>
+            <div>To top</div>
+            <div>To bottom</div>
+            <div>Delete</div>
+          </div>
+        </div>
+      )}
       {itemType === "habit" && (
         <div
           css={css`

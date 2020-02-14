@@ -106,8 +106,6 @@ const Calendar = ({ firebase, authUser }) => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(habits);
-
   return (
     <>
       <h1
