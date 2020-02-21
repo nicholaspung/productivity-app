@@ -1,23 +1,29 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
 import React from "react";
 
-import { SignUpLink } from "../SignUp";
-import { PasswordForgetLink } from "../PasswordForget";
-import SignInForm from "./SignInForm";
-import SignInWith from "./SignInWith";
-import { withFirebase } from "../../../contexts/Firebase";
+import AuthSignIn from "./AuthSignIn";
 
-const signInMethods = ["google", "facebook", "twitter", "github"];
+const signInMethods = ["google"];
+// "facebook", "twitter", "github"
 
 const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    {signInMethods.map(provider => (
-      <SignInWith key={provider} provider={provider} />
-    ))}
-    <PasswordForgetLink />
-    <SignUpLink />
+  <div
+    css={css`
+      display: flex;
+      justify-content: center;
+      flex-flow: row wrap;
+      text-align: center;
+    `}
+  >
+    <div>
+      <AuthSignIn title="Sign In" signInMethods={signInMethods} />
+    </div>
+    <div>
+      <AuthSignIn title="Sign Up" signInMethods={signInMethods} />
+    </div>
   </div>
 );
 
-export default withFirebase(SignInPage);
+export default SignInPage;
