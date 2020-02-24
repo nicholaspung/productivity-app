@@ -23,12 +23,15 @@ export const changeDatesToHabitsArray = days => {
             id: habit.id,
             name: habit.name,
             description: habit.description,
-            dates: [day.date]
+            dates: [day.date],
+            createdAt: habit.createdAt
           });
         }
       });
   });
 
-  console.log(habits);
-  return habits;
+  return sortOldToNewHabitTodo(habits);
+};
+export const sortOldToNewHabitTodo = arr => {
+  return arr.sort((a, b) => a.createdAt.seconds - b.createdAt.seconds);
 };

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import Habit from "./Habit";
-import { collectIdsAndDocsFirebase } from "../../utilities";
+import {
+  collectIdsAndDocsFirebase,
+  sortOldToNewHabitTodo
+} from "../../utilities";
 
 const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
   const [loading, setLoading] = useState(false);
@@ -16,10 +19,9 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
           let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
-
-          let habits = date.habits;
+          let habits = [...date.habits];
           if (habits.length) {
-            setHabits(habits);
+            setHabits(sortOldToNewHabitTodo(habits));
           } else {
             if (typeof handlePreviousClick == "function") {
               handlePreviousClick();

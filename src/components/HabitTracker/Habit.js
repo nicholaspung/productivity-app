@@ -40,7 +40,6 @@ const Habit = ({ habit, firebase, date }) => {
   return (
     <Item
       data={habit}
-      itemType="habit"
       handleToggle={handleToggle}
       options={options}
       handleOptions={handleOptions}

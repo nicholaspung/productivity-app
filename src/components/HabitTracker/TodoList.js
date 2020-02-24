@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
-import { collectIdsAndDocsFirebase } from "../../utilities";
+import {
+  collectIdsAndDocsFirebase,
+  sortOldToNewHabitTodo
+} from "../../utilities";
 
 const TodoList = ({ firebase, uid, status }) => {
   const [loading, setLoading] = useState(false);
@@ -14,10 +17,9 @@ const TodoList = ({ firebase, uid, status }) => {
       .where("user", "==", uid)
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
-          const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
+          const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
 
-          // Need to order eventually
-          setTodos(todosList);
+          setTodos(sortOldToNewHabitTodo(todosList));
         } else {
           setTodos([]);
         }
