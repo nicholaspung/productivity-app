@@ -2,11 +2,19 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { colors } from "../../constants/styleTheme";
 import { AuthUserContext } from "../../contexts/Session";
+import * as ROUTES from "../../constants/routes";
 import NavigationAuth from "./NavigationAuth";
 import NavigationNonAuth from "./NavigationNonAuth";
+
+const linkStyles = css`
+  text-decoration: none;
+  padding: 1rem;
+  color: white;
+`;
 
 const Navigation = () => (
   <header
@@ -27,7 +35,11 @@ const Navigation = () => (
         font-size: 3rem;
       `}
     >
-      <div>Your Toolbox</div>
+      <div>
+        <Link to={ROUTES.HOME} css={linkStyles}>
+          Your Toolbox
+        </Link>
+      </div>
       <nav>
         <AuthUserContext.Consumer>
           {authUser =>

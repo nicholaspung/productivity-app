@@ -26,11 +26,6 @@ const NavigationAuth = ({ authUser }) => (
     `}
   >
     <li>
-      <Link to={ROUTES.LANDING} css={linkStyles}>
-        Landing
-      </Link>
-    </li>
-    <li>
       <Link to={ROUTES.HOME} css={linkStyles}>
         Home
       </Link>

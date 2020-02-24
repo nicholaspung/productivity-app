@@ -15,11 +15,12 @@ export const changeDatesToHabitsArray = days => {
     day.habits
       .filter(habit => habit.done)
       .forEach(habit => {
-        let findHabit = habits.find(el => el.name === habit.name);
+        let findHabit = habits.find(el => el.id === habit.id);
         if (findHabit) {
           findHabit.dates.push(day.date);
         } else {
           habits.push({
+            id: habit.id,
             name: habit.name,
             description: habit.description,
             dates: [day.date]
@@ -28,5 +29,6 @@ export const changeDatesToHabitsArray = days => {
       });
   });
 
+  console.log(habits);
   return habits;
 };
