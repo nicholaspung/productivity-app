@@ -5,7 +5,7 @@ import React from "react";
 
 import { colors } from "../../constants/styleTheme";
 
-const Item = ({ data, handleToggle, itemType, options, handleOptions }) => (
+const Item = ({ data, handleToggle, options, handleOptions }) => (
   <div
     css={css`
       display: flex;
@@ -161,16 +161,6 @@ const Item = ({ data, handleToggle, itemType, options, handleOptions }) => (
             <div>To bottom</div>
             <div>Delete</div>
           </div>
-        </div>
-      )}
-      {itemType === "habit" && (
-        <div
-          css={css`
-            font-size: 0.75rem;
-            color: grey;
-          `}
-        >
-          {">> 1000"}
         </div>
       )}
     </div>

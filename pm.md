@@ -1,12 +1,5 @@
 bugs
 
-- calendar
-  - needs sorting
-- habit
-  - needs sorting
-- todo
-  - needs sorting
-
 todos
 
 - habit

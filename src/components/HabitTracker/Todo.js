@@ -37,7 +37,7 @@ const Todo = ({ todo, firebase }) => {
     setEdit(!edit);
   };
 
-  return <Item data={todo} itemType="todo" handleToggle={handleToggle} />;
+  return <Item data={todo} handleToggle={handleToggle} />;
 };
 
 export default withFirebase(Todo);
