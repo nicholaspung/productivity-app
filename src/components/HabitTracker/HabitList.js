@@ -47,7 +47,7 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
           return statusReturn(habit)[status];
         })
         .map(habit => (
-          <Habit habit={habit} key={habit.name} date={date} />
+          <Habit habit={habit} key={habit.id} date={date} />
         ))}
     </>
   );

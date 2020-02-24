@@ -16,7 +16,7 @@ const CalendarHabitView = ({
           display: flex;
           flex-flow: row nowrap;
         `}
-        key={habit.name}
+        key={habit.id}
       >
         <div
           css={[
