@@ -29,15 +29,26 @@ const Todo = ({ todo, firebase }) => {
     firebase.todo(todo.id).delete();
   };
 
-  const handleOptions = () => {
+  const toggleOptions = () => {
     setOptions(!options);
+  };
+
+  const closeOptions = () => {
+    setOptions(false);
   };
 
   const handleEdit = () => {
     setEdit(!edit);
   };
 
-  return <Item data={todo} handleToggle={handleToggle} />;
+  return (
+    <Item
+      data={todo}
+      handleToggle={handleToggle}
+      options={options}
+      handleOptions={{ closeOptions, toggleOptions }}
+    />
+  );
 };
 
 export default withFirebase(Todo);
