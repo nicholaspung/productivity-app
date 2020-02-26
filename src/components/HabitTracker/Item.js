@@ -3,7 +3,18 @@ import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEdit,
+  faArrowUp,
+  faArrowDown,
+  faTrash
+} from "@fortawesome/free-solid-svg-icons";
 import { colors } from "../../constants/styleTheme";
+
+const iconStyles = css`
+  padding: 0 0.25rem;
+`;
 
 const Item = ({ data, handleToggle, options, handleOptions }) => (
   <div
@@ -25,6 +36,7 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
         opacity: 100;
       }
     `}
+    onMouseLeave={handleOptions.closeOptions}
   >
     <div
       css={css`
@@ -126,9 +138,11 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
           width: 10px;
           opacity: 0;
           cursor: pointer;
+          background-color: ${options ? colors.primary : "white"};
+          border-radius: 1rem;
         `}
         className="item-option"
-        onClick={handleOptions}
+        onClick={handleOptions.toggleOptions}
       >
         <path
           fillRule="evenodd"
@@ -140,6 +154,9 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
           css={css`
             position: relative;
             display: inline-block;
+            top: -2.75rem;
+            right: 0.5rem;
+            padding: 0;
           `}
         >
           <div
@@ -150,16 +167,37 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
               flex-flow: column wrap;
               background-color: white;
               border: 1px solid grey;
-              padding: 0.5rem;
               right: 0.3rem;
               top: -0.5rem;
-              width: 150px;
+              width: 140px;
+              text-align: right;
+              & p {
+                padding: 0.5rem 1rem;
+                margin: 0;
+                cursor: pointer;
+
+                &:hover {
+                  background-color: ${colors.transition};
+                }
+              }
             `}
           >
-            <div>Edit</div>
-            <div>To top</div>
-            <div>To bottom</div>
-            <div>Delete</div>
+            <p>
+              Edit
+              <FontAwesomeIcon icon={faEdit} css={iconStyles} />
+            </p>
+            <p>
+              To top
+              <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
+            </p>
+            <p>
+              To bottom
+              <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
+            </p>
+            <p>
+              Delete
+              <FontAwesomeIcon icon={faTrash} css={iconStyles} />
+            </p>
           </div>
         </div>
       )}

@@ -28,9 +28,12 @@ const Habit = ({ habit, firebase, date }) => {
     await firebase.getHabitsAndUpdateDate();
   };
 
-  const handleOptions = () => {
+  const toggleOptions = () => {
     setOptions(!options);
-    console.log("hi");
+  };
+
+  const closeOptions = () => {
+    setOptions(false);
   };
 
   const handleEdit = () => {
@@ -42,7 +45,7 @@ const Habit = ({ habit, firebase, date }) => {
       data={habit}
       handleToggle={handleToggle}
       options={options}
-      handleOptions={handleOptions}
+      handleOptions={{ closeOptions, toggleOptions }}
     />
   );
 };
