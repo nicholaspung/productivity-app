@@ -194,7 +194,7 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
               To bottom
               <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
             </p>
-            <p>
+            <p onClick={handleOptions.handleDelete}>
               Delete
               <FontAwesomeIcon icon={faTrash} css={iconStyles} />
             </p>

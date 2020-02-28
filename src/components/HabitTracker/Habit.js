@@ -45,7 +45,7 @@ const Habit = ({ habit, firebase, date }) => {
       data={habit}
       handleToggle={handleToggle}
       options={options}
-      handleOptions={{ closeOptions, toggleOptions }}
+      handleOptions={{ closeOptions, toggleOptions, handleDelete }}
     />
   );
 };

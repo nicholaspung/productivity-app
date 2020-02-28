@@ -46,7 +46,7 @@ const Todo = ({ todo, firebase }) => {
       data={todo}
       handleToggle={handleToggle}
       options={options}
-      handleOptions={{ closeOptions, toggleOptions }}
+      handleOptions={{ closeOptions, toggleOptions, handleDelete }}
     />
   );
 };
