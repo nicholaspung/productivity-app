@@ -1,5 +1,8 @@
 bugs
 
+- habit
+  - when adding a new habit, it turns all the habits completed to false
+
 todos
 
 - habit
