@@ -28,6 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
+    "deploy:local": "npm run build && firebase serve --only hosting",
     "commit": "npx git-cz"
   },
   "eslintConfig": {
