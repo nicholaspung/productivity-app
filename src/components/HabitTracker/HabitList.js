@@ -28,7 +28,7 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
             }
           }
         } else {
-          firebase.checkIfDateIsCreated(date, uid);
+          firebase.createDateWithHabits(date, uid);
         }
         setLoading(false);
       });
