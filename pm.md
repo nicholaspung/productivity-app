@@ -2,6 +2,8 @@ bugs
 
 todos
 
+- styles
+  - change cursor to loading whenever an action is taking place
 - calendar
   - add an option to see past habits
   - add a hover effect to change background color on individual habits
