@@ -20,6 +20,8 @@ const AddHabit = ({ firebase }) => {
       user: firebase.auth.currentUser.uid
     });
 
+    console.log("hi");
+
     await firebase.getHabitsAndUpdateDate();
 
     setInput("");

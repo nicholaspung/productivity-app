@@ -106,15 +106,23 @@ class Firebase {
       .where("user", "==", this.auth.currentUser.uid)
       .get()
       .then(snapshot => {
-        let today = getTodaysDate(new Date());
-        let updatedHabits = snapshot.docs.map(collectIdsAndDocsFirebase);
+        const today = getTodaysDate(new Date());
+        const updatedHabits = snapshot.docs.map(collectIdsAndDocsFirebase);
         this.dates()
           .where("date", "==", today)
           .where("user", "==", this.auth.currentUser.uid)
           .get()
           .then(snapshot => {
-            let dateId = snapshot.docs[0].id;
-            this.date(dateId).update({ habits: updatedHabits });
+            const dateId = snapshot.docs[0].id;
+            const currentDate = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
+            const currentDateHabits = currentDate.habits.map(habit => habit.id);
+            const updatedHabitsForDate = updatedHabits.map(habit =>
+              currentDateHabits.includes(habit.id)
+                ? currentDate.habits[currentDateHabits.indexOf(habit.id)]
+                : { ...habit, done: false }
+            );
+
+            this.date(dateId).update({ habits: updatedHabitsForDate });
           });
       });
   toggleHabit = (habit, date) =>
@@ -135,7 +143,7 @@ class Firebase {
       });
   date = id => this.db.doc(`dates/${id}`);
   dates = () => this.db.collection("dates");
-  checkIfDateIsCreated = (date, uid) =>
+  createDateWithHabits = (date, uid) =>
     this.habits()
       .where("user", "==", uid)
       .get()
