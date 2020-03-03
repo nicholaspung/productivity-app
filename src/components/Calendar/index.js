@@ -95,7 +95,7 @@ const Calendar = ({ firebase, authUser }) => {
         if (!snapshot.empty) {
           let days = snapshot.docs.map(collectIdsAndDocsFirebase);
           let filteredDays = days.filter(day =>
-            day.date.includes(getSelectedMonth(today))
+            day.date.includes(getSelectedMonth(currentDate))
           );
 
           setHabits(changeDatesToHabitsArray(filteredDays));
@@ -104,7 +104,7 @@ const Calendar = ({ firebase, authUser }) => {
 
     return () => unsubscribe();
     // eslint-disable-next-line
-  }, []);
+  }, [currentDate]);
 
   return (
     <>

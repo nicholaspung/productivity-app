@@ -6,3 +6,9 @@ export const colors = {
   secondaryBackground: "#a2a2a2",
   tertiaryBackground: "#c1c1c1"
 };
+
+export const containers = {
+  primary: "95%",
+  secondary: "75%",
+  spacing: "1.5rem"
+};

@@ -87,6 +87,7 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
       <button
         type="submit"
         css={css`
+          margin: auto;
           display: flex;
           align-items: center;
           padding: 1rem;
