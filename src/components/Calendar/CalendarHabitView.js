@@ -2,7 +2,9 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+
 import { getSpecificDate } from "../../utilities";
+import { colors } from "../../constants/styleTheme";
 
 const CalendarHabitView = ({
   habits,
@@ -15,6 +17,9 @@ const CalendarHabitView = ({
         css={css`
           display: flex;
           flex-flow: row nowrap;
+          &:hover {
+            background: ${colors.secondary};
+          }
         `}
         key={habit.id}
       >

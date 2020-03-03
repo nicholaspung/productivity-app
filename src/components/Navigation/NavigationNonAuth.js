@@ -23,11 +23,6 @@ const NavigationNonAuth = () => (
     `}
   >
     <li>
-      <Link to={ROUTES.LANDING} css={linkStyles}>
-        Landing
-      </Link>
-    </li>
-    <li>
       <Link to={ROUTES.SIGN_IN} css={linkStyles}>
         Sign In
       </Link>
