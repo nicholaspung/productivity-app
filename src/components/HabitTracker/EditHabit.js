@@ -1,6 +1,6 @@
 import React from "react";
 import useTextInput from "../../hooks/useTextInput";
-import useExitModal from "../../hooks/useExitModal";
+import useModal from "../../hooks/useModal";
 
 const EditHabit = ({ handleEdit, habit, firebase }) => {
   // eslint-disable-next-line no-unused-vars
@@ -10,7 +10,7 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
     habit.description
   );
 
-  useExitModal("habit-modal", handleEdit);
+  useModal("habit-modal", handleEdit);
 
   const handleUpdate = async event => {
     event.preventDefault();
