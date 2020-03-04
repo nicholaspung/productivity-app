@@ -1,6 +1,6 @@
 import React from "react";
 import useTextInput from "../../hooks/useTextInput";
-import useExitModal from "../../hooks/useExitModal";
+import useModal from "../../hooks/useModal";
 
 const EditTodo = ({ handleEdit, todo, firebase }) => {
   // eslint-disable-next-line no-unused-vars
@@ -10,7 +10,7 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
     todo.description
   );
 
-  useExitModal("todo-modal", handleEdit);
+  useModal("todo-modal", handleEdit);
 
   const handleUpdate = async event => {
     event.preventDefault();
