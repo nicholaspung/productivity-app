@@ -182,7 +182,7 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
               }
             `}
           >
-            <p onClick={handleOptions.openModal}>
+            <p onClick={handleOptions.handleEdit}>
               Edit
               <FontAwesomeIcon icon={faEdit} css={iconStyles} />
             </p>

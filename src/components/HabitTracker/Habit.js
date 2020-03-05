@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Item from "./Item";
 import { withFirebase } from "../../contexts/Firebase";
 import EditHabit from "./EditHabit";
-import useModal from "../../hooks/useModal";
 
 /*
  * Habit Schema
@@ -19,7 +18,6 @@ import useModal from "../../hooks/useModal";
 const Habit = ({ habit, firebase, date }) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
-  const { openModal, Modal } = useModal();
 
   const handleToggle = () => {
     firebase.toggleHabit(habit, date);
@@ -44,12 +42,19 @@ const Habit = ({ habit, firebase, date }) => {
 
   return (
     <>
-      <Modal />
+      {edit && (
+        <EditHabit handleEdit={handleEdit} habit={habit} firebase={firebase} />
+      )}
       <Item
         data={habit}
         handleToggle={handleToggle}
         options={options}
-        handleOptions={{ closeOptions, toggleOptions, handleDelete, openModal }}
+        handleOptions={{
+          closeOptions,
+          toggleOptions,
+          handleDelete,
+          handleEdit
+        }}
       />
     </>
   );

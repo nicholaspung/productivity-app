@@ -42,12 +42,22 @@ const Todo = ({ todo, firebase }) => {
   };
 
   return (
-    <Item
-      data={todo}
-      handleToggle={handleToggle}
-      options={options}
-      handleOptions={{ closeOptions, toggleOptions, handleDelete }}
-    />
+    <>
+      {edit && (
+        <EditTodo handleEdit={handleEdit} todo={todo} firebase={firebase} />
+      )}
+      <Item
+        data={todo}
+        handleToggle={handleToggle}
+        options={options}
+        handleOptions={{
+          closeOptions,
+          toggleOptions,
+          handleDelete,
+          handleEdit
+        }}
+      />
+    </>
   );
 };
 
