@@ -16,7 +16,7 @@ const iconStyles = css`
   padding: 0 0.25rem;
 `;
 
-const Item = ({ data, handleToggle, options, handleOptions }) => (
+const Item = ({ data, handleToggle, options, handleOptions, noEdit }) => (
   <div
     css={css`
       display: flex;
@@ -117,91 +117,93 @@ const Item = ({ data, handleToggle, options, handleOptions }) => (
         {data.description}
       </span>
     </div>
-    <div
-      css={css`
-        height: auto;
-        display: flex;
-        flex-flow: column;
-        justify-content: space-between;
-        align-items: flex-end;
-        padding: 0.5rem;
-        background-color: white;
-        flex: 0 0 7.5%;
-      `}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 4 16"
+    {!noEdit && (
+      <div
         css={css`
-          padding-top: 5px;
-          height: 15px;
-          width: 10px;
-          opacity: 0;
-          cursor: pointer;
-          background-color: ${options ? colors.primary : "white"};
-          border-radius: 1rem;
+          height: auto;
+          display: flex;
+          flex-flow: column;
+          justify-content: space-between;
+          align-items: flex-end;
+          padding: 0.5rem;
+          background-color: white;
+          flex: 0 0 7.5%;
         `}
-        className="item-option"
-        onClick={handleOptions.toggleOptions}
       >
-        <path
-          fillRule="evenodd"
-          d="M2 4a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
-        />
-      </svg>
-      {options && (
-        <div
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 4 16"
           css={css`
-            position: relative;
-            display: inline-block;
-            top: -2.75rem;
-            right: 0.5rem;
-            padding: 0;
+            padding-top: 5px;
+            height: 15px;
+            width: 10px;
+            opacity: 0;
+            cursor: pointer;
+            background-color: ${options ? colors.primary : "white"};
+            border-radius: 1rem;
           `}
+          className="item-option"
+          onClick={handleOptions.toggleOptions}
         >
+          <path
+            fillRule="evenodd"
+            d="M2 4a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"
+          />
+        </svg>
+        {options && (
           <div
             css={css`
-              position: absolute;
-              z-index: 1;
-              display: flex;
-              flex-flow: column wrap;
-              background-color: white;
-              border: 1px solid grey;
-              right: 0.3rem;
-              top: -0.5rem;
-              width: 140px;
-              text-align: right;
-              & p {
-                padding: 0.5rem 1rem;
-                margin: 0;
-                cursor: pointer;
-
-                &:hover {
-                  background-color: ${colors.transition};
-                }
-              }
+              position: relative;
+              display: inline-block;
+              top: -2.75rem;
+              right: 0.5rem;
+              padding: 0;
             `}
           >
-            <p onClick={handleOptions.handleEdit}>
-              Edit
-              <FontAwesomeIcon icon={faEdit} css={iconStyles} />
-            </p>
-            <p>
-              To top
-              <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
-            </p>
-            <p>
-              To bottom
-              <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
-            </p>
-            <p onClick={handleOptions.handleDelete}>
-              Delete
-              <FontAwesomeIcon icon={faTrash} css={iconStyles} />
-            </p>
+            <div
+              css={css`
+                position: absolute;
+                z-index: 1;
+                display: flex;
+                flex-flow: column wrap;
+                background-color: white;
+                border: 1px solid grey;
+                right: 0.3rem;
+                top: -0.5rem;
+                width: 140px;
+                text-align: right;
+                & p {
+                  padding: 0.5rem 1rem;
+                  margin: 0;
+                  cursor: pointer;
+
+                  &:hover {
+                    background-color: ${colors.transition};
+                  }
+                }
+              `}
+            >
+              <p onClick={handleOptions.handleEdit}>
+                Edit
+                <FontAwesomeIcon icon={faEdit} css={iconStyles} />
+              </p>
+              <p>
+                To top
+                <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
+              </p>
+              <p>
+                To bottom
+                <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
+              </p>
+              <p onClick={handleOptions.handleDelete}>
+                Delete
+                <FontAwesomeIcon icon={faTrash} css={iconStyles} />
+              </p>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    )}
   </div>
 );
 

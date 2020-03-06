@@ -10,6 +10,7 @@ import HabitList from "./HabitList";
 import HabitHeader from "./HabitHeader";
 import TodoHeader from "./TodoHeader";
 import PreviousDay from "./PreviousDay";
+import Modal from "../Reusable/Modal";
 import { getTodaysDate } from "../../utilities";
 import { colors } from "../../constants/styleTheme";
 
@@ -45,12 +46,15 @@ const HabitTracker = ({ authUser }) => {
 
   return (
     <>
-      {/* {showPreviousDay && (
-        <PreviousDay
-          uid={authUser.uid}
-          setShowPreviousDay={setShowPreviousDay}
-        />
-      )} */}
+      {showPreviousDay && (
+        <Modal>
+          <PreviousDay
+            uid={authUser.uid}
+            setShowPreviousDay={setShowPreviousDay}
+            status={"all"}
+          />
+        </Modal>
+      )}
       <div css={tableStyles}>
         <HabitHeader status={habitStatus} setStatus={setHabitStatus} />
         <div css={tableOutlineStyles}>
