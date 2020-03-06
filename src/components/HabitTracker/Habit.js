@@ -15,7 +15,7 @@ import EditHabit from "./EditHabit";
  * }
  */
 
-const Habit = ({ habit, firebase, date }) => {
+const Habit = ({ habit, firebase, date, noEdit }) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
 
@@ -55,6 +55,7 @@ const Habit = ({ habit, firebase, date }) => {
           handleDelete,
           handleEdit
         }}
+        noEdit
       />
     </>
   );

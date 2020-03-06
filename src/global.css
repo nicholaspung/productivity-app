@@ -15,3 +15,16 @@ input,
 button {
   font-family: "Pontano Sans", sans-serif;
 }
+
+.noscroll {
+  overflow: hidden;
+}
+
+.overlay {
+  position: fixed;
+  overflow-y: scroll;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

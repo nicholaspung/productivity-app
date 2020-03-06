@@ -6,7 +6,14 @@ import {
   sortOldToNewHabitTodo
 } from "../../utilities";
 
-const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
+const HabitList = ({
+  firebase,
+  uid,
+  date,
+  handlePreviousClick,
+  status,
+  noEdit
+}) => {
   const [loading, setLoading] = useState(false);
   const [habits, setHabits] = useState([]);
 
@@ -49,7 +56,7 @@ const HabitList = ({ firebase, uid, date, handlePreviousClick, status }) => {
           return statusReturn(habit)[status];
         })
         .map(habit => (
-          <Habit habit={habit} key={habit.id} date={date} />
+          <Habit habit={habit} key={habit.id} date={date} noEdit />
         ))}
     </>
   );
