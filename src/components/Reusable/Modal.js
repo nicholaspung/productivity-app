@@ -34,9 +34,10 @@ const Modal = ({ children }) => {
         z-index: 10;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        padding: 3rem;
       `}
-      // className={"overlay"}
+      className={"overlay"}
     >
       <div
         css={css`
