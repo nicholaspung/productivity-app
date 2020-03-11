@@ -27,7 +27,7 @@ const PreviousDay = ({ uid, setShowPreviousDay, status }) => {
         uid={uid}
         date={getYesterdaysDate(new Date())}
         status={status}
-        noEdit
+        noEdit={true}
       />
       <button
         type="button"

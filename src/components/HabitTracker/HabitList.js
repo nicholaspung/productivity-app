@@ -56,7 +56,7 @@ const HabitList = ({
           return statusReturn(habit)[status];
         })
         .map(habit => (
-          <Habit habit={habit} key={habit.id} date={date} noEdit />
+          <Habit habit={habit} key={habit.id} date={date} noEdit={noEdit} />
         ))}
     </>
   );

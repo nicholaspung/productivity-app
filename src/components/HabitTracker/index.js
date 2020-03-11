@@ -63,6 +63,7 @@ const HabitTracker = ({ authUser }) => {
             uid={authUser.uid}
             date={getTodaysDate(new Date())}
             status={habitStatus}
+            noEdit={false}
           />
           <div css={textTableStyles}>
             <p>These are your Dailies</p>

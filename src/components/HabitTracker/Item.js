@@ -117,7 +117,7 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit }) => (
         {data.description}
       </span>
     </div>
-    {!noEdit && (
+    {!noEdit ? (
       <div
         css={css`
           height: auto;
@@ -203,7 +203,7 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit }) => (
           </div>
         )}
       </div>
-    )}
+    ) : null}
   </div>
 );
 
