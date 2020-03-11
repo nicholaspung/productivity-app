@@ -1,7 +1,11 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
 import React from "react";
-import useTextInput from "../../hooks/useTextInput";
 
+import useTextInput from "../../hooks/useTextInput";
 import Modal from "../Reusable/Modal";
+import { colors } from "../../constants/styleTheme";
 
 const EditHabit = ({ handleEdit, habit, firebase }) => {
   const [name, , handleNameChange] = useTextInput(habit.name);
@@ -22,27 +26,76 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
     <Modal>
       <form
         className="habit-modal"
-        style={{ border: "1px solid blue" }}
         onSubmit={event => handleUpdate(event)}
+        css={css`
+          display: flex;
+          flex-flow: column wrap;
+        `}
       >
+        <div
+          css={css`
+            display: flex;
+            justify-content: space-between;
+          `}
+        >
+          <button
+            onClick={event => handleUpdate(event)}
+            type="submit"
+            css={css`
+              background-color: ${colors.secondary};
+              font-color: black;
+              border: 2px solid black;
+              font-weight: bold;
+              cursor: pointer;
+            `}
+          >
+            Update
+          </button>
+          <button
+            onClick={handleEdit}
+            type="button"
+            css={css`
+              background-color: ${colors.secondary};
+              font-color: black;
+              border: 2px solid black;
+              font-weight: bold;
+              cursor: pointer;
+            `}
+          >
+            x
+          </button>
+        </div>
         <input
           type="text"
           value={name}
           placeholder="Name..."
           onChange={handleNameChange}
+          css={css`
+            box-sizing: border-box;
+            width: 350px;
+            border: 2px solid ${colors.secondaryBackground};
+            background-color: white;
+            margin-bottom: 0.5rem;
+            padding: 1rem;
+            font-weight: bold;
+          `}
         />
-        <input
-          type="textarea"
+        <textarea
+          rows="5"
           value={description}
           placeholder="Write a description"
           onChange={handleDescriptionChange}
+          css={css`
+            box-sizing: border-box;
+            width: 350px;
+            height: 100px;
+            border: 2px solid ${colors.secondaryBackground};
+            background-color: white;
+            margin-bottom: 0.5rem;
+            padding: 1rem;
+            font-weight: bold;
+          `}
         />
-        <button onClick={event => handleUpdate(event)} type="submit">
-          Update
-        </button>
-        <button onClick={handleEdit} type="button">
-          x
-        </button>
       </form>
     </Modal>
   );

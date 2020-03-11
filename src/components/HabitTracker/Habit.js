@@ -55,7 +55,7 @@ const Habit = ({ habit, firebase, date, noEdit }) => {
           handleDelete,
           handleEdit
         }}
-        noEdit
+        noEdit={noEdit}
       />
     </>
   );
