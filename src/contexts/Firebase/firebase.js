@@ -118,10 +118,10 @@ class Firebase {
             const currentDateHabits = currentDate.habits.map(habit => habit.id);
             const updatedHabitsForDate = updatedHabits.map(habit =>
               currentDateHabits.includes(habit.id)
-                ? currentDate.habits[currentDateHabits.indexOf(habit.id)]
+                ? habit
                 : { ...habit, done: false }
             );
-
+            console.log(updatedHabitsForDate);
             this.date(dateId).update({ habits: updatedHabitsForDate });
           });
       });

@@ -35,21 +35,25 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
         <div
           css={css`
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
           `}
         >
           <button
             onClick={event => handleUpdate(event)}
             type="submit"
             css={css`
-              background-color: ${colors.secondary};
+              background-color: ${colors.primary};
               font-color: black;
               border: 2px solid black;
               font-weight: bold;
               cursor: pointer;
+              color: white;
+              margin: 0 0.25rem;
+              font-size: 1.25rem;
+              padding: 0.5rem;
             `}
           >
-            Update
+            Save
           </button>
           <button
             onClick={handleEdit}
@@ -60,11 +64,15 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
               border: 2px solid black;
               font-weight: bold;
               cursor: pointer;
+              margin: 0 0.25rem;
+              font-size: 1.25rem;
+              padding: 0.5rem;
             `}
           >
             x
           </button>
         </div>
+        <h2>Edit a Daily</h2>
         <input
           type="text"
           value={name}
@@ -94,6 +102,7 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
             margin-bottom: 0.5rem;
             padding: 1rem;
             font-weight: bold;
+            font-family: "Pontano Sans", sans-serif;
           `}
         />
       </form>

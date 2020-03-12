@@ -7,11 +7,20 @@ import { createPortal } from "react-dom";
 const modalRoot = document.getElementById("modal");
 const body = document.body;
 
-const Modal = ({ children }) => {
+const Modal = ({ children, handleClose = () => {} }) => {
   const elRef = useRef(null);
   if (!elRef.current) {
     elRef.current = document.createElement("div");
   }
+
+  const onClose = event => {
+    if (
+      Array.from(event.target.classList)
+        .concat(" ")
+        .includes("overlay")
+    )
+      handleClose();
+  };
 
   useEffect(() => {
     modalRoot.appendChild(elRef.current);
@@ -38,6 +47,7 @@ const Modal = ({ children }) => {
         padding: 3rem;
       `}
       className={"overlay"}
+      onClick={event => onClose(event)}
     >
       <div
         css={css`
