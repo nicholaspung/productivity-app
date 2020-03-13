@@ -1,15 +1,18 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
 
 import { withFirebase } from "../../contexts/Firebase";
-import PasswordChangeForm from "../Authentication/PasswordChange";
-import DefaultLoginToggle from "./DefaultLoginToggle";
+// import PasswordChangeForm from "../Authentication/PasswordChange";
+// import DefaultLoginToggle from "./DefaultLoginToggle";
 import SocialLoginToggle from "./SocialLoginToggle";
 
 const SIGN_IN_METHODS = [
-  { id: "password", provider: "null" },
+  // { id: "password", provider: "null" },
   { id: "google.com", provider: "googleProvider" },
-  { id: "facebook.com", provider: "facebookProvider" },
-  { id: "twitter.com", provider: "twitterProvider" }
+  { id: "facebook.com", provider: "facebookProvider" }
+  // { id: "twitter.com", provider: "twitterProvider" }
 ];
 
 const LoginManagementBase = ({ firebase, authUser }) => {
@@ -27,7 +30,6 @@ const LoginManagementBase = ({ firebase, authUser }) => {
 
   useEffect(() => {
     fetchSignInMethods();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -45,30 +47,34 @@ const LoginManagementBase = ({ firebase, authUser }) => {
       .catch(error => setError(error));
   };
 
-  const onDefaultLoginLink = password => {
-    const credential = firebase.emailAuthProvider.credential(
-      authUser.email,
-      password
-    );
-
-    firebase.auth.currentUser
-      .linkAndRetrieveDataWithCredential(credential)
-      .then(fetchSignInMethods)
-      .catch(error => setError(error));
-  };
+  // const onDefaultLoginLink = password => {
+  //   const credential = firebase.emailAuthProvider.credential(
+  //     authUser.email,
+  //     password
+  //   );
+  //   firebase.auth.currentUser
+  //     .linkAndRetrieveDataWithCredential(credential)
+  //     .then(fetchSignInMethods)
+  //     .catch(error => setError(error));
+  // };
 
   return (
     <div>
-      {activeSignInMethods.includes("password") && <PasswordChangeForm />}
-      Sign In Methods:
-      <ul>
+      {/* {activeSignInMethods.includes("password") && <PasswordChangeForm />} */}
+      <p>Sign In Methods:</p>
+      <ul
+        css={css`
+          list-style: none;
+          padding: 0;
+        `}
+      >
         {SIGN_IN_METHODS.map(signInMethod => {
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
 
           return (
             <li key={signInMethod.id}>
-              {signInMethod.id === "password" ? (
+              {/* {signInMethod.id === "password" ? (
                 <DefaultLoginToggle
                   onlyOneLeft={onlyOneLeft}
                   isEnabled={isEnabled}
@@ -76,15 +82,15 @@ const LoginManagementBase = ({ firebase, authUser }) => {
                   onLink={onDefaultLoginLink}
                   onUnlink={onUnlink}
                 />
-              ) : (
-                <SocialLoginToggle
-                  onlyOneLeft={onlyOneLeft}
-                  isEnabled={isEnabled}
-                  signInMethod={signInMethod}
-                  onLink={onSocialLoginLink}
-                  onUnlink={onUnlink}
-                />
-              )}
+              ) : ( */}
+              <SocialLoginToggle
+                onlyOneLeft={onlyOneLeft}
+                isEnabled={isEnabled}
+                signInMethod={signInMethod}
+                onLink={onSocialLoginLink}
+                onUnlink={onUnlink}
+              />
+              {/* )} */}
             </li>
           );
         })}

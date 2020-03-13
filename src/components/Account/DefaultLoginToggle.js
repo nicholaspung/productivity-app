@@ -33,7 +33,7 @@ const DefaultLoginToggle = ({
       onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}
     >
-      Deactivate {signInMethod.id}
+      Click to deactivate {signInMethod.id}
     </button>
   ) : (
     <form onSubmit={onSubmit}>
