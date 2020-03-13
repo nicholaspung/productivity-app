@@ -73,7 +73,16 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
           </button>
         </div>
         <h2>Edit a Daily</h2>
+        <label
+          for="habit-title"
+          css={css`
+            text-align: left;
+          `}
+        >
+          Title
+        </label>
         <input
+          id="habit-title"
           type="text"
           value={name}
           placeholder="Name..."
@@ -85,10 +94,20 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
             background-color: white;
             margin-bottom: 0.5rem;
             padding: 1rem;
+            margin: 0 0 1rem 0;
             font-weight: bold;
           `}
         />
+        <label
+          for="habit-description"
+          css={css`
+            text-align: left;
+          `}
+        >
+          Description
+        </label>
         <textarea
+          id="habit-description"
           rows="5"
           value={description}
           placeholder="Write a description"
@@ -101,6 +120,7 @@ const EditHabit = ({ handleEdit, habit, firebase }) => {
             background-color: white;
             margin-bottom: 0.5rem;
             padding: 1rem;
+            margin: 0 0 1rem 0;
             font-weight: bold;
             font-family: "Pontano Sans", sans-serif;
           `}
