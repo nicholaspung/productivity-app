@@ -23,7 +23,7 @@ const AccountPage = () => (
           padding-bottom: ${containers.spacing};
         `}
       >
-        <h1>Account: {authUser.email}</h1>
+        <h1>Account email: {authUser.email}</h1>
         <LoginManagement authUser={authUser} />
       </div>
     )}
