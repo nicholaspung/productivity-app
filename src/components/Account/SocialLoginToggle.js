@@ -5,12 +5,7 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { colors } from "../../constants/styleTheme";
 import GoogleLogo from "../../constants/assets/images/google-logo.png";
-
-const iconStyles = css`
-  padding: 0 0.25rem;
-`;
 
 const SocialLoginToggle = ({
   onlyOneLeft,
@@ -42,8 +37,6 @@ const SocialLoginToggle = ({
             padding: 0.5rem;
             margin-right: 1rem;
             font-size: 30px;
-            filter: invert(1);
-            color: #1877f2;
           `}
         />
       );
@@ -73,21 +66,28 @@ const SocialLoginToggle = ({
       `}
     >
       {logoIcon(signInMethod.id)}
-      Click to deactivate {signInMethod.id}
+      Deactivate {signInMethod.id}
     </button>
   ) : (
     <button
       type="button"
       onClick={() => onLink(signInMethod.provider)}
       css={css`
-        background-color: ${colors.secondary};
-        font-color: black;
-        border: 2px solid black;
-        font-weight: bold;
-        margin: 1rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
         padding: 1rem;
+        background-color: #1877f2;
+        border: 0;
         font-size: 1.5rem;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
         cursor: pointer;
+
+        &:hover {
+          box-shadow: 0 0 6px #4285f4;
+        }
       `}
     >
       {logoIcon(signInMethod.id)}

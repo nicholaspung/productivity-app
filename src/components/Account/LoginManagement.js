@@ -4,15 +4,11 @@ import { jsx, css } from "@emotion/core";
 import React, { useState, useEffect } from "react";
 
 import { withFirebase } from "../../contexts/Firebase";
-// import PasswordChangeForm from "../Authentication/PasswordChange";
-// import DefaultLoginToggle from "./DefaultLoginToggle";
 import SocialLoginToggle from "./SocialLoginToggle";
 
 const SIGN_IN_METHODS = [
-  // { id: "password", provider: "null" },
   { id: "google.com", provider: "googleProvider" },
   { id: "facebook.com", provider: "facebookProvider" }
-  // { id: "twitter.com", provider: "twitterProvider" }
 ];
 
 const LoginManagementBase = ({ firebase, authUser }) => {
@@ -47,21 +43,15 @@ const LoginManagementBase = ({ firebase, authUser }) => {
       .catch(error => setError(error));
   };
 
-  // const onDefaultLoginLink = password => {
-  //   const credential = firebase.emailAuthProvider.credential(
-  //     authUser.email,
-  //     password
-  //   );
-  //   firebase.auth.currentUser
-  //     .linkAndRetrieveDataWithCredential(credential)
-  //     .then(fetchSignInMethods)
-  //     .catch(error => setError(error));
-  // };
-
   return (
-    <div>
-      {/* {activeSignInMethods.includes("password") && <PasswordChangeForm />} */}
-      <p>Sign In Methods:</p>
+    <div
+      css={css`
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      `}
+    >
+      <h2>Sign In Methods:</h2>
       <ul
         css={css`
           list-style: none;
@@ -74,15 +64,6 @@ const LoginManagementBase = ({ firebase, authUser }) => {
 
           return (
             <li key={signInMethod.id}>
-              {/* {signInMethod.id === "password" ? (
-                <DefaultLoginToggle
-                  onlyOneLeft={onlyOneLeft}
-                  isEnabled={isEnabled}
-                  signInMethod={signInMethod}
-                  onLink={onDefaultLoginLink}
-                  onUnlink={onUnlink}
-                />
-              ) : ( */}
               <SocialLoginToggle
                 onlyOneLeft={onlyOneLeft}
                 isEnabled={isEnabled}
@@ -90,12 +71,11 @@ const LoginManagementBase = ({ firebase, authUser }) => {
                 onLink={onSocialLoginLink}
                 onUnlink={onUnlink}
               />
-              {/* )} */}
             </li>
           );
         })}
+        {error && error.message}
       </ul>
-      {error && error.message}
     </div>
   );
 };
