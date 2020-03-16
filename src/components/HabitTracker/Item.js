@@ -187,11 +187,11 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit }) => (
                 Edit
                 <FontAwesomeIcon icon={faEdit} css={iconStyles} />
               </p>
-              <p onClick={() => handleOptions.handleMoveUp(data.order)}>
+              <p onClick={() => handleOptions.handleMoveUp(data)}>
                 Move up
                 <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
               </p>
-              <p onClick={() => handleOptions.handleMoveDown(data.order)}>
+              <p onClick={() => handleOptions.handleMoveDown(data)}>
                 Move down
                 <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
               </p>
