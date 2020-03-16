@@ -121,7 +121,6 @@ class Firebase {
                 ? habit
                 : { ...habit, done: false }
             );
-            console.log(updatedHabitsForDate);
             this.date(dateId).update({ habits: updatedHabitsForDate });
           });
       });

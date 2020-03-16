@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Item from "./Item";
 import { withFirebase } from "../../contexts/Firebase";
 import EditHabit from "./EditHabit";
-import { sortOrderHabitTodo } from "../../utilities";
 
 /*
  * Habit Schema
@@ -16,7 +15,14 @@ import { sortOrderHabitTodo } from "../../utilities";
  * }
  */
 
-const Habit = ({ habit, firebase, date, noEdit }) => {
+const Habit = ({
+  habit,
+  firebase,
+  date,
+  noEdit,
+  handleMoveDown,
+  handleMoveUp
+}) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
 
@@ -39,70 +45,6 @@ const Habit = ({ habit, firebase, date, noEdit }) => {
 
   const handleEdit = () => {
     setEdit(!edit);
-  };
-
-  const handleMoveUp = async habitOrder => {
-    const order = JSON.parse(localStorage.getItem("sortedHabits"));
-    if (habitOrder === 0) return null;
-    let updateTheseInFirebase = [];
-    let updateTheseInLocalStorage = [];
-    order.forEach((orderHabit, idx, arr) => {
-      if (orderHabit.id === habit.id) {
-        [orderHabit.order, arr[idx - 1].order] = [
-          arr[idx - 1].order,
-          orderHabit.order
-        ];
-        updateTheseInFirebase = [orderHabit, arr[idx - 1]];
-        updateTheseInLocalStorage = [orderHabit, arr[idx - 1]];
-      }
-    });
-    order.forEach(orderHabit => {
-      if (!updateTheseInFirebase.find(el => el.id === orderHabit.id)) {
-        updateTheseInLocalStorage.push(orderHabit);
-      }
-    });
-    localStorage.setItem(
-      "sortedHabits",
-      JSON.stringify(sortOrderHabitTodo(updateTheseInLocalStorage))
-    );
-
-    for (let i = 0; i < updateTheseInFirebase.length; i += 1) {
-      await firebase
-        .habit(updateTheseInFirebase[i].id)
-        .update({ order: updateTheseInFirebase[i].order });
-    }
-  };
-
-  const handleMoveDown = async habitOrder => {
-    const order = JSON.parse(localStorage.getItem("sortedHabits"));
-    if (habitOrder === order.length - 1) return null;
-    let updateTheseInFirebase = [];
-    let updateTheseInLocalStorage = [];
-    order.forEach((orderHabit, idx, arr) => {
-      if (orderHabit.id === habit.id) {
-        [orderHabit.order, arr[idx + 1].order] = [
-          arr[idx + 1].order,
-          orderHabit.order
-        ];
-        updateTheseInFirebase = [orderHabit, arr[idx + 1]];
-        updateTheseInLocalStorage = [orderHabit, arr[idx + 1]];
-      }
-    });
-
-    order.forEach(orderHabit => {
-      if (!updateTheseInFirebase.find(el => el.id === orderHabit.id)) {
-        updateTheseInLocalStorage.push(orderHabit);
-      }
-    });
-    localStorage.setItem(
-      "sortedHabits",
-      JSON.stringify(sortOrderHabitTodo(updateTheseInLocalStorage))
-    );
-    for (let i = 0; i < updateTheseInFirebase.length; i += 1) {
-      await firebase
-        .habit(updateTheseInFirebase[i].id)
-        .update({ order: updateTheseInFirebase[i].order });
-    }
   };
 
   return (
