@@ -187,12 +187,12 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit }) => (
                 Edit
                 <FontAwesomeIcon icon={faEdit} css={iconStyles} />
               </p>
-              <p>
-                To top
+              <p onClick={() => handleOptions.handleMoveUp(data.order)}>
+                Move up
                 <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
               </p>
-              <p>
-                To bottom
+              <p onClick={() => handleOptions.handleMoveDown(data.order)}>
+                Move down
                 <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
               </p>
               <p onClick={handleOptions.handleDelete}>
