@@ -35,3 +35,6 @@ export const changeDatesToHabitsArray = days => {
 export const sortOldToNewHabitTodo = arr => {
   return arr.sort((a, b) => a.createdAt.seconds - b.createdAt.seconds);
 };
+export const sortOrderHabitTodo = arr => {
+  return arr.sort((a, b) => a.order - b.order);
+};
