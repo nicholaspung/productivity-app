@@ -10,13 +10,15 @@ todos
     - change cursor to loading whenever an action is taking place
 - calendar
   - loading elements when checking out a new month
+  - calendar needs to be arranged according to order sort
 - habit
   - add 'number of times finished in a row' functionality
   - loading elements when checking out a new month
-  - finished move up and move down functionality
+  - when adding habits, need to add the order onto data
 - todo
   - loading elements when checking out a new month
   - finished move up and move down functionality
+  - when adding todos, need to add the order onto data
 - account
   - add a delete button
     - deletes all data from app

@@ -71,7 +71,6 @@ const HabitList = ({
           let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
           let habits = [...date.habits];
           if (habits.length) {
-            console.log(habits);
             setHabits(sortOrderHabitTodo(habits));
           } else {
             if (typeof handlePreviousClick == "function") {
@@ -84,7 +83,6 @@ const HabitList = ({
       });
 
     return () => unsubscribe();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

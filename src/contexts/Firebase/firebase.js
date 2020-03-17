@@ -115,12 +115,16 @@ class Firebase {
           .then(snapshot => {
             const dateId = snapshot.docs[0].id;
             const currentDate = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
-            const currentDateHabits = currentDate.habits.map(habit => habit.id);
-            const updatedHabitsForDate = updatedHabits.map(habit =>
-              currentDateHabits.includes(habit.id)
-                ? habit
-                : { ...habit, done: false }
-            );
+            const currentDateHabits = currentDate.habits;
+            const updatedHabitsForDate = updatedHabits.map((habit, idx) => {
+              const indexOfHabit = currentDateHabits.findIndex(
+                el => el.id === habit.id
+              );
+              if (indexOfHabit !== -1) {
+                return { ...habit, done: currentDateHabits[indexOfHabit].done };
+              }
+              return { ...habit, done: false };
+            });
             this.date(dateId).update({ habits: updatedHabitsForDate });
           });
       });
