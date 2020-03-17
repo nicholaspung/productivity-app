@@ -70,7 +70,7 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
         </div>
         <h2>Edit a Todo</h2>
         <label
-          for="todo-title"
+          htmlFor="todo-title"
           css={css`
             text-align: left;
           `}
@@ -78,7 +78,6 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
           Title
         </label>
         <input
-          for="todo-title"
           type="text"
           value={name}
           placeholder="Name..."
@@ -95,7 +94,7 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
           `}
         />
         <label
-          for="todo-description"
+          htmlFor="todo-description"
           css={css`
             text-align: left;
           `}
@@ -103,7 +102,6 @@ const EditTodo = ({ handleEdit, todo, firebase }) => {
           Description
         </label>
         <textarea
-          for="todo-description"
           rows="5"
           value={description}
           placeholder="Write a description"
