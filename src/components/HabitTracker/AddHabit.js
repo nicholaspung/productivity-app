@@ -7,17 +7,28 @@ import { colors } from "../../constants/styleTheme";
 import { withFirebase } from "../../contexts/Firebase";
 import useTextInput from "../../hooks/useTextInput";
 
-const AddHabit = ({ firebase }) => {
+const AddHabit = ({ firebase, date }) => {
   const [input, setInput, handleChange] = useTextInput();
 
   const handleSubmit = async event => {
     event.preventDefault();
 
+    let length = 0;
+    await firebase
+      .dates()
+      .where("date", "==", date)
+      .where("user", "==", firebase.auth.currentUser.uid)
+      .get()
+      .then(snapshot => {
+        length = snapshot.docs[0].data().habits.length;
+      });
+
     await firebase.addHabit({
       name: input,
       description: null, // String
       createdAt: new Date(),
-      user: firebase.auth.currentUser.uid
+      user: firebase.auth.currentUser.uid,
+      order: length
     });
 
     await firebase.getHabitsAndUpdateDate();

@@ -58,7 +58,7 @@ const HabitTracker = ({ authUser }) => {
       <div css={tableStyles}>
         <HabitHeader status={habitStatus} setStatus={setHabitStatus} />
         <div css={tableOutlineStyles}>
-          <AddHabit />
+          <AddHabit date={getTodaysDate(new Date())} />
           <HabitList
             uid={authUser.uid}
             date={getTodaysDate(new Date())}
