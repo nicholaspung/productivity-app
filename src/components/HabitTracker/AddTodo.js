@@ -19,7 +19,8 @@ const AddTodo = ({ firebase }) => {
       done: false,
       createdAt: new Date(),
       doneAt: null, // Date
-      user: firebase.auth.currentUser.uid
+      user: firebase.auth.currentUser.uid,
+      priority: "low"
     });
 
     setInput("");

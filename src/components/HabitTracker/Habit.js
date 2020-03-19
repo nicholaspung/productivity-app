@@ -65,6 +65,7 @@ const Habit = ({
           handleMoveDown
         }}
         noEdit={noEdit}
+        type={"habits"}
       />
     </>
   );

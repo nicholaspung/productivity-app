@@ -10,6 +10,30 @@ const TodoList = ({ firebase, uid, status }) => {
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
+  const handleMoveUp = async targetTodo => {
+    await firebase.todo(targetTodo.id).update({ priority: "high" });
+    await firebase
+      .todos()
+      .where("user", "==", uid)
+      .get()
+      .then(snapshot => {
+        const todoList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
+        setTodos(todoList);
+      });
+  };
+
+  const handleMoveDown = async targetTodo => {
+    firebase.todo(targetTodo.id).update({ priority: "low" });
+    await firebase
+      .todos()
+      .where("user", "==", uid)
+      .get()
+      .then(snapshot => {
+        const todoList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
+        setTodos(todoList);
+      });
+  };
+
   useEffect(() => {
     setLoading(true);
     const unsubscribe = firebase
@@ -29,7 +53,7 @@ const TodoList = ({ firebase, uid, status }) => {
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log(todos);
   return (
     <>
       {todos
@@ -40,8 +64,14 @@ const TodoList = ({ firebase, uid, status }) => {
           });
           return statusReturn(todo)[status];
         })
+        .sort((a, b) => b.priority - a.priority)
         .map(todo => (
-          <Todo todo={todo} key={todo.name} />
+          <Todo
+            todo={todo}
+            key={todo.name}
+            handleMoveDown={handleMoveDown}
+            handleMoveUp={handleMoveUp}
+          />
         ))}
     </>
   );

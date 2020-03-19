@@ -18,6 +18,8 @@ todos
   - loading elements when checking out a new month
   - finish move up and move down functionality
   - when adding todos, need to add the order onto data
+    - high priority
+    - low priority
 - account
   - add a delete button
     - deletes all data from app
