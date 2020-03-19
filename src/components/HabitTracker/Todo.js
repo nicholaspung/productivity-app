@@ -17,7 +17,7 @@ import EditTodo from "./EditTodo";
  * }
  */
 
-const Todo = ({ todo, firebase }) => {
+const Todo = ({ todo, firebase, handleMoveUp, handleMoveDown }) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
 
@@ -54,7 +54,9 @@ const Todo = ({ todo, firebase }) => {
           closeOptions,
           toggleOptions,
           handleDelete,
-          handleEdit
+          handleEdit,
+          handleMoveUp,
+          handleMoveDown
         }}
       />
     </>
