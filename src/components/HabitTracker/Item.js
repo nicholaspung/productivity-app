@@ -31,7 +31,12 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
         border: 2px solid transparent;
         min-height: 79px;
         &:hover {
-          border: 2px solid ${colors.transition};
+          border: 2px solid
+            ${type
+              ? colors.transition
+              : data.priority === "high"
+              ? "pink"
+              : "lightblue"};
 
           .item-option {
             opacity: 100;
@@ -50,7 +55,11 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
           width: 50px;
           background-color: ${data.done
             ? colors.secondaryBackground
-            : colors.primary};
+            : type
+            ? colors.primary
+            : data.priority === "high"
+            ? "red"
+            : "blue"};
           display: flex;
           justify-content: center;
           align-items: center;
@@ -62,7 +71,11 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
             width: 35px;
             background-color: ${data.done
               ? colors.primaryBackground
-              : colors.transition};
+              : type
+              ? colors.transition
+              : data.priority === "high"
+              ? "pink"
+              : "lightblue"};
             cursor: pointer;
           `}
           onClick={handleToggle}
@@ -95,7 +108,11 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
                 );
                 background-color: ${data.done
                   ? colors.secondaryBackground
-                  : colors.primary};
+                  : type
+                  ? colors.primary
+                  : data.priority === "high"
+                  ? "red"
+                  : "blue"};
               `}
             />
           </div>
@@ -193,14 +210,32 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
                   Edit
                   <FontAwesomeIcon icon={faEdit} css={iconStyles} />
                 </p>
-                <p onClick={() => handleOptions.handleMoveUp(data)}>
-                  {words.first}
-                  <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
-                </p>
-                <p onClick={() => handleOptions.handleMoveDown(data)}>
-                  {words.second}
-                  <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
-                </p>
+                {data.priority ? (
+                  data.priority === "high" ? null : (
+                    <p onClick={() => handleOptions.handleMoveUp(data)}>
+                      {words.first}
+                      <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
+                    </p>
+                  )
+                ) : (
+                  <p onClick={() => handleOptions.handleMoveUp(data)}>
+                    {words.first}
+                    <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
+                  </p>
+                )}
+                {data.priority ? (
+                  data.priority === "low" ? null : (
+                    <p onClick={() => handleOptions.handleMoveDown(data)}>
+                      {words.second}
+                      <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
+                    </p>
+                  )
+                ) : (
+                  <p onClick={() => handleOptions.handleMoveDown(data)}>
+                    {words.second}
+                    <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
+                  </p>
+                )}
                 <p onClick={handleOptions.handleDelete}>
                   Delete
                   <FontAwesomeIcon icon={faTrash} css={iconStyles} />

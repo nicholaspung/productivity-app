@@ -18,7 +18,7 @@ const CalendarHeader = ({ arrayOfDaysInMonth, calendarStyles: cs }) => (
         display: flex;
       `}
     >
-      {arrayOfDaysInMonth().map(day => (
+      {arrayOfDaysInMonth.map(day => (
         <div css={cs.calendarDayCellStyles} key={day}>
           <h4
             css={css`

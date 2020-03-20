@@ -2,7 +2,7 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React, { useState, useEffect } from "react";
-import { getDaysInMonth, getMonth, getYear } from "date-fns";
+import { getDaysInMonth, getMonth, getYear, getDate, format } from "date-fns";
 
 import CalendarControls from "./CalendarControls";
 import CalendarHeader from "./CalendarHeader";
@@ -54,6 +54,24 @@ const calendarHabitCellStyles = css`
   align-items: center;
 `;
 
+const getArrayOfDaysInMonth = (today, currentDate, placement) => {
+  let arr = [];
+  {
+    let i = 1;
+    while (
+      i <=
+      (format(today, "yyyy-MM-dd") !== format(currentDate, "yyyy-MM-dd") ||
+      placement
+        ? getDaysInMonth(currentDate)
+        : getDate(currentDate))
+    ) {
+      arr.push(i);
+      i += 1;
+    }
+  }
+  return arr;
+};
+
 const Calendar = ({ firebase, authUser }) => {
   const [today] = useState(new Date());
   const [currentDate, setCurrentDate] = useState(today);
@@ -61,19 +79,21 @@ const Calendar = ({ firebase, authUser }) => {
     `${MONTHS[getMonth(currentDate)]} ${getYear(currentDate)}`
   );
   const [habits, setHabits] = useState([]);
+  const [arrayOfDaysInMonthHeader, setArrayOfDaysInMonthHeader] = useState(
+    getArrayOfDaysInMonth(today, currentDate, "headers")
+  );
+  const [arrayOfDaysInMonth, setArrayOfDaysInMonth] = useState(
+    getArrayOfDaysInMonth(today, currentDate)
+  );
 
-  const arrayOfDaysInMonth = () => {
-    let arr = [];
-    {
-      let i = 1;
-      while (i <= getDaysInMonth(currentDate)) {
-        arr.push(i);
-        i += 1;
-      }
-    }
-    return arr;
-  };
+  useEffect(() => {
+    setArrayOfDaysInMonth(getArrayOfDaysInMonth(today, currentDate));
+    setArrayOfDaysInMonthHeader(
+      getArrayOfDaysInMonth(today, currentDate, "headers")
+    );
+  }, [currentDate]);
 
+  console.log(arrayOfDaysInMonth);
   const changeMonth = operator => {
     let nextMonth = operator(currentDate, 1);
     setCurrentDate(nextMonth);
@@ -130,7 +150,7 @@ const Calendar = ({ firebase, authUser }) => {
         }}
       />
       <CalendarHeader
-        arrayOfDaysInMonth={arrayOfDaysInMonth}
+        arrayOfDaysInMonth={arrayOfDaysInMonthHeader}
         calendarStyles={{ calendarHabitCellStyles, calendarDayCellStyles }}
       />
       <CalendarHabitView

@@ -42,7 +42,7 @@ const CalendarHabitView = ({
             display: flex;
           `}
         >
-          {arrayOfDaysInMonth().map(day => (
+          {arrayOfDaysInMonth.map(day => (
             <div css={cs.calendarDayCellStyles} key={day}>
               <div
                 css={css`
