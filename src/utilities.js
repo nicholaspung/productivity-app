@@ -38,3 +38,10 @@ export const sortOldToNewHabitTodo = arr => {
 export const sortOrderHabitTodo = arr => {
   return arr.sort((a, b) => a.order - b.order);
 };
+export const sortPriorityTodo = arr => {
+  return arr.sort((a, b) => {
+    if (a.priority < b.priority) return -1;
+    else if (a.priority > b.priority) return 1;
+    return 0;
+  });
+};

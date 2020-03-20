@@ -3,7 +3,8 @@ import { withFirebase } from "../../contexts/Firebase";
 import Todo from "./Todo";
 import {
   collectIdsAndDocsFirebase,
-  sortOldToNewHabitTodo
+  sortOldToNewHabitTodo,
+  sortPriorityTodo
 } from "../../utilities";
 
 const TodoList = ({ firebase, uid, status }) => {
@@ -17,20 +18,21 @@ const TodoList = ({ firebase, uid, status }) => {
       .where("user", "==", uid)
       .get()
       .then(snapshot => {
-        const todoList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
-        setTodos(todoList);
+        const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
+        console.log(sortOldToNewHabitTodo(todosList));
+        setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
       });
   };
 
   const handleMoveDown = async targetTodo => {
-    firebase.todo(targetTodo.id).update({ priority: "low" });
+    await firebase.todo(targetTodo.id).update({ priority: "low" });
     await firebase
       .todos()
       .where("user", "==", uid)
       .get()
       .then(snapshot => {
-        const todoList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
-        setTodos(todoList);
+        const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
+        setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
       });
   };
 
@@ -42,8 +44,7 @@ const TodoList = ({ firebase, uid, status }) => {
       .onSnapshot(snapshot => {
         if (!snapshot.empty) {
           const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
-
-          setTodos(sortOldToNewHabitTodo(todosList));
+          setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
         } else {
           setTodos([]);
         }
@@ -53,7 +54,7 @@ const TodoList = ({ firebase, uid, status }) => {
     return () => unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(todos);
+
   return (
     <>
       {todos
@@ -64,7 +65,6 @@ const TodoList = ({ firebase, uid, status }) => {
           });
           return statusReturn(todo)[status];
         })
-        .sort((a, b) => b.priority - a.priority)
         .map(todo => (
           <Todo
             todo={todo}
