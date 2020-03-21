@@ -32,6 +32,7 @@ const HomePage = () => {
           >
             <Calendar authUser={authUser} />
           </section>
+
           <section
             css={css`
               display: flex;
