@@ -212,26 +212,54 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
                 </p>
                 {data.priority ? (
                   data.priority === "high" ? null : (
-                    <p onClick={() => handleOptions.handleMoveUp(data)}>
+                    <p
+                      onClick={() =>
+                        handleOptions.handleMoveUp(
+                          data,
+                          handleOptions.toggleOptions
+                        )
+                      }
+                    >
                       {words.first}
                       <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
                     </p>
                   )
                 ) : (
-                  <p onClick={() => handleOptions.handleMoveUp(data)}>
+                  <p
+                    onClick={() =>
+                      handleOptions.handleMoveUp(
+                        data,
+                        handleOptions.toggleOptions
+                      )
+                    }
+                  >
                     {words.first}
                     <FontAwesomeIcon icon={faArrowUp} css={iconStyles} />
                   </p>
                 )}
                 {data.priority ? (
                   data.priority === "low" ? null : (
-                    <p onClick={() => handleOptions.handleMoveDown(data)}>
+                    <p
+                      onClick={() =>
+                        handleOptions.handleMoveDown(
+                          data,
+                          handleOptions.toggleOptions
+                        )
+                      }
+                    >
                       {words.second}
                       <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
                     </p>
                   )
                 ) : (
-                  <p onClick={() => handleOptions.handleMoveDown(data)}>
+                  <p
+                    onClick={() =>
+                      handleOptions.handleMoveDown(
+                        data,
+                        handleOptions.toggleOptions
+                      )
+                    }
+                  >
                     {words.second}
                     <FontAwesomeIcon icon={faArrowDown} css={iconStyles} />
                   </p>

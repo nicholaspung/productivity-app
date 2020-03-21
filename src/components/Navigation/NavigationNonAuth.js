@@ -20,6 +20,7 @@ const NavigationNonAuth = () => (
       align-items: center;
       list-style: none;
       margin: 0;
+      padding: 0;
     `}
   >
     <li>
