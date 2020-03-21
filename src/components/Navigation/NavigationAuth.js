@@ -25,6 +25,9 @@ const NavigationAuth = ({ authUser }) => (
       margin: 0;
       padding: 0;
       flex-flow: row wrap;
+      @media only screen and (min-width: 700px) {
+        justify-content: flex-end;
+      }
     `}
   >
     <li>

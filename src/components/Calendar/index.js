@@ -13,6 +13,9 @@ import {
   getSelectedMonth,
   changeDatesToHabitsArray
 } from "../../utilities";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const MONTHS = [
   "JAN",
@@ -54,6 +57,10 @@ const calendarHabitCellStyles = css`
   align-items: center;
 `;
 
+const iconStyles = css`
+  padding: 0 0.5rem 0 0.25rem;
+`;
+
 const getArrayOfDaysInMonth = (today, currentDate, placement) => {
   let arr = [];
   {
@@ -85,12 +92,21 @@ const Calendar = ({ firebase, authUser }) => {
   const [arrayOfDaysInMonth, setArrayOfDaysInMonth] = useState(
     getArrayOfDaysInMonth(today, currentDate)
   );
+  const [showCalendar, setShowCalendar] = useLocalStorage(
+    "calendarDisplay",
+    false
+  );
+
+  const toggleShowCalendar = () => {
+    setShowCalendar(!showCalendar);
+  };
 
   useEffect(() => {
     setArrayOfDaysInMonth(getArrayOfDaysInMonth(today, currentDate));
     setArrayOfDaysInMonthHeader(
       getArrayOfDaysInMonth(today, currentDate, "headers")
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate]);
 
   const changeMonth = operator => {
@@ -127,43 +143,77 @@ const Calendar = ({ firebase, authUser }) => {
 
   return (
     <>
-      <h1
+      <div
         css={css`
-          text-align: center;
-          margin: 0;
-          text-decoration: underline;
+          display: flex;
         `}
       >
-        Calendar
-      </h1>
-      <CalendarControls
-        changeMonth={changeMonth}
-        changeDate={changeDate}
-        currentMonthAndYear={currentMonthAndYear}
-        calendarStyles={{
-          cellMargin,
-          cellDayFlex,
-          cellHabitFlex,
-          minWidthCell,
-          minHeightCell
-        }}
-      />
-      <CalendarHeader
-        arrayOfDaysInMonth={arrayOfDaysInMonthHeader}
-        calendarStyles={{ calendarHabitCellStyles, calendarDayCellStyles }}
-      />
-      <CalendarHabitView
-        months={MONTHS}
-        currentMonth={currentMonthAndYear.slice(0, 3)}
-        habits={habits}
-        arrayOfDaysInMonth={arrayOfDaysInMonth}
-        calendarStyles={{
-          calendarHabitCellStyles,
-          calendarDayCellStyles,
-          minWidthCell,
-          minHeightCell
-        }}
-      />
+        <h1
+          css={css`
+            text-align: center;
+            margin: 0;
+            text-decoration: underline;
+            flex: 1;
+          `}
+        >
+          Calendar
+        </h1>
+        <button
+          onClick={toggleShowCalendar}
+          css={css`
+            background: black;
+            border: 0;
+            margin: 0.25rem 0;
+            color: white;
+            padding-right: 0.5rem;
+            cursor: pointer;
+          `}
+        >
+          {showCalendar ? (
+            <>
+              <FontAwesomeIcon icon={faEyeSlash} css={iconStyles} />
+              Hide Calendar
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faEye} css={iconStyles} />
+              Show Calendar
+            </>
+          )}
+        </button>
+      </div>
+      {showCalendar && (
+        <>
+          <CalendarControls
+            changeMonth={changeMonth}
+            changeDate={changeDate}
+            currentMonthAndYear={currentMonthAndYear}
+            calendarStyles={{
+              cellMargin,
+              cellDayFlex,
+              cellHabitFlex,
+              minWidthCell,
+              minHeightCell
+            }}
+          />
+          <CalendarHeader
+            arrayOfDaysInMonth={arrayOfDaysInMonthHeader}
+            calendarStyles={{ calendarHabitCellStyles, calendarDayCellStyles }}
+          />
+          <CalendarHabitView
+            months={MONTHS}
+            currentMonth={currentMonthAndYear.slice(0, 3)}
+            habits={habits}
+            arrayOfDaysInMonth={arrayOfDaysInMonth}
+            calendarStyles={{
+              calendarHabitCellStyles,
+              calendarDayCellStyles,
+              minWidthCell,
+              minHeightCell
+            }}
+          />
+        </>
+      )}
     </>
   );
 };

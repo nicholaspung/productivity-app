@@ -17,7 +17,7 @@ import { colors } from "../../constants/styleTheme";
 const tableStyles = css`
   margin: 0 0.75rem 1.5rem;
   flex: 1 0 25%;
-  min-width: 340px;
+  min-width: 325px;
 `;
 
 const tableOutlineStyles = css`

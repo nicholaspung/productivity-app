@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const useLocalStorage = (key, initialState = "") => {
   const [data, setData] = useState(initialState);
@@ -9,9 +9,15 @@ const useLocalStorage = (key, initialState = "") => {
     } else {
       localStorage.setItem(key, JSON.stringify(data));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return [data];
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
+  return [data, setData];
 };
 
 export default useLocalStorage;
