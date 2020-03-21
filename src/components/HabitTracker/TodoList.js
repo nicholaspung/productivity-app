@@ -19,7 +19,6 @@ const TodoList = ({ firebase, uid, status }) => {
       .get()
       .then(snapshot => {
         const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
-        console.log(sortOldToNewHabitTodo(todosList));
         setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
       });
   };

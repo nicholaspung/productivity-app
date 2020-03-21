@@ -35,8 +35,8 @@ const cellHabitFlex = "0 0 201px";
 const minWidthCell = "25px";
 const minHeightCell = "25px";
 
-const calendarDayCellStyles = css`
-  border: 1px solid grey;
+const calendarDayCellStyles = (conditional = false) => css`
+  border: ${conditional ? "1px solid white" : "1px solid grey"};
   margin: ${cellMargin};
   flex: ${cellDayFlex};
   text-align: center;
@@ -93,7 +93,6 @@ const Calendar = ({ firebase, authUser }) => {
     );
   }, [currentDate]);
 
-  console.log(arrayOfDaysInMonth);
   const changeMonth = operator => {
     let nextMonth = operator(currentDate, 1);
     setCurrentDate(nextMonth);
@@ -154,6 +153,8 @@ const Calendar = ({ firebase, authUser }) => {
         calendarStyles={{ calendarHabitCellStyles, calendarDayCellStyles }}
       />
       <CalendarHabitView
+        months={MONTHS}
+        currentMonth={currentMonthAndYear.slice(0, 3)}
         habits={habits}
         arrayOfDaysInMonth={arrayOfDaysInMonth}
         calendarStyles={{

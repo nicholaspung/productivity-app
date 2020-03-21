@@ -5,8 +5,11 @@ import React from "react";
 
 import { getSpecificDate } from "../../utilities";
 import { colors } from "../../constants/styleTheme";
+import { getMonth, getDate } from "date-fns";
 
 const CalendarHabitView = ({
+  months,
+  currentMonth,
   habits,
   arrayOfDaysInMonth,
   calendarStyles: cs
@@ -43,7 +46,14 @@ const CalendarHabitView = ({
           `}
         >
           {arrayOfDaysInMonth.map(day => (
-            <div css={cs.calendarDayCellStyles} key={day}>
+            <div
+              css={cs.calendarDayCellStyles(
+                currentMonth ===
+                  months[getMonth(habit.createdAt.toDate())].toUpperCase() &&
+                  getDate(habit.createdAt.toDate()) > day
+              )}
+              key={day}
+            >
               <div
                 css={css`
                   background-color: ${habit.dates.find(

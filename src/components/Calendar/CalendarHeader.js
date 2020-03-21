@@ -19,7 +19,7 @@ const CalendarHeader = ({ arrayOfDaysInMonth, calendarStyles: cs }) => (
       `}
     >
       {arrayOfDaysInMonth.map(day => (
-        <div css={cs.calendarDayCellStyles} key={day}>
+        <div css={cs.calendarDayCellStyles()} key={day}>
           <h4
             css={css`
               padding: 0;
