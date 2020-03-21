@@ -25,7 +25,8 @@ const Navigation = () => (
     <div
       css={css`
         display: flex;
-        justify-content: space-between;
+        flex-flow: row wrap;
+        justify-content: center;
         align-items: center;
         background-color: ${colors.transition};
         padding: 1rem;
@@ -33,14 +34,29 @@ const Navigation = () => (
         max-width: 1000px;
         color: white;
         font-size: 3rem;
+        @media only screen and (min-width: 700px) {
+          justify-content: space-between;
+        }
       `}
     >
-      <div>
+      <div
+        css={css`
+          @media only screen and (min-width: 700px) {
+            flex: 1;
+          }
+        `}
+      >
         <Link to={ROUTES.HOME} css={linkStyles}>
           Your Toolbox
         </Link>
       </div>
-      <nav>
+      <nav
+        css={css`
+          @media only screen and (min-width: 700px) {
+            flex: 1;
+          }
+        `}
+      >
         <AuthUserContext.Consumer>
           {authUser =>
             authUser ? (

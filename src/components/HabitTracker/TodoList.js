@@ -11,7 +11,8 @@ const TodoList = ({ firebase, uid, status }) => {
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState([]);
 
-  const handleMoveUp = async targetTodo => {
+  const handleMoveUp = async (targetTodo, closeOptions) => {
+    closeOptions();
     await firebase.todo(targetTodo.id).update({ priority: "high" });
     await firebase
       .todos()
@@ -23,7 +24,8 @@ const TodoList = ({ firebase, uid, status }) => {
       });
   };
 
-  const handleMoveDown = async targetTodo => {
+  const handleMoveDown = async (targetTodo, closeOptions) => {
+    closeOptions();
     await firebase.todo(targetTodo.id).update({ priority: "low" });
     await firebase
       .todos()

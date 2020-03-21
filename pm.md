@@ -2,8 +2,6 @@ bugs
 
 - account
   - on load, changes the styling because of the way it's coded
-- todos
-  - when you move an item sporadically using "set priorities", the options stays up
 
 todos
 
@@ -13,6 +11,8 @@ todos
 - calendar
   - loading elements when checking out a new month
   - calendar needs a button to be able to sort/filter by something
+  - toggle to show or hide
+    - mobile view show a mini version on small dots??
 - habit
   - add 'number of times finished in a row' functionality
     - can probably show on calendar for this, rather than on the habit itself
