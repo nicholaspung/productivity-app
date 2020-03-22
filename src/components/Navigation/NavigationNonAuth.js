@@ -21,6 +21,10 @@ const NavigationNonAuth = () => (
       list-style: none;
       margin: 0;
       padding: 0;
+      justify-content: center;
+      @media only screen and (min-width: 700px) {
+        justify-content: flex-end;
+      }
     `}
   >
     <li>

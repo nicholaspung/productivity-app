@@ -18,10 +18,13 @@ const CalendarControls = ({
   >
     <div
       css={css`
-        flex: ${cs.cellHabitFlex};
         display: flex;
         justify-content: center;
         margin: ${cs.cellMargin};
+        flex: ${cs.cellHabitFlexTiny};
+        @media only screen and (min-width: 700px) {
+          flex: ${cs.cellHabitFlex};
+        }
       `}
     >
       <button

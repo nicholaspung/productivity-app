@@ -21,6 +21,7 @@ const NavigationAuth = ({ authUser }) => (
     css={css`
       display: flex;
       align-items: center;
+      justify-content: center;
       list-style: none;
       margin: 0;
       padding: 0;

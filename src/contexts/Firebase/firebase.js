@@ -93,6 +93,58 @@ class Firebase {
   // *** User API ***
   user = uid => this.db.doc(`users/${uid}`);
   users = () => this.db.collection("users");
+  deleteUserAndUserData = uid => {
+    const arrayOf500 = data => {
+      let arr = [...data];
+      if (arr.length > 500) {
+        arr = arr.slice(0, 500);
+      }
+      return arr;
+    };
+    this.user(uid)
+      .delete()
+      .then(() => console.log("User successfully deleted."))
+      .catch(error => console.error(`Error removing user: ${error}`));
+    this.todos()
+      .where("user", "==", uid)
+      .runTransaction(transaction => {
+        return transaction.get().then(snapshot => {
+          let todoArray = arrayOf500(snapshot.docs);
+          return todoArray.forEach(todo =>
+            this.todo(todo.id)
+              .delete()
+              .then(() => console.log("User successfully deleted."))
+              .catch(error => console.error(`Error removing user: ${error}`))
+          );
+        });
+      });
+    this.habits()
+      .where("user", "==", uid)
+      .runTransaction(transaction => {
+        return transaction.get().then(snapshot => {
+          let habitArray = arrayOf500(snapshot.docs);
+          return habitArray.forEach(todo =>
+            this.todo(todo.id)
+              .delete()
+              .then(() => console.log("User successfully deleted."))
+              .catch(error => console.error(`Error removing user: ${error}`))
+          );
+        });
+      });
+    this.dates()
+      .where("user", "==", uid)
+      .runTransaction(transaction => {
+        return transaction.get().then(snapshot => {
+          let dateArray = arrayOf500(snapshot.docs);
+          return dateArray.forEach(todo =>
+            this.todo(todo.id)
+              .delete()
+              .then(() => console.log("User successfully deleted."))
+              .catch(error => console.error(`Error removing user: ${error}`))
+          );
+        });
+      });
+  };
 
   // *** Habit API ***
   todo = id => this.db.doc(`todos/${id}`);

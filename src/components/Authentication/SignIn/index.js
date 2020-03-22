@@ -6,8 +6,8 @@ import React from "react";
 import AuthSignIn from "./AuthSignIn";
 import { containers, colors } from "../../../constants/styleTheme";
 
-const signInMethods = ["google"];
-// "facebook", "twitter", "github"
+const signInMethods = ["google", "facebook"];
+// , "twitter", "github"
 const boxStyles = css`
   flex: 0 0 35%;
   border: 1px solid ${colors.secondaryBackground};
