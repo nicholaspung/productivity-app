@@ -3,21 +3,18 @@ bugs
 - account
   - on load, changes the styling because of the way it's coded
   - need styling for mobile
-- sign in
-  - need styling for mobile
 
 todos
 
+- landing page
+  - do something about that
 - calendar
   - loading elements when checking out a new month
   - calendar needs a button to be able to sort/filter by something
 - habit
   - add 'number of times finished in a row' functionality
     - can probably show on calendar for this, rather than on the habit itself
-- todo
 - account
-  - add a delete button
-    - deletes all data from app
   - if only on 1 login provider, tell user that they cannot disconnect provider
 - loading screen
   - takes up entire screen for 1 second when loading
