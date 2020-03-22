@@ -93,7 +93,7 @@ class Firebase {
   // *** User API ***
   user = uid => this.db.doc(`users/${uid}`);
   users = () => this.db.collection("users");
-  deleteUserAndUserData = uid => {
+  deleteUserAndUserData = async uid => {
     const arrayOf500 = data => {
       let arr = [...data];
       if (arr.length > 500) {
@@ -101,49 +101,53 @@ class Firebase {
       }
       return arr;
     };
-    this.user(uid)
+    await this.user(uid)
       .delete()
       .then(() => console.log("User successfully deleted."))
       .catch(error => console.error(`Error removing user: ${error}`));
-    this.todos()
+    await this.todos()
       .where("user", "==", uid)
-      .runTransaction(transaction => {
-        return transaction.get().then(snapshot => {
-          let todoArray = arrayOf500(snapshot.docs);
-          return todoArray.forEach(todo =>
-            this.todo(todo.id)
-              .delete()
-              .then(() => console.log("User successfully deleted."))
-              .catch(error => console.error(`Error removing user: ${error}`))
-          );
-        });
+      .get()
+      .then(snapshot => {
+        if (snapshot.exists) {
+          let batch = this.db.batch();
+          snapshot.forEach(doc => batch.delete(doc.ref));
+          return batch
+            .commit()
+            .then(() => console.log("Todos successfully deleted."))
+            .catch(error => console.error(error));
+        }
       });
-    this.habits()
+    await this.habits()
       .where("user", "==", uid)
-      .runTransaction(transaction => {
-        return transaction.get().then(snapshot => {
-          let habitArray = arrayOf500(snapshot.docs);
-          return habitArray.forEach(todo =>
-            this.todo(todo.id)
-              .delete()
-              .then(() => console.log("User successfully deleted."))
-              .catch(error => console.error(`Error removing user: ${error}`))
-          );
-        });
+      .get()
+      .then(snapshot => {
+        if (snapshot.exists) {
+          let batch = this.db.batch();
+          snapshot.forEach(doc => batch.delete(doc.ref));
+          return batch
+            .commit()
+            .then(() => console.log("Todos successfully deleted."))
+            .catch(error => console.error(error));
+        }
       });
-    this.dates()
+    await this.dates()
       .where("user", "==", uid)
-      .runTransaction(transaction => {
-        return transaction.get().then(snapshot => {
-          let dateArray = arrayOf500(snapshot.docs);
-          return dateArray.forEach(todo =>
-            this.todo(todo.id)
-              .delete()
-              .then(() => console.log("User successfully deleted."))
-              .catch(error => console.error(`Error removing user: ${error}`))
-          );
-        });
+      .get()
+      .then(snapshot => {
+        if (snapshot.exists) {
+          let batch = this.db.batch();
+          snapshot.forEach(doc => batch.delete(doc.ref));
+          return batch
+            .commit()
+            .then(() => console.log("Todos successfully deleted."))
+            .catch(error => console.error(error));
+        }
       });
+    await this.auth.currentUser
+      .delete()
+      .then(() => console.log("User deleted."))
+      .catch(error => console.error(error));
   };
 
   // *** Habit API ***
