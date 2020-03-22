@@ -52,6 +52,17 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
   const [error, setError] = useState(null);
   const { signInMethod, name } = chooseProvider(firebase, provider);
 
+  const backgroundColor =
+    provider === "google"
+      ? css`
+          background-color: white;
+          color: grey;
+        `
+      : css`
+          background-color: #1877f2;
+          color: white;
+        `;
+
   const logoIcon = method => {
     if (method === "google") {
       return (
@@ -72,9 +83,9 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
         <FontAwesomeIcon
           icon={faFacebook}
           css={css`
-            padding: 0.5rem;
+            padding: calc(0.5rem - 3px) 0.5rem;
             margin-right: 1rem;
-            font-size: 30px;
+            font-size: 31px;
           `}
         />
       );
@@ -121,14 +132,19 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
           margin: auto;
           display: flex;
           align-items: center;
-          padding: 1rem;
-          background-color: white;
+          justify-content: center;
           border: 0;
-          font-size: 1.5rem;
-          color: grey;
+          ${backgroundColor}
           font-weight: bold;
           box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
           cursor: pointer;
+          width: 100%;
+          font-size: 1.25rem;
+          @media only screen and (min-width: 700px) {
+            width: 500px;
+            font-size: 1.5rem;
+            padding: 1rem;
+          }
 
           &:hover {
             box-shadow: 0 0 6px #4285f4;

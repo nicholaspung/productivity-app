@@ -29,7 +29,7 @@ const NavigationNonAuth = () => (
   >
     <li>
       <Link to={ROUTES.SIGN_IN} css={linkStyles}>
-        Sign In
+        Sign In / Register
       </Link>
     </li>
   </ul>

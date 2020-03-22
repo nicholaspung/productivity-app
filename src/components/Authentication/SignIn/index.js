@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
-import React from "react";
+import React, { useState } from "react";
 
 import AuthSignIn from "./AuthSignIn";
 import { containers, colors } from "../../../constants/styleTheme";
@@ -9,31 +9,45 @@ import { containers, colors } from "../../../constants/styleTheme";
 const signInMethods = ["google", "facebook"];
 // , "twitter", "github"
 const boxStyles = css`
-  flex: 0 0 35%;
+  flex: 1;
   border: 1px solid ${colors.secondaryBackground};
   background-color: ${colors.tertiaryBackground};
+  @media only screen and (min-width: 700px) {
+    flex: 0 0 35%;
+  }
 `;
 
-const SignInPage = () => (
-  <div
-    css={css`
-      display: flex;
-      justify-content: center;
-      flex-flow: row wrap;
-      text-align: center;
-      width: ${containers.secondary};
-      margin: auto;
-      padding-bottom: ${containers.spacing};
-    `}
-  >
-    <div css={boxStyles}>
-      <AuthSignIn title="Sign In" signInMethods={signInMethods} />
+const SignInPage = () => {
+  const [title, setTitle] = useState("Sign In");
+
+  const selectTitle = name => {
+    setTitle(name);
+  };
+
+  return (
+    <div
+      css={css`
+        display: flex;
+        justify-content: center;
+        flex-flow: row wrap;
+        text-align: center;
+        margin: auto;
+        padding-bottom: ${containers.spacing};
+        width: 100%;
+        @media only screen and (min-width: 700px) {
+          width: ${containers.secondary};
+        }
+      `}
+    >
+      <div css={boxStyles}>
+        <AuthSignIn
+          title={title}
+          selectTitle={selectTitle}
+          signInMethods={signInMethods}
+        />
+      </div>
     </div>
-    <hr />
-    <div css={boxStyles}>
-      <AuthSignIn title="Sign Up" signInMethods={signInMethods} />
-    </div>
-  </div>
-);
+  );
+};
 
 export default SignInPage;
