@@ -35,26 +35,38 @@ const MONTHS = [
 const cellMargin = "2px";
 const cellDayFlex = "0 0 2.75%";
 const cellHabitFlex = "0 0 201px";
+const cellHabitFlexTiny = "0 0 125px";
 const minWidthCell = "25px";
+const minWidthCellTiny = "10px";
 const minHeightCell = "25px";
+const minHeightCellTiny = "20px";
 
 const calendarDayCellStyles = (conditional = false) => css`
   border: ${conditional ? "1px solid white" : "1px solid grey"};
   margin: ${cellMargin};
   flex: ${cellDayFlex};
   text-align: center;
-  min-width: ${minWidthCell};
-  min-height: ${minHeightCell};
+  min-width: ${minWidthCellTiny};
+  min-height: ${minHeightCellTiny};
+  font-size: 0.5rem;
+  @media only screen and (min-width: 700px) {
+    font-size: 1rem;
+    min-width: ${minWidthCell};
+    min-height: ${minHeightCell};
+  }
 `;
 
 const calendarHabitCellStyles = css`
   border: 1px solid grey;
   margin: ${cellMargin};
-  flex: ${cellHabitFlex};
+  flex: ${cellHabitFlexTiny};
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media only screen and (min-width: 700px) {
+    flex: ${cellHabitFlex};
+  }
 `;
 
 const iconStyles = css`
@@ -146,18 +158,9 @@ const Calendar = ({ firebase, authUser }) => {
       <div
         css={css`
           display: flex;
+          justify-content: flex-end;
         `}
       >
-        <h1
-          css={css`
-            text-align: center;
-            margin: 0;
-            text-decoration: underline;
-            flex: 1;
-          `}
-        >
-          Calendar
-        </h1>
         <button
           onClick={toggleShowCalendar}
           css={css`
@@ -165,7 +168,7 @@ const Calendar = ({ firebase, authUser }) => {
             border: 0;
             margin: 0.25rem 0;
             color: white;
-            padding-right: 0.5rem;
+            padding: 0.25rem 0.5rem 0.25rem 0;
             cursor: pointer;
           `}
         >
@@ -182,8 +185,18 @@ const Calendar = ({ firebase, authUser }) => {
           )}
         </button>
       </div>
+
       {showCalendar && (
         <>
+          <h1
+            css={css`
+              text-align: center;
+              margin: 0 0 0.5rem;
+              text-decoration: underline;
+            `}
+          >
+            Calendar
+          </h1>
           <CalendarControls
             changeMonth={changeMonth}
             changeDate={changeDate}
@@ -192,8 +205,11 @@ const Calendar = ({ firebase, authUser }) => {
               cellMargin,
               cellDayFlex,
               cellHabitFlex,
+              cellHabitFlexTiny,
               minWidthCell,
-              minHeightCell
+              minWidthCellTiny,
+              minHeightCell,
+              minHeightCellTiny
             }}
           />
           <CalendarHeader
@@ -209,7 +225,9 @@ const Calendar = ({ firebase, authUser }) => {
               calendarHabitCellStyles,
               calendarDayCellStyles,
               minWidthCell,
-              minHeightCell
+              minWidthCellTiny,
+              minHeightCell,
+              minHeightCellTiny
             }}
           />
         </>

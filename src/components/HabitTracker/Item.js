@@ -30,16 +30,21 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
         background-color: lightgrey;
         border: 2px solid transparent;
         min-height: 79px;
-        &:hover {
-          border: 2px solid
-            ${type
-              ? colors.transition
-              : data.priority === "high"
-              ? "pink"
-              : "lightblue"};
+        .item-option {
+          opacity: 100;
+        }
+        @media only screen and (min-width: 700px) {
+          &:hover {
+            border: 2px solid
+              ${type
+                ? colors.transition
+                : data.priority === "high"
+                ? "pink"
+                : "lightblue"};
 
-          .item-option {
-            opacity: 100;
+            .item-option {
+              opacity: 100;
+            }
           }
         }
 
@@ -124,6 +129,7 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
           padding: 0.5rem;
           background-color: white;
           font-weight: normal;
+          border-right: 1px solid white;
         `}
       >
         {data.name}
@@ -151,6 +157,7 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
             padding: 0.5rem;
             background-color: white;
             flex: 0 0 7.5%;
+            border-left: 1px solid white;
           `}
         >
           <svg

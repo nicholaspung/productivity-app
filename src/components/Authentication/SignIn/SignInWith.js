@@ -5,6 +5,8 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import GoogleLogo from "../../../constants/assets/images/google-logo.png";
 import { withFirebase } from "../../../contexts/Firebase";
 import * as ROUTES from "../../../constants/routes";
@@ -49,6 +51,35 @@ const chooseProvider = (firebase, provider) => {
 const SignInWithBase = ({ firebase, history, provider, title }) => {
   const [error, setError] = useState(null);
   const { signInMethod, name } = chooseProvider(firebase, provider);
+
+  const logoIcon = method => {
+    if (method === "google") {
+      return (
+        <img
+          src={GoogleLogo}
+          alt="Google Logo"
+          height="25"
+          width="25"
+          css={css`
+            padding: 0.5rem;
+            margin-right: 1rem;
+          `}
+        />
+      );
+    }
+    if (method === "facebook") {
+      return (
+        <FontAwesomeIcon
+          icon={faFacebook}
+          css={css`
+            padding: 0.5rem;
+            margin-right: 1rem;
+            font-size: 30px;
+          `}
+        />
+      );
+    }
+  };
 
   const onSubmit = event => {
     signInMethod()
@@ -104,16 +135,7 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
           }
         `}
       >
-        <img
-          src={GoogleLogo}
-          alt="Google Logo"
-          height="25"
-          width="25"
-          css={css`
-            padding: 0.5rem;
-            margin-right: 1rem;
-          `}
-        />
+        {logoIcon(provider)}
         {title} with {name}
       </button>
       {error && <p>{error.message}</p>}

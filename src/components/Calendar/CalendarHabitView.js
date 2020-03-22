@@ -61,8 +61,13 @@ const CalendarHabitView = ({
                   )
                     ? "lightgreen"
                     : "white"};
-                  min-width: ${cs.minWidthCell};
-                  min-height: ${cs.minHeightCell};
+                  min-width: ${cs.minWidthCellTiny};
+                  min-height: ${cs.minHeightCellTiny};
+                  height: inherit;
+                  @media only screen and (min-width: 700px) {
+                    min-width: ${cs.minWidthCell};
+                    min-height: ${cs.minHeightCell};
+                  }
                 `}
               />
               {/* if dates.includes(day) background-color: lightblue, else background-color: white */}

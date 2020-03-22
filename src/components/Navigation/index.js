@@ -41,8 +41,10 @@ const Navigation = () => (
     >
       <div
         css={css`
+          text-align: center;
           @media only screen and (min-width: 700px) {
             flex: 1;
+            text-align: left;
           }
         `}
       >
