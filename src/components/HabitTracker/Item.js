@@ -46,6 +46,9 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
               opacity: 100;
             }
           }
+          .item-option {
+            opacity: 0;
+          }
         }
 
         .item-checkmark {
