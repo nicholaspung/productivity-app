@@ -94,13 +94,6 @@ class Firebase {
   user = uid => this.db.doc(`users/${uid}`);
   users = () => this.db.collection("users");
   deleteUserAndUserData = async uid => {
-    const arrayOf500 = data => {
-      let arr = [...data];
-      if (arr.length > 500) {
-        arr = arr.slice(0, 500);
-      }
-      return arr;
-    };
     await this.user(uid)
       .delete()
       .then(() => console.log("User successfully deleted."))

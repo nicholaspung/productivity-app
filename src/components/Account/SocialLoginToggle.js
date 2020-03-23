@@ -81,7 +81,7 @@ const SocialLoginToggle = ({
       `}
     >
       {logoIcon(signInMethod.id)}
-      Deactivate {signInMethod.id}
+      {onlyOneLeft ? "Cannot deactivate" : "Deactivate"} {signInMethod.id}
     </button>
   ) : (
     <button
