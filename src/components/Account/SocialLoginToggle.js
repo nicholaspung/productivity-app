@@ -14,6 +14,17 @@ const SocialLoginToggle = ({
   onLink,
   onUnlink
 }) => {
+  const backgroundColor =
+    signInMethod.id === "google.com"
+      ? css`
+          background-color: white;
+          color: grey;
+        `
+      : css`
+          background-color: #1877f2;
+          color: white;
+        `;
+
   const logoIcon = method => {
     if (method === "google.com") {
       return (
@@ -45,20 +56,24 @@ const SocialLoginToggle = ({
   return isEnabled ? (
     <button
       type="button"
-      onClick={() => onUnlink(signInMethod.id)}
       disabled={onlyOneLeft}
       css={css`
         margin: auto;
         display: flex;
         align-items: center;
-        padding: 1rem;
-        background-color: white;
+        justify-content: center;
         border: 0;
-        font-size: 1.5rem;
-        color: grey;
+        ${backgroundColor}
         font-weight: bold;
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-        cursor: pointer;
+        cursor: not-allowed;
+        width: 100%;
+        font-size: 1.25rem;
+        @media only screen and (min-width: 700px) {
+          width: 500px;
+          font-size: 1.5rem;
+          padding: 1rem;
+        }
 
         &:hover {
           box-shadow: 0 0 6px #4285f4;
@@ -76,14 +91,19 @@ const SocialLoginToggle = ({
         margin: auto;
         display: flex;
         align-items: center;
-        padding: 1rem;
-        background-color: #1877f2;
+        justify-content: center;
         border: 0;
-        font-size: 1.5rem;
-        color: white;
+        ${backgroundColor}
         font-weight: bold;
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
         cursor: pointer;
+        width: 100%;
+        font-size: 1.25rem;
+        @media only screen and (min-width: 700px) {
+          width: 500px;
+          font-size: 1.5rem;
+          padding: 1rem;
+        }
 
         &:hover {
           box-shadow: 0 0 6px #4285f4;

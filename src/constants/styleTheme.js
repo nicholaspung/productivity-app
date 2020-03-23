@@ -10,5 +10,6 @@ export const colors = {
 export const containers = {
   primary: "95%",
   secondary: "75%",
-  spacing: "1.5rem"
+  spacing: "1.5rem",
+  halfSpacing: "0.75rem"
 };
