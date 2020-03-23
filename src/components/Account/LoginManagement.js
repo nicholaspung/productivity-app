@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 
 import { withFirebase } from "../../contexts/Firebase";
 import SocialLoginToggle from "./SocialLoginToggle";
+import { colors, containers } from "../../constants/styleTheme";
 
 const SIGN_IN_METHODS = [
   { id: "google.com", provider: "googleProvider" },
@@ -46,11 +47,21 @@ const LoginManagementBase = ({ firebase, authUser }) => {
   return (
     <div
       css={css`
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+        background-color: ${colors.primaryBackground};
+        padding: ${containers.spacing};
       `}
     >
+      <p
+        css={css`
+          font-size: 1rem;
+          font-weight: normal;
+          @media only screen and (min-width: 700px) {
+            font-size: 2rem;
+          }
+        `}
+      >
+        <strong>Email:</strong> {authUser.email}
+      </p>
       <h2>Sign In Methods:</h2>
       <ul
         css={css`
@@ -63,7 +74,12 @@ const LoginManagementBase = ({ firebase, authUser }) => {
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
 
           return (
-            <li key={signInMethod.id}>
+            <li
+              key={signInMethod.id}
+              css={css`
+                margin: 1rem 0;
+              `}
+            >
               <SocialLoginToggle
                 onlyOneLeft={onlyOneLeft}
                 isEnabled={isEnabled}
