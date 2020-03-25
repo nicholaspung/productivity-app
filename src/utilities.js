@@ -24,7 +24,8 @@ export const changeDatesToHabitsArray = days => {
             name: habit.name,
             description: habit.description,
             dates: [day.date],
-            createdAt: habit.createdAt
+            createdAt: habit.createdAt,
+            order: habit.order
           });
         }
       });
