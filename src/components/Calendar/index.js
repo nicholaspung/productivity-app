@@ -106,7 +106,7 @@ const Calendar = ({ firebase, authUser }) => {
   );
   const [showCalendar, setShowCalendar] = useLocalStorage(
     "calendarDisplay",
-    false
+    true
   );
 
   const toggleShowCalendar = () => {
