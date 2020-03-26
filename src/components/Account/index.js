@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React, { useState } from "react";
 import { compose } from "recompose";
+import { Helmet } from "react-helmet";
 
 import {
   withAuthorization,
@@ -20,7 +21,11 @@ const AccountPage = ({ firebase }) => {
   return (
     <AuthUserContext.Consumer>
       {authUser => (
-        <>
+        <React.Fragment>
+          <Helmet>
+            <title>Account - Your Toolbox</title>
+            <meta name="description" content="Account - Toolbox" />
+          </Helmet>
           {showDelete && (
             <Modal>
               <h1>Are you sure you want to delete your account?</h1>
@@ -38,7 +43,7 @@ const AccountPage = ({ firebase }) => {
                   width: 150px;
                   font-size: 1.25rem;
                   background-color: white;
-                  padding: 1rem;
+                  padding: 2rem;
                   @media only screen and (min-width: 700px) {
                     font-size: 1.5rem;
                     padding: 0.5rem;
@@ -120,7 +125,7 @@ const AccountPage = ({ firebase }) => {
               Delete
             </button>
           </div>
-        </>
+        </React.Fragment>
       )}
     </AuthUserContext.Consumer>
   );

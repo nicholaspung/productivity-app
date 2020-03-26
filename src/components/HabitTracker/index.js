@@ -45,7 +45,7 @@ const HabitTracker = ({ authUser }) => {
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       {showPreviousDay && (
         <Modal>
           <PreviousDay
@@ -83,7 +83,7 @@ const HabitTracker = ({ authUser }) => {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

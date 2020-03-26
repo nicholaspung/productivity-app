@@ -74,10 +74,6 @@ const SocialLoginToggle = ({
           font-size: 1.5rem;
           padding: 1rem;
         }
-
-        &:hover {
-          box-shadow: 0 0 6px #4285f4;
-        }
       `}
     >
       {logoIcon(signInMethod.id)}

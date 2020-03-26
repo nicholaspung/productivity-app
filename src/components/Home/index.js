@@ -3,6 +3,7 @@ import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
 import { compose } from "recompose";
+import { Helmet } from "react-helmet";
 
 import {
   withAuthorization,
@@ -23,6 +24,10 @@ const HomePage = () => {
             grid-template-columns: 1fr 1fr;
           `}
         >
+          <Helmet>
+            <title>Home Page - Your Toolbox</title>
+            <meta name="description" content="Home Page - Your Toolbox" />
+          </Helmet>
           <section
             css={css`
               grid-column: 1/3;
