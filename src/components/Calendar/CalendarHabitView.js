@@ -14,7 +14,7 @@ const CalendarHabitView = ({
   arrayOfDaysInMonth,
   calendarStyles: cs
 }) => (
-  <>
+  <React.Fragment>
     {habits.map(habit => {
       return (
         <div
@@ -79,7 +79,7 @@ const CalendarHabitView = ({
         </div>
       );
     })}
-  </>
+  </React.Fragment>
 );
 
 export default CalendarHabitView;

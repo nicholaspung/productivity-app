@@ -154,7 +154,7 @@ const Calendar = ({ firebase, authUser }) => {
   }, [currentDate]);
 
   return (
-    <>
+    <React.Fragment>
       <div
         css={css`
           display: flex;
@@ -173,21 +173,21 @@ const Calendar = ({ firebase, authUser }) => {
           `}
         >
           {showCalendar ? (
-            <>
+            <React.Fragment>
               <FontAwesomeIcon icon={faEyeSlash} css={iconStyles} />
               Hide Calendar
-            </>
+            </React.Fragment>
           ) : (
-            <>
+            <React.Fragment>
               <FontAwesomeIcon icon={faEye} css={iconStyles} />
               Show Calendar
-            </>
+            </React.Fragment>
           )}
         </button>
       </div>
 
       {showCalendar && (
-        <>
+        <React.Fragment>
           <h1
             css={css`
               text-align: center;
@@ -230,9 +230,9 @@ const Calendar = ({ firebase, authUser }) => {
               minHeightCellTiny
             }}
           />
-        </>
+        </React.Fragment>
       )}
-    </>
+    </React.Fragment>
   );
 };
 

@@ -17,7 +17,7 @@ const PreviousDay = ({ uid, setShowPreviousDay, status }) => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <h1>Welcome back!</h1>
       <p>
         Check and see if you forgot to complete any habits from the previous
@@ -45,7 +45,7 @@ const PreviousDay = ({ uid, setShowPreviousDay, status }) => {
       >
         Start my new day!
       </button>
-    </>
+    </React.Fragment>
   );
 };
 

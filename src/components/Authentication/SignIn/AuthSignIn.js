@@ -9,7 +9,7 @@ import { colors } from "../../../constants/styleTheme";
 
 const AuthSignIn = ({ signInMethods, title, selectTitle }) => {
   return (
-    <>
+    <React.Fragment>
       <div
         css={css`
           display: flex;
@@ -67,7 +67,7 @@ const AuthSignIn = ({ signInMethods, title, selectTitle }) => {
       {signInMethods.map(provider => (
         <SignInWith key={provider} provider={provider} title={title} />
       ))}
-    </>
+    </React.Fragment>
   );
 };
 

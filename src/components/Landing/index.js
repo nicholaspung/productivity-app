@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const Landing = () => (
   <div
@@ -9,6 +10,10 @@ const Landing = () => (
       text-align: center;
     `}
   >
+    <Helmet>
+      <title>Your Toolbox</title>
+      <meta name="description" content="Your Toolbox" />
+    </Helmet>
     <p
       css={css`
         font-size: 3rem;
