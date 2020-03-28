@@ -77,7 +77,9 @@ const SocialLoginToggle = ({
       `}
     >
       {logoIcon(signInMethod.id)}
-      {onlyOneLeft ? "Cannot deactivate" : "Deactivate"} {signInMethod.id}
+      <span>
+        {onlyOneLeft ? "Cannot deactivate" : "Deactivate"} {signInMethod.id}
+      </span>
     </button>
   ) : (
     <button
@@ -107,7 +109,7 @@ const SocialLoginToggle = ({
       `}
     >
       {logoIcon(signInMethod.id)}
-      Link {signInMethod.id}
+      <span>Link {signInMethod.id}</span>
     </button>
   );
 };

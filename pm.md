@@ -1,5 +1,8 @@
 bugs
 
+- account
+  - google icon not being placed next to text
+
 todos
 
 - a loader component for:
@@ -12,8 +15,6 @@ todos
   - takes up entire screen for 1 second when loading
     - when the data is finished loading, load the data
   - screen will show some kind of quote from people
-    - quote can be stored on the browser
-    - when loaded, quote will be shown underneath the header
 
 new features
 
@@ -25,5 +26,9 @@ new features
   - write down 3 goals and create 3 habtis to follow those goals
 - tooltips when hovering over specific text
 - habit
+
   - add 'number of times finished in a row' functionality
     - can probably show on calendar for this, rather than on the habit itself
+
+- quiz capabilities
+  - upload a google excel sheet
