@@ -1,8 +1,5 @@
 bugs
 
-- account
-  - google icon not being placed next to text
-
 todos
 
 - a loader component for:
@@ -12,9 +9,7 @@ todos
   - loading screen
   - account
 - loading screen
-  - takes up entire screen for 1 second when loading
-    - when the data is finished loading, load the data
-  - screen will show some kind of quote from people
+  - when the data is finished loading, load the data
 
 new features
 

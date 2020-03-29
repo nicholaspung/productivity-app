@@ -7,10 +7,20 @@ import { createPortal } from "react-dom";
 const modalRoot = document.getElementById("modal");
 const body = document.body;
 
-const Modal = ({ children, handleClose = () => {} }) => {
+const Modal = ({ children, handleClose = () => {}, type = "default" }) => {
   const elRef = useRef(null);
   if (!elRef.current) {
     elRef.current = document.createElement("div");
+  }
+
+  const defaultStyles = {
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    alignItems: "flex-start"
+  };
+  if (type !== "default") {
+    defaultStyles.backgroundColor = "rgba(0, 0, 0)";
+    defaultStyles.alignItems = "center";
+    defaultStyles.media700px = "max-width: 700px";
   }
 
   const onClose = event => {
@@ -30,11 +40,11 @@ const Modal = ({ children, handleClose = () => {} }) => {
       body.classList.toggle("noscroll", false);
     };
   }, []);
-
+  console.log(defaultStyles.media700px);
   return createPortal(
     <div
       css={css`
-        background-color: rgba(0, 0, 0, 0.9);
+        background-color: ${defaultStyles.backgroundColor};
         position: fixed;
         left: 0;
         right: 0;
@@ -43,7 +53,7 @@ const Modal = ({ children, handleClose = () => {} }) => {
         z-index: 10;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: ${defaultStyles.alignItems};
         padding: 3rem;
       `}
       className={"overlay"}
@@ -55,6 +65,9 @@ const Modal = ({ children, handleClose = () => {} }) => {
           max-width: 350px;
           padding: 15px;
           text-align: center;
+          @media only screen and (min-width: 700px) {
+            ${defaultStyles.media700px && defaultStyles.media700px}
+          }
         `}
       >
         {children}
