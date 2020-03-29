@@ -12,12 +12,14 @@ import AdminPage from "../Admin";
 import NotFoundPage from "../404";
 import Footer from "../Footer";
 import HOCQuoteOfTheDay from "../Reusable/HOCQuoteOfTheDay";
+import LoadingScreen from "../Reusable/LoadingScreen";
 
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../../contexts/Session";
 
 const HomePage = () => (
   <HOCQuoteOfTheDay>
+    <LoadingScreen />
     <Home />
   </HOCQuoteOfTheDay>
 );

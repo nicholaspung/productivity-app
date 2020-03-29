@@ -77,7 +77,14 @@ const SocialLoginToggle = ({
       `}
     >
       {logoIcon(signInMethod.id)}
-      <span>
+      <span
+        css={css`
+          width: 170px;
+          @media only screen and (min-width: 700px) {
+            width: auto;
+          }
+        `}
+      >
         {onlyOneLeft ? "Cannot deactivate" : "Deactivate"} {signInMethod.id}
       </span>
     </button>
@@ -109,7 +116,16 @@ const SocialLoginToggle = ({
       `}
     >
       {logoIcon(signInMethod.id)}
-      <span>Link {signInMethod.id}</span>
+      <span
+        css={css`
+          width: 170px;
+          @media only screen and (min-width: 700px) {
+            width: auto;
+          }
+        `}
+      >
+        Link {signInMethod.id}
+      </span>
     </button>
   );
 };
