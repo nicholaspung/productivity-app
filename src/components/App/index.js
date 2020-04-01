@@ -6,23 +6,14 @@ import LandingPage from "../Landing";
 import SignUpPage from "../Authentication/SignUp";
 import SignInPage from "../Authentication/SignIn";
 import PasswordForgetPage from "../Authentication/PasswordForget";
-import Home from "../Home";
+import HomePage from "../Home";
 import AccountPage from "../Account";
 import AdminPage from "../Admin";
 import NotFoundPage from "../404";
 import Footer from "../Footer";
-import HOCQuoteOfTheDay from "../Reusable/HOCQuoteOfTheDay";
-import LoadingScreen from "../Reusable/LoadingScreen";
 
 import * as ROUTES from "../../constants/routes";
 import { withAuthentication } from "../../contexts/Session";
-
-const HomePage = () => (
-  <HOCQuoteOfTheDay>
-    <LoadingScreen />
-    <Home />
-  </HOCQuoteOfTheDay>
-);
 
 const App = () => (
   <Router>

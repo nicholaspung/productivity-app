@@ -16,6 +16,7 @@ import {
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import LoadingScreen from "../Reusable/LoadingScreen";
 
 const MONTHS = [
   "JAN",
@@ -108,6 +109,7 @@ const Calendar = ({ firebase, authUser }) => {
     "calendarDisplay",
     true
   );
+  const [loading, setLoading] = useState(false);
 
   const toggleShowCalendar = () => {
     setShowCalendar(!showCalendar);
@@ -135,6 +137,7 @@ const Calendar = ({ firebase, authUser }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const unsubscribe = firebase
       .dates()
       .where("user", "==", authUser.uid)
@@ -146,6 +149,7 @@ const Calendar = ({ firebase, authUser }) => {
           );
 
           setHabits(changeDatesToHabitsArray(filteredDays));
+          setTimeout(() => setLoading(false), 2000);
         }
       });
 
@@ -161,6 +165,7 @@ const Calendar = ({ firebase, authUser }) => {
           justify-content: flex-end;
         `}
       >
+        {loading && <LoadingScreen />}
         <button
           onClick={toggleShowCalendar}
           css={css`
