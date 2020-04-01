@@ -2,15 +2,6 @@ bugs
 
 todos
 
-- a loader component for:
-  - todos
-  - habits
-  - calendar
-  - loading screen
-  - account
-- loading screen
-  - when the data is finished loading, load the data
-
 new features
 
 - see friends who are also on application's habits
@@ -24,6 +15,14 @@ new features
 
   - add 'number of times finished in a row' functionality
     - can probably show on calendar for this, rather than on the habit itself
+
+- a loader component for:
+
+  - todos
+  - habits
+  - calendar
+  - loading screen
+  - account
 
 - quiz capabilities
   - upload a google excel sheet

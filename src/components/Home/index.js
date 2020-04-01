@@ -12,45 +12,49 @@ import {
 } from "../../contexts/Session";
 import HabitTracker from "../HabitTracker";
 import Calendar from "../Calendar";
+import QuoteOfTheDay from "../Reusable/QuoteOfTheDay";
 
 const HomePage = () => {
   return (
-    <AuthUserContext.Consumer>
-      {authUser => (
-        <main
-          css={css`
-            display: grid;
-            grid-template-rows: 1fr auto;
-            grid-template-columns: 1fr 1fr;
-          `}
-        >
-          <Helmet>
-            <title>Home Page - Your Toolbox</title>
-            <meta name="description" content="Home Page - Your Toolbox" />
-          </Helmet>
-          <section
+    <React.Fragment>
+      <QuoteOfTheDay />
+      <AuthUserContext.Consumer>
+        {authUser => (
+          <main
             css={css`
-              grid-column: 1/3;
-              grid-row: 2/3;
-              margin: 0 0.75rem 1.5rem;
+              display: grid;
+              grid-template-rows: 1fr auto;
+              grid-template-columns: 1fr 1fr;
             `}
           >
-            <Calendar authUser={authUser} />
-          </section>
+            <Helmet>
+              <title>Home Page - Your Toolbox</title>
+              <meta name="description" content="Home Page - Your Toolbox" />
+            </Helmet>
+            <section
+              css={css`
+                grid-column: 1/3;
+                grid-row: 2/3;
+                margin: 0 0.75rem 1.5rem;
+              `}
+            >
+              <Calendar authUser={authUser} />
+            </section>
 
-          <section
-            css={css`
-              display: flex;
-              flex-flow: row wrap;
-              grid-column: 1/3;
-              grid-row: 3/4;
-            `}
-          >
-            <HabitTracker authUser={authUser} />
-          </section>
-        </main>
-      )}
-    </AuthUserContext.Consumer>
+            <section
+              css={css`
+                display: flex;
+                flex-flow: row wrap;
+                grid-column: 1/3;
+                grid-row: 3/4;
+              `}
+            >
+              <HabitTracker authUser={authUser} />
+            </section>
+          </main>
+        )}
+      </AuthUserContext.Consumer>
+    </React.Fragment>
   );
 };
 
