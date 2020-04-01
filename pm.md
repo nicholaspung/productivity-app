@@ -2,6 +2,8 @@ bugs
 
 todos
 
+- refactor
+
 new features
 
 - see friends who are also on application's habits
