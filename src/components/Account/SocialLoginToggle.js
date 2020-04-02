@@ -56,6 +56,7 @@ const SocialLoginToggle = ({
   return isEnabled ? (
     <button
       type="button"
+      onClick={() => onUnlink(signInMethod.provider)}
       disabled={onlyOneLeft}
       css={css`
         margin: auto;

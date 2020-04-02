@@ -7,7 +7,12 @@ import { createPortal } from "react-dom";
 const modalRoot = document.getElementById("modal");
 const body = document.body;
 
-const Modal = ({ children, handleClose = () => {}, type = "default" }) => {
+const Modal = ({
+  children,
+  handleClose = () => {},
+  type = "default",
+  zIndex
+}) => {
   const elRef = useRef(null);
   if (!elRef.current) {
     elRef.current = document.createElement("div");
@@ -15,12 +20,16 @@ const Modal = ({ children, handleClose = () => {}, type = "default" }) => {
 
   const defaultStyles = {
     backgroundColor: "rgba(0, 0, 0, 0.9)",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    zIndex: 1
   };
   if (type !== "default") {
     defaultStyles.backgroundColor = "rgba(0, 0, 0)";
     defaultStyles.alignItems = "center";
     defaultStyles.media700px = "max-width: 700px";
+  }
+  if (zIndex) {
+    defaultStyles.zIndex = zIndex;
   }
 
   const onClose = event => {
@@ -40,7 +49,7 @@ const Modal = ({ children, handleClose = () => {}, type = "default" }) => {
       body.classList.toggle("noscroll", false);
     };
   }, []);
-  console.log(defaultStyles.media700px);
+
   return createPortal(
     <div
       css={css`
@@ -50,7 +59,7 @@ const Modal = ({ children, handleClose = () => {}, type = "default" }) => {
         right: 0;
         bottom: 0;
         top: 0;
-        z-index: 10;
+        z-index: ${defaultStyles.zIndex};
         display: flex;
         justify-content: center;
         align-items: ${defaultStyles.alignItems};
