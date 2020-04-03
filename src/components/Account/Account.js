@@ -26,7 +26,7 @@ const AccountPage = () => {
             <title>Account - Your Toolbox</title>
             <meta name="description" content="Account - Toolbox" />
           </Helmet>
-          {showDelete && <DeleteValidation />}
+          {showDelete && <DeleteValidation setShowDelete={setShowDelete} />}
           <div
             css={css`
               text-align: center;
@@ -42,13 +42,15 @@ const AccountPage = () => {
             <h2>Delete Account</h2>
             <Button
               onClickAction={() => setShowDelete(true)}
-              label="Delete"
-              styles={{
-                width: "150px",
-                backgroundColor: "red",
-                mediaPaddingRem: "1"
-              }}
-            />
+              styles={css`
+                background-color: red;
+                @media only screen and (min-width: 700px) {
+                  padding: 1rem;
+                }
+              `}
+            >
+              Delete
+            </Button>
           </div>
         </React.Fragment>
       )}
