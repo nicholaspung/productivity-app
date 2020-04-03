@@ -1,3 +1,6 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+// eslint-disable-next-line
 import React from "react";
 import Modal from "../Reusable/Modal";
 import Button from "../Reusable/Button";
@@ -10,24 +13,17 @@ const DeleteValidation = ({ firebase, setShowDelete }) => (
       onClickAction={() =>
         firebase.deleteUserAndUserData(firebase.auth.currentUser.uid)
       }
-      label="Yes"
-      styles={{
-        width: "150px",
-        backgroundColor: "white",
-        paddingRem: "2",
-        mediaPaddingRem: "0.5"
-      }}
-    />
+    >
+      Yes
+    </Button>
     <Button
       onClickAction={() => setShowDelete(false)}
-      label="No"
-      styles={{
-        width: "150px",
-        backgroundColor: "red",
-        paddingRem: "2",
-        mediaPaddingRem: "0.5"
-      }}
-    />
+      styles={css`
+        background-color: red;
+      `}
+    >
+      No
+    </Button>
   </Modal>
 );
 
