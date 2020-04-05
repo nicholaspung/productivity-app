@@ -8,10 +8,10 @@ import { Helmet } from "react-helmet";
 import {
   withAuthorization,
   AuthUserContext,
-  withEmailVerification
+  withEmailVerification,
 } from "../../contexts/Session";
 import LoginManagement from "./LoginManagement";
-import { containers } from "../../constants/styleTheme";
+import { containers, mediaQuery } from "../../constants/styleTheme";
 import Button from "../Reusable/Button";
 import DeleteValidation from "./DeleteValidation";
 
@@ -20,7 +20,7 @@ const AccountPage = () => {
 
   return (
     <AuthUserContext.Consumer>
-      {authUser => (
+      {(authUser) => (
         <React.Fragment>
           <Helmet>
             <title>Account - Your Toolbox</title>
@@ -32,7 +32,7 @@ const AccountPage = () => {
               text-align: center;
               margin: auto;
               padding-bottom: ${containers.spacing};
-              @media only screen and (min-width: 700px) {
+              ${mediaQuery} {
                 width: ${containers.secondary};
               }
             `}
@@ -44,7 +44,7 @@ const AccountPage = () => {
               onClickAction={() => setShowDelete(true)}
               styles={css`
                 background-color: red;
-                @media only screen and (min-width: 700px) {
+                ${mediaQuery} {
                   padding: 1rem;
                 }
               `}
@@ -58,7 +58,7 @@ const AccountPage = () => {
   );
 };
 
-const condition = authUser => !!authUser;
+const condition = (authUser) => !!authUser;
 
 export default compose(
   withEmailVerification,
