@@ -3,8 +3,8 @@ import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
 
-import { colors } from "../../../constants/styleTheme";
-import { withFirebase } from "../../../contexts/Firebase";
+import { colors } from "../../constants/styleTheme";
+import { withFirebase } from "../../contexts/Firebase";
 
 const SignOutButton = ({ firebase }) => (
   <button
