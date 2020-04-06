@@ -2,12 +2,14 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+import { compose } from "recompose";
+import { withRouter } from "react-router-dom";
 
 import SignInWith from "./SignInWith";
-import { withFirebase } from "../../../contexts/Firebase";
-import { colors } from "../../../constants/styleTheme";
+import { withFirebase } from "../../contexts/Firebase";
+import { colors } from "../../constants/styleTheme";
 
-const AuthSignIn = ({ signInMethods, title, selectTitle }) => {
+const AuthSignIn = ({ signInMethods, title, history }) => {
   return (
     <React.Fragment>
       <div
@@ -34,9 +36,7 @@ const AuthSignIn = ({ signInMethods, title, selectTitle }) => {
               padding: 1rem 0;
             }
           `}
-          onClick={event =>
-            event.target.name === "Sign In" ? null : selectTitle("Sign In")
-          }
+          onClick={() => history.push("/signin")}
         >
           Sign In
         </button>
@@ -57,18 +57,16 @@ const AuthSignIn = ({ signInMethods, title, selectTitle }) => {
               padding: 1rem 0;
             }
           `}
-          onClick={event =>
-            event.target.name === "Register" ? null : selectTitle("Register")
-          }
+          onClick={() => history.push("/register")}
         >
           Register
         </button>
       </div>
-      {signInMethods.map(provider => (
+      {signInMethods.map((provider) => (
         <SignInWith key={provider} provider={provider} title={title} />
       ))}
     </React.Fragment>
   );
 };
 
-export default withFirebase(AuthSignIn);
+export default compose(withRouter, withFirebase)(AuthSignIn);

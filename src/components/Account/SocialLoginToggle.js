@@ -3,18 +3,19 @@ import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
 
+import { mediaQuery } from "../../constants/styleTheme";
 import { GoogleButton, FacebookButton } from "../Reusable/Button";
 
 const buttonTextStyles = css`
   width: 170px;
-  @media only screen and (min-width: 700px) {
+  ${mediaQuery} {
     width: auto;
   }
 `;
 
 const buttonContainerStyles = css`
   width: 100%;
-  @media only screen and (min-width: 700px) {
+  ${mediaQuery} {
     width: 500px;
     padding: 1rem;
   }

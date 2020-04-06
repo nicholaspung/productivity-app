@@ -4,10 +4,10 @@ import { jsx, css } from "@emotion/core";
 import React, { useState } from "react";
 
 import AuthSignIn from "./AuthSignIn";
-import { containers, colors } from "../../../constants/styleTheme";
+import { containers, colors } from "../../constants/styleTheme";
 
 const signInMethods = ["google", "facebook"];
-// , "twitter", "github"
+
 const boxStyles = css`
   flex: 1;
   border: 1px solid ${colors.secondaryBackground};
@@ -17,13 +17,7 @@ const boxStyles = css`
   }
 `;
 
-const SignInPage = () => {
-  const [title, setTitle] = useState("Sign In");
-
-  const selectTitle = name => {
-    setTitle(name);
-  };
-
+const SignInPage = ({ title }) => {
   return (
     <div
       css={css`
@@ -40,11 +34,7 @@ const SignInPage = () => {
       `}
     >
       <div css={boxStyles}>
-        <AuthSignIn
-          title={title}
-          selectTitle={selectTitle}
-          signInMethods={signInMethods}
-        />
+        <AuthSignIn title={title} signInMethods={signInMethods} />
       </div>
     </div>
   );

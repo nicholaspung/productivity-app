@@ -7,10 +7,10 @@ import { compose } from "recompose";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
-import GoogleLogo from "../../../constants/assets/images/google-logo.png";
-import { withFirebase } from "../../../contexts/Firebase";
-import * as ROUTES from "../../../constants/routes";
-import * as ROLES from "../../../constants/roles";
+import GoogleLogo from "../../constants/assets/images/google-logo.png";
+import { withFirebase } from "../../contexts/Firebase";
+import * as ROUTES from "../../constants/routes";
+import * as ROLES from "../../constants/roles";
 
 const ERROR_CODE_ACCOUNT_EXISTS =
   "auth/account-exists-with-different-credential";
@@ -21,7 +21,7 @@ const ERROR_MSG_ACCOUNT_EXISTS = `
 `;
 
 const chooseProvider = (firebase, provider) => {
-  let signInMethod = function() {};
+  let signInMethod = function () {};
   let name = "";
 
   switch (provider) {
@@ -63,7 +63,7 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
           color: white;
         `;
 
-  const logoIcon = method => {
+  const logoIcon = (method) => {
     if (method === "google") {
       return (
         <img
@@ -92,13 +92,13 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
     }
   };
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     signInMethod()
-      .then(socialAuthUser => {
+      .then((socialAuthUser) => {
         const authUserObject = {
           username: socialAuthUser.user.displayName,
           email: socialAuthUser.user.email,
-          roles: { [ROLES.USER]: true }
+          roles: { [ROLES.USER]: true },
         };
 
         return firebase
@@ -109,7 +109,7 @@ const SignInWithBase = ({ firebase, history, provider, title }) => {
         setError(null);
         history.push(ROUTES.HOME);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.code === ERROR_CODE_ACCOUNT_EXISTS) {
           error.message = ERROR_MSG_ACCOUNT_EXISTS;
         }

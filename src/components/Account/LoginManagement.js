@@ -5,11 +5,11 @@ import React, { useState, useEffect } from "react";
 
 import { withFirebase } from "../../contexts/Firebase";
 import SocialLoginToggle from "./SocialLoginToggle";
-import { colors, containers } from "../../constants/styleTheme";
+import { colors, containers, mediaQuery } from "../../constants/styleTheme";
 
 const SIGN_IN_METHODS = [
   { id: "google.com", provider: "googleProvider" },
-  { id: "facebook.com", provider: "facebookProvider" }
+  { id: "facebook.com", provider: "facebookProvider" },
 ];
 
 const LoginManagementBase = ({ firebase, authUser }) => {
@@ -19,10 +19,10 @@ const LoginManagementBase = ({ firebase, authUser }) => {
   const fetchSignInMethods = () => {
     firebase.auth
       .fetchSignInMethodsForEmail(authUser.email)
-      .then(activeSignInMethodsObject =>
+      .then((activeSignInMethodsObject) =>
         setActiveSignInMethods(activeSignInMethodsObject)
       )
-      .catch(error => setError(error));
+      .catch((error) => setError(error));
   };
 
   useEffect(() => {
@@ -30,18 +30,18 @@ const LoginManagementBase = ({ firebase, authUser }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSocialLoginLink = provider => {
+  const onSocialLoginLink = (provider) => {
     firebase.auth.currentUser
       .linkWithPopup(firebase[provider])
       .then(fetchSignInMethods)
-      .catch(error => setError(error));
+      .catch((error) => setError(error));
   };
 
-  const onUnlink = providerId => {
+  const onUnlink = (providerId) => {
     firebase.auth.currentUser
       .unlink(providerId)
       .then(fetchSignInMethods)
-      .catch(error => setError(error));
+      .catch((error) => setError(error));
   };
 
   return (
@@ -55,7 +55,7 @@ const LoginManagementBase = ({ firebase, authUser }) => {
         css={css`
           font-size: 1rem;
           font-weight: normal;
-          @media only screen and (min-width: 700px) {
+          ${mediaQuery} {
             font-size: 2rem;
           }
         `}
@@ -69,7 +69,7 @@ const LoginManagementBase = ({ firebase, authUser }) => {
           padding: 0;
         `}
       >
-        {SIGN_IN_METHODS.map(signInMethod => {
+        {SIGN_IN_METHODS.map((signInMethod) => {
           const onlyOneLeft = activeSignInMethods.length === 1;
           const isEnabled = activeSignInMethods.includes(signInMethod.id);
 
