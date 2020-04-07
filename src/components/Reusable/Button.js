@@ -29,9 +29,15 @@ const baseStyles = css`
   }
 `;
 
-const Button = ({ onClickAction, styles, children, disabled = false }) => (
+const Button = ({
+  onClickAction,
+  styles,
+  children,
+  disabled = false,
+  type = "button",
+}) => (
   <button
-    type="button"
+    type={type}
     disabled={disabled}
     onClick={onClickAction}
     css={css`
@@ -54,8 +60,15 @@ const fontAwesomeStyles = css`
   font-size: 30px;
 `;
 
-export const GoogleButton = ({ children, onClickAction, disabled, styles }) => (
+export const GoogleButton = ({
+  children,
+  onClickAction,
+  disabled,
+  styles,
+  type,
+}) => (
   <Button
+    type={type}
     onClickAction={onClickAction}
     disabled={disabled}
     styles={css`
@@ -73,8 +86,10 @@ export const FacebookButton = ({
   onClickAction,
   disabled,
   styles,
+  type,
 }) => (
   <Button
+    type={type}
     onClickAction={onClickAction}
     disabled={disabled}
     styles={css`
