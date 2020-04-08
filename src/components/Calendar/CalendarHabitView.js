@@ -4,7 +4,7 @@ import { jsx, css } from "@emotion/core";
 import React from "react";
 
 import { getSpecificDate } from "../../utilities";
-import { colors } from "../../constants/styleTheme";
+import { colors, mediaQuery } from "../../constants/styleTheme";
 import { getMonth, getDate } from "date-fns";
 
 const CalendarHabitView = ({
@@ -12,10 +12,10 @@ const CalendarHabitView = ({
   currentMonth,
   habits,
   arrayOfDaysInMonth,
-  calendarStyles: cs
+  calendarStyles: cs,
 }) => (
   <React.Fragment>
-    {habits.map(habit => {
+    {habits.map((habit) => {
       return (
         <div
           css={css`
@@ -28,13 +28,11 @@ const CalendarHabitView = ({
           key={habit.id}
         >
           <div
-            css={[
-              cs.calendarHabitCellStyles,
-              css`
-                font-weight: normal;
-                font-size: 0.75rem;
-              `
-            ]}
+            css={css`
+              ${cs.calendarHabitCellStyles};
+              font-weight: normal;
+              font-size: 0.75rem;
+            `}
           >
             {habit.name.length > 24
               ? `${habit.name.slice(0, 25)}...`
@@ -47,7 +45,7 @@ const CalendarHabitView = ({
               display: flex;
             `}
           >
-            {arrayOfDaysInMonth.map(day => (
+            {arrayOfDaysInMonth.map((day) => (
               <div
                 css={cs.calendarDayCellStyles(
                   currentMonth ===
@@ -59,20 +57,19 @@ const CalendarHabitView = ({
                 <div
                   css={css`
                     background-color: ${habit.dates.find(
-                      date => Number(getSpecificDate(date)) === day
+                      (date) => Number(getSpecificDate(date)) === day
                     )
                       ? "lightgreen"
                       : "white"};
                     min-width: ${cs.minWidthCellTiny};
                     min-height: ${cs.minHeightCellTiny};
                     height: inherit;
-                    @media only screen and (min-width: 700px) {
+                    ${mediaQuery} {
                       min-width: ${cs.minWidthCell};
                       min-height: ${cs.minHeightCell};
                     }
                   `}
                 />
-                {/* if dates.includes(day) background-color: lightblue, else background-color: white */}
               </div>
             ))}
           </div>
