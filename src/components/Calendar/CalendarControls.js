@@ -2,13 +2,26 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+
 import { subMonths, addMonths } from "date-fns";
+import { mediaQuery } from "../../constants/styleTheme";
+
+const changeMonthButtonStyles = (styles) => css`
+  background-color: white;
+  border: 0;
+  cursor: pointer;
+  flex: ${styles.cellDayFlex};
+  margin: ${styles.cellMargin};
+  text-align: center;
+  min-width: ${styles.minWidthCell};
+  min-height: ${styles.minHeightCell};
+`;
 
 const CalendarControls = ({
   changeMonth,
   changeDate,
   currentMonthAndYear,
-  calendarStyles: cs
+  calendarStyles: cs,
 }) => (
   <div
     css={css`
@@ -22,7 +35,7 @@ const CalendarControls = ({
         justify-content: center;
         margin: ${cs.cellMargin};
         flex: ${cs.cellHabitFlexTiny};
-        @media only screen and (min-width: 700px) {
+        ${mediaQuery} {
           flex: ${cs.cellHabitFlex};
         }
       `}
@@ -49,32 +62,14 @@ const CalendarControls = ({
     >
       <button
         onClick={() => changeMonth(subMonths)}
-        css={css`
-          background-color: white;
-          border: 0;
-          cursor: pointer;
-          flex: ${cs.cellDayFlex};
-          margin: ${cs.cellMargin};
-          text-align: center;
-          min-width: ${cs.minWidthCell};
-          min-height: ${cs.minHeightCell};
-        `}
+        css={changeMonthButtonStyles(cs)}
       >
         {"<"}
       </button>
       {currentMonthAndYear}
       <button
         onClick={() => changeMonth(addMonths)}
-        css={css`
-          background-color: white;
-          border: 0;
-          cursor: pointer;
-          flex: ${cs.cellDayFlex};
-          margin: 1px;
-          text-align: center;
-          min-width: ${cs.minWidthCell};
-          min-height: ${cs.minHeightCell};
-        `}
+        css={changeMonthButtonStyles(cs)}
       >
         {">"}
       </button>
