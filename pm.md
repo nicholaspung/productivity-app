@@ -2,6 +2,8 @@ bugs
 
 todos
 
+- need a mobile view for editing
+
 - refactor
 
 new features
