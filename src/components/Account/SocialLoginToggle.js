@@ -28,8 +28,10 @@ const SocialLoginToggle = ({
   onLink,
   onUnlink,
 }) => {
+  const SocialButton =
+    signInMethod.id === "google.com" ? GoogleButton : FacebookButton;
   return isEnabled ? (
-    <GoogleButton
+    <SocialButton
       onClickAction={() => onUnlink(signInMethod.provider)}
       disabled={onlyOneLeft}
       styles={css`
@@ -40,16 +42,16 @@ const SocialLoginToggle = ({
       <span css={buttonTextStyles}>
         {onlyOneLeft ? "Cannot deactivate" : "Deactivate"} {signInMethod.id}
       </span>
-    </GoogleButton>
+    </SocialButton>
   ) : (
-    <FacebookButton
+    <SocialButton
       onClickAction={() => onLink(signInMethod.provider)}
       styles={css`
         ${buttonContainerStyles}
       `}
     >
       <span css={buttonTextStyles}>Link {signInMethod.id}</span>
-    </FacebookButton>
+    </SocialButton>
   );
 };
 

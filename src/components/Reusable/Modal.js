@@ -4,40 +4,19 @@ import { jsx, css } from "@emotion/core";
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
+import { mediaQuery } from "../../constants/styleTheme";
+
 const modalRoot = document.getElementById("modal");
 const body = document.body;
 
-const Modal = ({
-  children,
-  handleClose = () => {},
-  type = "default",
-  zIndex
-}) => {
+const Modal = ({ children, handleClose = () => {} }) => {
   const elRef = useRef(null);
   if (!elRef.current) {
     elRef.current = document.createElement("div");
   }
 
-  const defaultStyles = {
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
-    alignItems: "flex-start",
-    zIndex: 1
-  };
-  if (type !== "default") {
-    defaultStyles.backgroundColor = "rgba(0, 0, 0)";
-    defaultStyles.alignItems = "center";
-    defaultStyles.media700px = "max-width: 700px";
-  }
-  if (zIndex) {
-    defaultStyles.zIndex = zIndex;
-  }
-
-  const onClose = event => {
-    if (
-      Array.from(event.target.classList)
-        .concat(" ")
-        .includes("overlay")
-    )
+  const onClose = (event) => {
+    if (Array.from(event.target.classList).concat(" ").includes("overlay"))
       handleClose();
   };
 
@@ -53,30 +32,26 @@ const Modal = ({
   return createPortal(
     <div
       css={css`
-        background-color: ${defaultStyles.backgroundColor};
+        background-color: rgba(0, 0, 0, 0.9);
         position: fixed;
         left: 0;
         right: 0;
         bottom: 0;
         top: 0;
-        z-index: ${defaultStyles.zIndex};
         display: flex;
         justify-content: center;
-        align-items: ${defaultStyles.alignItems};
+        align-items: flex-start;
         padding: 3rem;
       `}
       className={"overlay"}
-      onClick={event => onClose(event)}
+      onClick={(event) => onClose(event)}
     >
       <div
         css={css`
           background-color: white;
-          max-width: 350px;
           padding: 15px;
           text-align: center;
-          @media only screen and (min-width: 700px) {
-            ${defaultStyles.media700px && defaultStyles.media700px}
-          }
+          max-width: 350px;
         `}
       >
         {children}
