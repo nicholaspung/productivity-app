@@ -15,16 +15,20 @@ const statusStyles = css`
   cursor: pointer;
   border-bottom: 0.1rem solid transparent;
   padding: 0.25rem 0.5rem;
+  text-transform: capitalize;
 `;
 
 const conditionalStyles = (status, conditional) => {
   if (status === conditional) {
-    return [statusStyles, activeStatusStyles];
+    return css`
+      ${statusStyles}
+      ${activeStatusStyles}
+    `;
   }
   return statusStyles;
 };
 
-const TodoHeader = ({ status, setStatus }) => (
+const TodoHeader = ({ status, setStatus, title, categories }) => (
   <div
     css={css`
       display: flex;
@@ -41,22 +45,18 @@ const TodoHeader = ({ status, setStatus }) => (
           padding: 0;
         `}
       >
-        Your Todos
+        {title}
       </h2>
     </div>
     <div>
-      <button
-        css={conditionalStyles(status, "active")}
-        onClick={() => setStatus("active")}
-      >
-        Active
-      </button>
-      <button
-        css={conditionalStyles(status, "completed")}
-        onClick={() => setStatus("completed")}
-      >
-        Completed
-      </button>
+      {categories.map((category) => (
+        <button
+          css={conditionalStyles(status, category)}
+          onClick={() => setStatus(category)}
+        >
+          {category}
+        </button>
+      ))}
     </div>
   </div>
 );

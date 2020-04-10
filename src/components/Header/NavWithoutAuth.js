@@ -4,6 +4,7 @@ import { jsx, css } from "@emotion/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { mediaQuery } from "../../constants/styleTheme";
 import * as ROUTES from "../../constants/routes";
 
 const linkStyles = css`
@@ -22,7 +23,7 @@ const NavigationNonAuth = () => (
       margin: 0;
       padding: 0;
       justify-content: center;
-      @media only screen and (min-width: 700px) {
+      ${mediaQuery} {
         justify-content: flex-end;
       }
     `}

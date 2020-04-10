@@ -2,14 +2,9 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
-import { compose } from "recompose";
 import { Helmet } from "react-helmet";
 
-import {
-  withAuthorization,
-  withEmailVerification,
-  AuthUserContext,
-} from "../../contexts/Session";
+import { withAuthorization, AuthUserContext } from "../../contexts/Session";
 import HabitTracker from "../HabitTracker";
 import Calendar from "../Calendar";
 import QuoteOfTheDay from "../Reusable/QuoteOfTheDay";
@@ -40,7 +35,6 @@ const HomePage = () => {
             >
               <Calendar authUser={authUser} />
             </section>
-
             <section
               css={css`
                 display: flex;
@@ -60,7 +54,4 @@ const HomePage = () => {
 
 const condition = (authUser) => !!authUser;
 
-export default compose(
-  withEmailVerification,
-  withAuthorization(condition)
-)(HomePage);
+export default withAuthorization(condition)(HomePage);

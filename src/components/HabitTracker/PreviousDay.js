@@ -2,6 +2,8 @@
 import { jsx, css } from "@emotion/core";
 // eslint-disable-next-line
 import React from "react";
+
+import Modal from "../Reusable/Modal";
 import { withFirebase } from "../../contexts/Firebase";
 import HabitList from "./HabitList";
 import { getYesterdaysDate, getTodaysDate } from "../../utilities";
@@ -17,7 +19,7 @@ const PreviousDay = ({ uid, setShowPreviousDay, status }) => {
   };
 
   return (
-    <React.Fragment>
+    <Modal>
       <h1>Welcome back!</h1>
       <p>
         Check and see if you forgot to complete any habits from the previous
@@ -45,7 +47,7 @@ const PreviousDay = ({ uid, setShowPreviousDay, status }) => {
       >
         Start my new day!
       </button>
-    </React.Fragment>
+    </Modal>
   );
 };
 

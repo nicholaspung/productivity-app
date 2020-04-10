@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navigation from "../Navigation";
+import Header from "../Header";
 import LandingPage from "../Landing";
 import SignInPage from "../Authentication";
 import HomePage from "../Home";
@@ -16,7 +16,7 @@ import { withAuthentication } from "../../contexts/Session";
 const App = () => (
   <Router>
     <>
-      <Navigation />
+      <Header />
 
       <Switch>
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
