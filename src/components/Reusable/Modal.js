@@ -51,7 +51,10 @@ const Modal = ({ children, handleClose = () => {} }) => {
           background-color: white;
           padding: 15px;
           text-align: center;
-          max-width: 350px;
+          width: 100%;
+          ${mediaQuery} {
+            max-width: 350px;
+          }
         `}
       >
         {children}
