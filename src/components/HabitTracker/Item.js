@@ -8,7 +8,7 @@ import {
   faEdit,
   faArrowUp,
   faArrowDown,
-  faTrash
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { colors } from "../../constants/styleTheme";
 
@@ -216,7 +216,12 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => {
                   }
                 `}
               >
-                <p onClick={handleOptions.handleEdit}>
+                <p
+                  onClick={() => {
+                    handleOptions.handleEdit();
+                    handleOptions.closeOptions();
+                  }}
+                >
                   Edit
                   <FontAwesomeIcon icon={faEdit} css={iconStyles} />
                 </p>

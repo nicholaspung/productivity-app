@@ -2,8 +2,7 @@ bugs
 
 todos
 
-- need a mobile view for editing
-
+- when modal is on, checkmarks are visible
 - refactor
 
 new features

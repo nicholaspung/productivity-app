@@ -21,7 +21,7 @@ const Habit = ({
   date,
   noEdit,
   handleMoveDown,
-  handleMoveUp
+  handleMoveUp,
 }) => {
   const [options, setOptions] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -62,7 +62,7 @@ const Habit = ({
           handleDelete,
           handleEdit,
           handleMoveUp,
-          handleMoveDown
+          handleMoveDown,
         }}
         noEdit={noEdit}
         type={"habits"}
