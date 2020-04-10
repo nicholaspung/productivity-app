@@ -4,17 +4,11 @@ import { jsx, css } from "@emotion/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { colors } from "../../constants/styleTheme";
+import { colors, mediaQuery } from "../../constants/styleTheme";
 import { AuthUserContext } from "../../contexts/Session";
 import * as ROUTES from "../../constants/routes";
-import NavigationAuth from "./NavigationAuth";
-import NavigationNonAuth from "./NavigationNonAuth";
-
-const linkStyles = css`
-  text-decoration: none;
-  padding: 1rem;
-  color: white;
-`;
+import NavWithAuth from "./NavWithAuth";
+import NavWithoutAuth from "./NavWithoutAuth";
 
 const Navigation = () => (
   <header
@@ -34,7 +28,7 @@ const Navigation = () => (
         max-width: 1000px;
         color: white;
         font-size: 3rem;
-        @media only screen and (min-width: 700px) {
+        ${mediaQuery} {
           justify-content: space-between;
         }
       `}
@@ -42,30 +36,33 @@ const Navigation = () => (
       <div
         css={css`
           text-align: center;
-          @media only screen and (min-width: 700px) {
+          ${mediaQuery} {
             flex: 1;
             text-align: left;
           }
         `}
       >
-        <Link to={ROUTES.HOME} css={linkStyles}>
+        <Link
+          to={ROUTES.HOME}
+          css={css`
+            text-decoration: none;
+            padding: 1rem;
+            color: white;
+          `}
+        >
           Your Toolbox
         </Link>
       </div>
       <nav
         css={css`
-          @media only screen and (min-width: 700px) {
+          ${mediaQuery} {
             flex: 1;
           }
         `}
       >
         <AuthUserContext.Consumer>
-          {authUser =>
-            authUser ? (
-              <NavigationAuth authUser={authUser} />
-            ) : (
-              <NavigationNonAuth />
-            )
+          {(authUser) =>
+            authUser ? <NavWithAuth authUser={authUser} /> : <NavWithoutAuth />
           }
         </AuthUserContext.Consumer>
       </nav>

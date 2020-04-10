@@ -3,8 +3,10 @@ import React from "react";
 import { withFirebase } from "../../contexts/Firebase";
 import useTextInput from "../../hooks/useTextInput";
 import AddTodoBase from "./AddTodoBase";
+import { getTodaysDate } from "../../utilities";
 
-const AddHabit = ({ firebase, date }) => {
+const AddHabit = ({ firebase }) => {
+  const date = getTodaysDate(new Date());
   const [input, setInput, handleChange] = useTextInput();
 
   const handleSubmit = async (event) => {

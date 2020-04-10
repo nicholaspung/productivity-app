@@ -4,6 +4,7 @@ import { jsx, css } from "@emotion/core";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { mediaQuery } from "../../constants/styleTheme";
 import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
 
@@ -26,7 +27,7 @@ const NavigationAuth = ({ authUser }) => (
       margin: 0;
       padding: 0;
       flex-flow: row wrap;
-      @media only screen and (min-width: 700px) {
+      ${mediaQuery} {
         justify-content: flex-end;
       }
     `}
