@@ -51,6 +51,7 @@ const TodoHeader = ({ status, setStatus, title, categories }) => (
     <div>
       {categories.map((category) => (
         <button
+          key={category}
           css={conditionalStyles(status, category)}
           onClick={() => setStatus(category)}
         >

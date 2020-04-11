@@ -9,11 +9,11 @@ const HabitList = ({
   date,
   handlePreviousClick,
   status,
-  noEdit
+  noEdit,
 }) => {
   const [habits, setHabits] = useState([]);
 
-  const handleMoveUp = async targetHabit => {
+  const handleMoveUp = async (targetHabit) => {
     if (targetHabit.order === 0) return;
     const updating = [];
     habits.forEach((habit, idx, arr) => {
@@ -22,22 +22,15 @@ const HabitList = ({
         updating.push({ id: arr[idx - 1].id, order: habit.order });
       }
     });
-    const updatingHabits = [...habits];
+    console.log(updating);
     for (let i = 0; i < updating.length; i += 1) {
-      const indexOfHabit = updatingHabits.findIndex(
-        el => el.id === updating[i].id
-      );
-      updatingHabits[indexOfHabit] = {
-        ...updatingHabits[indexOfHabit],
-        order: updating[i].order
-      };
       await firebase.habit(updating[i].id).update({ order: updating[i].order });
     }
     // setHabits(sortOrderHabitTodo(updatingHabits));
     await firebase.getHabitsAndUpdateDate();
   };
 
-  const handleMoveDown = async targetHabit => {
+  const handleMoveDown = async (targetHabit) => {
     if (targetHabit.order === habits.length - 1) return;
     const updating = [];
     habits.forEach((habit, idx, arr) => {
@@ -46,15 +39,7 @@ const HabitList = ({
         updating.push({ id: arr[idx + 1].id, order: habit.order });
       }
     });
-    const updatingHabits = [...habits];
     for (let i = 0; i < updating.length; i += 1) {
-      const indexOfHabit = updatingHabits.findIndex(
-        el => el.id === updating[i].id
-      );
-      updatingHabits[indexOfHabit] = {
-        ...updatingHabits[indexOfHabit],
-        order: updating[i].order
-      };
       await firebase.habit(updating[i].id).update({ order: updating[i].order });
     }
     // setHabits(sortOrderHabitTodo(updatingHabits));
@@ -66,7 +51,7 @@ const HabitList = ({
       .dates()
       .where("user", "==", uid)
       .where("date", "==", date)
-      .onSnapshot(snapshot => {
+      .onSnapshot((snapshot) => {
         if (!snapshot.empty) {
           let date = snapshot.docs.map(collectIdsAndDocsFirebase)[0];
           let habits = [...date.habits];
@@ -89,15 +74,15 @@ const HabitList = ({
   return (
     <>
       {habits
-        .filter(habit => {
-          let statusReturn = habit => ({
+        .filter((habit) => {
+          let statusReturn = (habit) => ({
             all: true,
             due: !habit.done,
-            "not due": habit.done
+            "not due": habit.done,
           });
           return statusReturn(habit)[status];
         })
-        .map(habit => (
+        .map((habit) => (
           <Habit
             habit={habit}
             key={habit.id}

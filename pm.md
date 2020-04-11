@@ -2,7 +2,7 @@ bugs
 
 todos
 
-- when modal is on, checkmarks are visible
+- need to fix moving habits again
 - refactor
 
 new features
