@@ -42,6 +42,7 @@ const Modal = ({ children, handleClose = () => {} }) => {
         justify-content: center;
         align-items: flex-start;
         padding: 3rem;
+        z-index: 1;
       `}
       className={"overlay"}
       onClick={(event) => onClose(event)}
