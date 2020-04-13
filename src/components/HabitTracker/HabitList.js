@@ -13,39 +13,6 @@ const HabitList = ({
 }) => {
   const [habits, setHabits] = useState([]);
 
-  const handleMoveUp = async (targetHabit) => {
-    if (targetHabit.order === 0) return;
-    const updating = [];
-    habits.forEach((habit, idx, arr) => {
-      if (habit.id === targetHabit.id) {
-        updating.push({ id: habit.id, order: arr[idx - 1].order });
-        updating.push({ id: arr[idx - 1].id, order: habit.order });
-      }
-    });
-    console.log(updating);
-    for (let i = 0; i < updating.length; i += 1) {
-      await firebase.habit(updating[i].id).update({ order: updating[i].order });
-    }
-    // setHabits(sortOrderHabitTodo(updatingHabits));
-    await firebase.getHabitsAndUpdateDate();
-  };
-
-  const handleMoveDown = async (targetHabit) => {
-    if (targetHabit.order === habits.length - 1) return;
-    const updating = [];
-    habits.forEach((habit, idx, arr) => {
-      if (habit.id === targetHabit.id) {
-        updating.push({ id: habit.id, order: arr[idx + 1].order });
-        updating.push({ id: arr[idx + 1].id, order: habit.order });
-      }
-    });
-    for (let i = 0; i < updating.length; i += 1) {
-      await firebase.habit(updating[i].id).update({ order: updating[i].order });
-    }
-    // setHabits(sortOrderHabitTodo(updatingHabits));
-    await firebase.getHabitsAndUpdateDate();
-  };
-
   useEffect(() => {
     const unsubscribe = firebase
       .dates()
@@ -71,17 +38,46 @@ const HabitList = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleMoveUp = async (targetHabit) => {
+    if (targetHabit.order === 0) return;
+    const updating = [];
+    habits.forEach((habit, idx, arr) => {
+      if (habit.id === targetHabit.id) {
+        updating.push({ id: habit.id, order: arr[idx - 1].order });
+        updating.push({ id: arr[idx - 1].id, order: habit.order });
+      }
+    });
+    for (let i = 0; i < updating.length; i += 1) {
+      await firebase.habit(updating[i].id).update({ order: updating[i].order });
+    }
+    await firebase.getHabitsAndUpdateDate();
+  };
+
+  const handleMoveDown = async (targetHabit) => {
+    if (targetHabit.order === habits.length - 1) return;
+    const updating = [];
+    habits.forEach((habit, idx, arr) => {
+      if (habit.id === targetHabit.id) {
+        updating.push({ id: habit.id, order: arr[idx + 1].order });
+        updating.push({ id: arr[idx + 1].id, order: habit.order });
+      }
+    });
+    for (let i = 0; i < updating.length; i += 1) {
+      await firebase.habit(updating[i].id).update({ order: updating[i].order });
+    }
+    await firebase.getHabitsAndUpdateDate();
+  };
+
+  const statusReturn = (habit) => ({
+    all: true,
+    due: !habit.done,
+    "not due": habit.done,
+  });
+
   return (
     <>
       {habits
-        .filter((habit) => {
-          let statusReturn = (habit) => ({
-            all: true,
-            due: !habit.done,
-            "not due": habit.done,
-          });
-          return statusReturn(habit)[status];
-        })
+        .filter((habit) => statusReturn(habit)[status])
         .map((habit) => (
           <Habit
             habit={habit}

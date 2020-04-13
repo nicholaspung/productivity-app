@@ -10,15 +10,27 @@ import {
 const TodoList = ({ firebase, uid, status }) => {
   const [todos, setTodos] = useState([]);
 
-  const updateTodoList = async () => {
-    await firebase
+  useEffect(() => {
+    const unsubscribe = firebase
       .todos()
       .where("user", "==", uid)
-      .get()
-      .then((snapshot) => {
-        const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
-        setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
+      .onSnapshot((snapshot) => {
+        if (!snapshot.empty) {
+          const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
+          setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
+        } else {
+          setTodos([]);
+        }
       });
+
+    return () => unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const updateTodoList = async () => {
+    const snapshot = await firebase.todos().where("user", "==", uid).get();
+    const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
+    setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
   };
 
   const handleMoveUp = async (todo, cb) => {
@@ -33,33 +45,15 @@ const TodoList = ({ firebase, uid, status }) => {
     await updateTodoList();
   };
 
-  useEffect(() => {
-    const unsubscribe = firebase
-      .todos()
-      .where("user", "==", uid)
-      .onSnapshot((snapshot) => {
-        if (!snapshot.empty) {
-          const todosList = [...snapshot.docs.map(collectIdsAndDocsFirebase)];
-          setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
-        } else {
-          setTodos([]);
-        }
-      });
-
-    return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const statusReturn = (todo) => ({
+    active: !todo.done,
+    completed: todo.done,
+  });
 
   return (
     <>
       {todos
-        .filter((todo) => {
-          let statusReturn = (todo) => ({
-            active: !todo.done,
-            completed: todo.done,
-          });
-          return statusReturn(todo)[status];
-        })
+        .filter((todo) => statusReturn(todo)[status])
         .map((todo) => (
           <Todo
             todo={todo}

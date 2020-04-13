@@ -12,15 +12,12 @@ const AddHabit = ({ firebase }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    let length = 0;
-    await firebase
+    let snapshot = await firebase
       .dates()
       .where("date", "==", date)
       .where("user", "==", firebase.auth.currentUser.uid)
-      .get()
-      .then((snapshot) => {
-        length = snapshot.docs[0].data().habits.length;
-      });
+      .get();
+    const length = snapshot.docs[0].data().habits.length;
 
     await firebase.addHabit({
       name: input,

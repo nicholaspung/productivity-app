@@ -2,7 +2,8 @@ bugs
 
 todos
 
-- need to fix moving habits again
+- if i delete a habit, the ordering is going to be messed up
+  - say i delete order 1, everything else needs to be recalculated
 - refactor
 
 new features
