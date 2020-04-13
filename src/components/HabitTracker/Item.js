@@ -6,6 +6,19 @@ import React from "react";
 import ItemOptions from "./ItemOptions";
 import { colors, mediaQuery } from "../../constants/styleTheme";
 
+const backgroundColorChooser = (conditionals) => {
+  switch (conditionals) {
+    case conditionals.data.done:
+      return colors.secondaryBackground;
+    case conditionals.type:
+      return colors.primary;
+    case conditionals.data.priority === "high":
+      return "red";
+    default:
+      return "blue";
+  }
+};
+
 const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => (
   <div
     css={css`
@@ -15,6 +28,9 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => (
       border: 2px solid transparent;
       min-height: 79px;
       .item-option {
+        opacity: 100;
+      }
+      .item-checkmark {
         opacity: 100;
       }
       ${mediaQuery} {
@@ -33,10 +49,6 @@ const Item = ({ data, handleToggle, options, handleOptions, noEdit, type }) => (
         .item-option {
           opacity: 0;
         }
-      }
-
-      .item-checkmark {
-        opacity: 100;
       }
     `}
     onMouseLeave={handleOptions.closeOptions}
