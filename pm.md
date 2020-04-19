@@ -2,8 +2,6 @@ bugs
 
 todos
 
-- if i delete a habit, the ordering is going to be messed up
-  - say i delete order 1, everything else needs to be recalculated
 - refactor
 
 new features
