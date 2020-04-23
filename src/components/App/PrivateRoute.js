@@ -8,7 +8,9 @@ const PrivateRoute = ({ children, firebase, ...rest }) => (
     render={({ location }) =>
       firebase.onAuthUserListener(
         (authUser) => children,
-        <Redirect to={{ pathname: "/login", state: { from: location } }} />
+        () => (
+          <Redirect to={{ pathname: "/login", state: { from: location } }} />
+        )
       )
     }
   />

@@ -17,6 +17,11 @@ const auth = (state = initialState, action) => {
         ...state,
         authUser: action.payload,
       };
+    case REMOVE_AUTH_FROM_LOCAL_STORAGE:
+      return {
+        ...state,
+        authUser: null,
+      };
     default:
       return state;
   }
