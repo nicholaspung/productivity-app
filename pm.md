@@ -2,8 +2,7 @@ bugs
 
 todos
 
-- if i delete a habit, the ordering is going to be messed up
-  - say i delete order 1, everything else needs to be recalculated
+- seems like unchecking todos from completed is causing some kind of bug
 - refactor
 
 new features
@@ -13,7 +12,7 @@ new features
     - allows user to see calendar of their habits
 - show a feed of friends checking off their public habits
 - goal tracker
-  - write down 3 goals and create 3 habtis to follow those goals
+  - write down 3 goals and create 3 habits to follow those goals
 - tooltips when hovering over specific text
 - habit
 
