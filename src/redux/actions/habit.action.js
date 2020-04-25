@@ -1,5 +1,18 @@
-export const FETCH_DATES = "FETCH_DATES";
-export const FETCH_DATES_SUCCESS = "FETCH_DATES_SUCCESS";
-export const FETCH_DATES_FAIL = "FETCH_DATES_FAIL";
+import { collectIdsAndDocsFirebase } from "../../utilities";
 
-export const getCalendarHabits = (uid) => (dispatch) => {};
+export const CONNECT_DATES = "CONNECT_DATES";
+export const CONNECT_HABITS = "CONNECT_HABITS";
+export const CONNECT_YESTERDAYS_HABITS = "CONNECT_YESTERDAYS_HABITS";
+export const FETCH_TODOS = "FETCH_TODOS";
+export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
+export const FETCH_TODOS_FAIL = "FETCH_TODOS_FAIL";
+
+export const getDates = (snapshot) => ({
+  type: CONNECT_DATES,
+  payload: snapshot.docs.map(collectIdsAndDocsFirebase),
+});
+
+export const getHabits = (snapshot) => ({
+  type: CONNECT_HABITS,
+  payload: snapshot.docs.map(collectIdsAndDocsFirebase)[0],
+});
