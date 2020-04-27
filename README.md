@@ -38,6 +38,7 @@ REACT_APP_APP_ID=xxxxx
 - Test app using Lighthouse
 - Add social component to keep people accountable
 - Add goal tracker to help create better habits
+- Reduce calls to Firebase Cloud Firestore
 
 ## Installation Instructions
 
