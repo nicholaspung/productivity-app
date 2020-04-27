@@ -1,78 +1,68 @@
-# TDM Calculator
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Traffic Demand Management (TDM) calculator tool. DTLA Hack for LA is partnering with Los Angeles Department of Transportation (LADOT) to develop this tool to help planners at LADOT and real estate developers calculate how to meet some of Los Angeles’s Mobility Plan 2035 goals.
+## Available Scripts
 
-Transportation demand management (TDM) is a defined set of strategies aimed at maximizing traveller choices while also improving mobility, reduce congestion, vehicle miles travelled, greenhouse gas emissions, and air pollution. For our project purposes, we are creating a TDM calculator tool in order to help real estate developers learn how to pass their development plans through the city with visible calculations showing based on their development plans.
+In the project directory, you can run:
 
-### Project context
+### `yarn start`
 
-In order to start construction on a building to the City of Los Angeles, real estate developers have to submit a proposal of their development plan to the city for review and must meet certain criteria in order to be approved. Currently, the process for getting approved to build plans (on a super high level, steps may vary) goes like this:
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- Real estate developer submit development proposal
-- City manually checks criteria through manual review
-- If it meets the criteria, city "approves" the plan
-- If it doesn't, real estate developer is able to request a meeting for further review and discussion. Otherwise, the plan is rejected.
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-Real estate developers currently don't have any way to understand where their development plans are getting rejected. The TDM Calculator will be created in order to give them more visibility into how to get their development plans approved and, more importantly, get fined less for following city building criteria.
+### `yarn test`
 
-The city will benefit by having more time to review edge cases for building development plans, while being able to approve plans that fit criteria with more ease and less hassle.
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-[LADOT New Requirements for Sustainable Developments](https://ladot.lacity.org/businesses/development-review#new-requirements-for-sustainable-developments)
+### `yarn build`
 
-[LA Mobility Plan 2035](https://planning.lacity.org/documents/policy/mobilityplnmemo.pdf)
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-[Hack for LA Code of Conduct](https://github.com/hackforla/codeofconduct)
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-### Technology used
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) / [How CSS Works](https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/How_CSS_works) / [MDN Resources](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources)
-- Client and Server Programming Language: [JavaScript](https://www.ecma-international.org/ecma-262/6.0/) / [Introduction](http://javascript.info/)
-- Web Server Runtime: [Node](https://nodejs.org/en/)
-- Web API Server Library: [Express](https://expressjs.com/)
-- Client JavaScript Library: [React](https://reactjs.org/)
-- Scaffolding for Client Application: [Create React App](https://facebook.github.io/create-react-app/docs/getting-started)
-- Visual Component Library: [Storybook](https://storybook.js.org/) / [Tutorial](https://www.learnstorybook.com/react/en/get-started) - The first three sections are enough to get you started.
-- JavaScript Unit Test Framework: [Jest](https://jestjs.io/)
-- Database Engine: [Microsoft SQL Server](http://www.sqlservertutorial.net/) / [Tutorial](http://www.sqlservertutorial.net/)
+### `yarn eject`
 
-# Feature Descriptions
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-- [register](./register.md)
-- [forgot-password](./forgot-password.md)
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-# How to contribute
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-- Join the team on the Hack For LA Slack channel (#tdm-calculator), or at our weekly hack night on Tuesdays in [Hack For LA](https://www.hackforla.org/)!
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-- To help with user research, find other cities' TDM calculators. For example, check out [SF's TDM Tool](http://www.sftdmtool.org/)
+## Learn More
 
-- To contribute to the code, see [Contributing](./Contributing.md)
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### Working with issues
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-- To submit a bug.
+### Code Splitting
 
-Go to Project Kanban board by clicking on "Projects" tab. Create a note in Ice Box by clicking on the "+" sign. Write a general bug description and add the note. During weekly meetings in Hack For LA, we'll review the Ice Box and convert cards to Prioritized Backlog.
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-- Explain how to submit a feature request.
+### Analyzing the Bundle Size
 
-- Explain how to contribute to an existing issue.
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-To create a new issue, please use the blank issue template (available when you click New Issue). If you want to create an issue for other projects to use, please create the issue in your own repository and send a slack message to one of your hack night hosts with the link.
+### Making a Progressive Web App
 
-# Contact info
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-Please use the tdm-calculator slack channel to communicate with the whole project team, or direct-messages through slack for communication with individuals.
+### Advanced Configuration
 
-If you have any questions or comments, feel free to reach out to:
-Hack For LA
-Bonnie
-Co-Host/Organizer
-bonnie@hackforla.org
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Licensing
+### Deployment
 
-Include details about the project's open source status.
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-_this readme file sourced from [Jessica Sand](http://jessicasand.com/other-stuff/just-enough-docs/)_
+### `yarn build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
