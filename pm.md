@@ -2,9 +2,6 @@ bugs
 
 todos
 
-- seems like unchecking todos from completed is causing some kind of bug
-- refactor
-
 new features
 
 - see friends who are also on application's habits

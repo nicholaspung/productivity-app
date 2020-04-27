@@ -27,22 +27,14 @@ const TodoList = ({ firebase, uid, status }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const updateTodoList = async () => {
-    const snapshot = await firebase.todos().where("user", "==", uid).get();
-    const todosList = snapshot.docs.map(collectIdsAndDocsFirebase);
-    setTodos(sortPriorityTodo(sortOldToNewHabitTodo(todosList)));
-  };
-
   const handleMoveUp = async (todo, cb) => {
     cb();
     await firebase.todo(todo.id).update({ priority: "high" });
-    await updateTodoList();
   };
 
   const handleMoveDown = async (todo, cb) => {
     cb();
     await firebase.todo(todo.id).update({ priority: "low" });
-    await updateTodoList();
   };
 
   const statusReturn = (todo) => ({
@@ -57,7 +49,7 @@ const TodoList = ({ firebase, uid, status }) => {
         .map((todo) => (
           <Todo
             todo={todo}
-            key={todo.name}
+            key={todo.id}
             handleMoveDown={handleMoveDown}
             handleMoveUp={handleMoveUp}
           />
