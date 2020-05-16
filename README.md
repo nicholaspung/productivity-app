@@ -47,5 +47,5 @@ To get client running locally:
 - Clone this repo
 - Create a Firebase account, with Firebase Cloud Firestore
 - Copy configuration into `.env.production` file to root directory of repo
-- npm install
-- `yarn start`
+- `npm install`
+- `npm start`
