@@ -1,6 +1,6 @@
 # Your Toolbox
 
-Habit tracker and todo list. This was created to be different from other habit trackers by having the calendar shows which habits on which days have not been completed.
+Habit tracker and todo list. This was created to be different from other habit trackers by having the calendar show which habits on which days have not been completed. In addition, it has little bloat and only focuses on the main functions: tracking habits and having a prioritized todo list.
 
 ## Key Features
 
